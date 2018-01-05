@@ -10,8 +10,8 @@ resource "aws_vpn_gateway_attachment" "default" {
 }
 
 resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
-  count = "${length(var.vpc_subnet_ids)}"
+  count = "${length(var.vpc_subnet_route_table_ids)}"
 
   vpn_gateway_id = "${var.vpn_gateway_id}"
-  route_table_id = "${element(var.vpc_subnet_ids, count.index)}"
+  route_table_id = "${element(var.vpc_subnet_route_table_ids, count.index)}"
 }
