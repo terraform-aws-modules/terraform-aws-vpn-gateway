@@ -4,6 +4,15 @@ resource "aws_vpn_connection" "default" {
   vpn_gateway_id      = "${var.vpn_gateway_id}"
   customer_gateway_id = "${var.customer_gateway_id}"
   type                = "ipsec.1"
+
+  static_routes_only = "${var.vpn_connection_static_routes_only}"
+
+  tags = "${merge(
+    var.tags,
+    map(
+      "Name", "VPN Connection between VPC ${var.vpc_id} and Customer Gateway ${var.customer_gateway_id}"
+    )
+  )}"
 }
 
 resource "aws_vpn_gateway_attachment" "default" {
