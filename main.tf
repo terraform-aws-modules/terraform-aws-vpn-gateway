@@ -2,7 +2,7 @@ resource "aws_vpn_connection" "default" {
   count = "${var.create_vpn_connection ? 1 : 0}"
 
   vpn_gateway_id      = "${var.vpn_gateway_id}"
-  customer_gateway_id = "${var.intralot_gateway_id}"
+  customer_gateway_id = "${var.customer_gateway_id}"
   type                = "ipsec.1"
 }
 

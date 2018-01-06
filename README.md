@@ -7,6 +7,7 @@ This module creates:
 * one or more [VPN Gateway Route Propagation](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_route_propagation.html) depending on how many routing tables exists in a VPC
 
 This module does not create a [VPN Gateway](https://www.terraform.io/docs/providers/aws/r/vpn_gateway.html) resource because it is meant to be used in combination with the [VPC module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws) that will create that resource (when `enable_vpn_gateway = true`).
+This module also does not create a [Customer Gateway](https://www.terraform.io/docs/providers/aws/r/customer_gateway.html) resource.
 
 Usage
 -----
@@ -22,9 +23,20 @@ provider "aws" {
 module "vpn_gateway" {
   source = "terraform-aws-modules/vpn-gateway/aws"
 
-  vpn_gateway_id = "${module.vpc.vgw_id}"
-  vpc_id         = "${module.vpc.vpc_id}"
-  vpc_subnet_ids = ["${module.vpc.private_route_table_ids}"]
+  vpn_gateway_id      = "${module.vpc.vgw_id}"
+  customer_gateway_id = "${aws_customer_gateway.main.id}"
+  vpc_id              = "${module.vpc.vpc_id}"
+  vpc_subnet_ids      = ["${module.vpc.private_route_table_ids}"]
+}
+
+resource "aws_customer_gateway" "main" {
+  bgp_asn    = 65000
+  ip_address = "172.83.124.10"
+  type       = "ipsec.1"
+
+  tags {
+    Name = "main-customer-gateway"
+  }
 }
 
 module "vpc" {
@@ -47,9 +59,20 @@ provider "aws" {
 module "vpn_gateway" {
   source = "terraform-aws-modules/vpn-gateway/aws"
 
-  vpn_gateway_id = "${aws_vpn_gateway.vpn_gateway.id}"
-  vpc_id = "${aws_vpc.vpc.vpc_id}"
-  vpc_subnet_ids = ["${aws_subnet.*.id}"]
+  vpn_gateway_id      = "${aws_vpn_gateway.vpn_gateway.id}"
+  customer_gateway_id = "${aws_customer_gateway.main.id}"
+  vpc_id              = "${aws_vpc.vpc.vpc_id}"
+  vpc_subnet_ids      = ["${aws_subnet.*.id}"]
+}
+
+resource "aws_customer_gateway" "main" {
+  bgp_asn    = 65000
+  ip_address = "172.83.124.10"
+  type       = "ipsec.1"
+
+  tags {
+    Name = "main-customer-gateway"
+  }
 }
 
 resource "aws_vpc" "vpc" {

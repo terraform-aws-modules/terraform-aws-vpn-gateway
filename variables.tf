@@ -1,5 +1,7 @@
 variable "vpn_gateway_id" {}
 
+variable "customer_gateway_id" {}
+
 variable "create_vpn_connection" {
   default = true
 }
