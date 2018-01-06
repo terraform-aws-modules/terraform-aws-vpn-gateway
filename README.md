@@ -2,7 +2,7 @@
 
 Terraform module which creates VPN gateway resources on AWS.
 This module creates:
-* a [VPN Connection](https://www.terraform.io/docs/providers/aws/r/vpn_connection.html)
+* a [VPN Connection](https://www.terraform.io/docs/providers/aws/r/vpn_connection.html) unless `create_vpn_connection = false`
 * a [VPN Gateway Attachment](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_attachment.html)
 * one or more [VPN Gateway Route Propagation](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_route_propagation.html) depending on how many routing tables exists in a VPC
 
