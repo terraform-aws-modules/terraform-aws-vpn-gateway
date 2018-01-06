@@ -1,21 +1,30 @@
-variable "vpn_gateway_id" {}
-
-variable "customer_gateway_id" {}
-
-variable "create_vpn_connection" {
-  default = true
+variable "vpn_gateway_id" {
+  description = "The id of the VPN Gateway"
 }
 
-variable "vpc_id" {}
+variable "customer_gateway_id" {
+  description = "The id of the Customer Gateway"
+}
+
+variable "create_vpn_connection" {
+  description = "Set to false to prevent the creation of a VPN Connection"
+  default     = true
+}
+
+variable "vpc_id" {
+  description = "The id of the VPC where the VPN Gateway lives"
+}
 
 variable "vpc_subnet_route_table_ids" {
-  type    = "list"
-  default = []
+  description = "The ids of the VPC subnets for which routes from the VPN Gateway will be propagated"
+  type        = "list"
+  default     = []
 }
 
 variable "tags" {
-  type    = "map"
-  default = {}
+  description = "Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`)"
+  type        = "map"
+  default     = {}
 }
 
 variable "vpn_connection_static_routes_only" {
