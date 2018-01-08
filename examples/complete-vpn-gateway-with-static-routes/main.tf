@@ -1,7 +1,8 @@
 module "vpn_gateway" {
   source = "terraform-aws-modules/vpn-gateway/aws"
 
-  vpn_connection_static_routes_only = true
+  vpn_connection_static_routes_only         = true
+  vpn_connection_static_routes_destinations = ["10.100.0.1", "10.100.0.1"]
 
   vpn_gateway_id      = "${module.vpc.vgw_id}"
   customer_gateway_id = "${aws_customer_gateway.main.id}"
