@@ -1,6 +1,8 @@
-# terraform-aws-vpn-gateway
+AWS VPN Gateway Terraform module
+================================
 
-Terraform module which creates VPN gateway resources on AWS.
+Terraform module which creates [VPN gateway](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html) resources on AWS.
+
 This module creates:
 * a [VPN Connection](https://www.terraform.io/docs/providers/aws/r/vpn_connection.html) unless `create_vpn_connection = false`
 * a [VPN Gateway Attachment](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_attachment.html)
@@ -14,21 +16,16 @@ This module will create static routes for the VPN Connection if configured to cr
 Usage
 -----
 
-## With VPC module
+##### With [VPC module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws)
 
 ```hcl
-provider "aws" {
-  version = "~> 1.0.0"
-  region  = "eu-west-1"
-}
-
 module "vpn_gateway" {
   source = "terraform-aws-modules/vpn-gateway/aws"
 
-  vpn_gateway_id      = "${module.vpc.vgw_id}"
-  customer_gateway_id = "${aws_customer_gateway.main.id}"
-  vpc_id              = "${module.vpc.vpc_id}"
-  vpc_subnet_ids      = ["${module.vpc.private_route_table_ids}"]
+  vpc_id                  = "${module.vpc.vpc_id}"
+  vpn_gateway_id          = "${module.vpc.vgw_id}"
+  customer_gateway_id     = "${aws_customer_gateway.main.id}"
+  private_route_table_ids = ["${module.vpc.private_route_table_ids}"]
 }
 
 resource "aws_customer_gateway" "main" {
@@ -50,14 +47,9 @@ module "vpc" {
 }
 ```
 
-## Without VPC module
+##### Without VPC module
 
 ```hcl
-provider "aws" {
-  version = "~> 1.0.0"
-  region  = "eu-west-1"
-}
-
 module "vpn_gateway" {
   source = "terraform-aws-modules/vpn-gateway/aws"
 
@@ -99,3 +91,21 @@ resource "aws_vpn_gateway" "vpn_gateway" {
   ...
 }
 ```
+
+Examples
+--------
+
+* [Complete example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway) shows how to create all VPN Gateway resources.
+* [Complete example with static routes](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway-with-static-routes) shows how to create all VPN Gateway together with static routes.
+* [Minimal example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/minimal-vpn-gateway) shows how to create just VPN Gateway using this module.
+
+Authors
+-------
+
+Currently maintained by [these awesome contributors](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/graphs/contributors).
+Module managed by [Anton Babenko](https://github.com/antonbabenko).
+
+License
+-------
+
+Apache 2 Licensed. See LICENSE for full details.

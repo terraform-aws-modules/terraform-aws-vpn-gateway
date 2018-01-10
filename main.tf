@@ -31,5 +31,5 @@ resource "aws_vpn_connection_route" "default" {
   count = "${var.create_vpn_connection ? (var.vpn_connection_static_routes_only ? length(var.vpn_connection_static_routes_destinations) : 0) : 0}"
 
   vpn_connection_id      = "${element(split(",", (var.create_vpn_connection ? join(",", aws_vpn_connection.default.*.id) : "")), 0)}"
-  destination_cidr_block = "${element(var.vpn_connection_static_routes_destinations), count.index}"
+  destination_cidr_block = "${element(var.vpn_connection_static_routes_destinations, count.index)}"
 }

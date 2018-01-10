@@ -1,5 +1,5 @@
 module "vpn_gateway" {
-  source = "terraform-aws-modules/vpn-gateway/aws"
+  source = "../../"
 
   vpn_connection_static_routes_only         = true
   vpn_connection_static_routes_destinations = ["10.100.0.1", "10.100.0.1"]
@@ -21,7 +21,7 @@ resource "aws_customer_gateway" "main" {
 }
 
 module "vpc" {
-  source = "../../"
+  source = "terraform-aws-modules/vpc/aws"
 
   name = "complete-example"
 

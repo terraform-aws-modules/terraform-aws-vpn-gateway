@@ -1,10 +1,10 @@
 module "vpn_gateway" {
-  source = "terraform-aws-modules/vpn-gateway/aws"
+  source = "../../"
 
-  vpn_gateway_id      = "${module.vpc.vgw_id}"
-  customer_gateway_id = "${aws_customer_gateway.main.id}"
-  vpc_id              = "${module.vpc.vpc_id}"
-  vpc_subnet_ids      = ["${module.vpc.private_route_table_ids}"]
+  vpn_gateway_id                  = "${module.vpc.vgw_id}"
+  customer_gateway_id             = "${aws_customer_gateway.main.id}"
+  vpc_id                          = "${module.vpc.vpc_id}"
+  vpc_subnet_route_table_ids      = ["${module.vpc.private_route_table_ids}"]
 }
 
 resource "aws_customer_gateway" "main" {
@@ -18,7 +18,7 @@ resource "aws_customer_gateway" "main" {
 }
 
 module "vpc" {
-  source = "../../"
+  source = "terraform-aws-modules/vpc/aws"
 
   name = "complete-example"
 
