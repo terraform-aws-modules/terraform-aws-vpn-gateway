@@ -21,6 +21,13 @@ variable "vpc_subnet_route_table_ids" {
   default     = []
 }
 
+# Workaround for limitation when using computed values in count attribute
+# https://github.com/hashicorp/terraform/issues/10857
+variable "vpc_subnet_route_table_count" {
+  description = "The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`."
+  default     = 0
+}
+
 variable "tags" {
   description = "Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`)."
   type        = "map"
