@@ -19,7 +19,7 @@ resource "aws_customer_gateway" "main" {
   type       = "ipsec.1"
 
   tags {
-    Name = "main-customer-gateway"
+    Name = "main-customer-gateway-complete-example"
   }
 }
 
