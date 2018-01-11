@@ -6,7 +6,7 @@ module "vpn_gateway" {
   source = "../../"
 
   vpn_connection_static_routes_only         = true
-  vpn_connection_static_routes_destinations = ["10.100.0.1", "10.100.0.1"]
+  vpn_connection_static_routes_destinations = ["10.100.0.1/32", "10.200.0.1/32"]
 
   vpn_gateway_id      = "${module.vpc.vgw_id}"
   customer_gateway_id = "${aws_customer_gateway.main.id}"
@@ -18,18 +18,18 @@ module "vpn_gateway" {
 
 resource "aws_customer_gateway" "main" {
   bgp_asn    = 65000
-  ip_address = "172.83.124.10"
+  ip_address = "172.83.124.11"
   type       = "ipsec.1"
 
   tags {
-    Name = "main-customer-gateway"
+    Name = "main-customer-gateway-complete-example-with-static-routes"
   }
 }
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "complete-example"
+  name = "complete-example-with-static-routes"
 
   cidr = "10.10.0.0/16"
 
