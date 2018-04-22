@@ -8,10 +8,10 @@ resource "aws_vpn_connection" "default" {
   static_routes_only = "${var.vpn_connection_static_routes_only}"
 
   tags = "${merge(
-    var.tags,
     map(
       "Name", "VPN Connection between VPC ${var.vpc_id} and Customer Gateway ${var.customer_gateway_id}"
-    )
+    ),
+    var.tags
   )}"
 }
 
