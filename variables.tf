@@ -61,6 +61,6 @@ variable "tunnel1_preshared_key" {
 }
 
 variable "tunnel2_preshared_key" {
-  description = "The CIDR block of the inside IP addresses for the second VPN tunnel. "
+  description = "The preshared key of the second VPN tunnel."
   default     = ""
 }
