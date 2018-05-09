@@ -31,8 +31,8 @@ module "vpn_gateway" {
   private_route_table_ids = ["${module.vpc.private_route_table_ids}"]
 
   # tunnel inside cidr & preshared keys (optional)
-  tunnel1_inside_cidr = "${var.custom_tunnel1_inside_cidr}"
-  tunnel2_inside_cidr = "${var.custom_tunnel2_inside_cidr}"
+  tunnel1_inside_cidr   = "${var.custom_tunnel1_inside_cidr}"
+  tunnel2_inside_cidr   = "${var.custom_tunnel2_inside_cidr}"
   tunnel1_preshared_key = "${var.custom_tunnel1_preshared_key}"
   tunnel2_preshared_key = "${var.custom_tunnel2_preshared_key}"
 }
@@ -68,8 +68,8 @@ module "vpn_gateway" {
   vpc_subnet_ids      = ["${aws_subnet.*.id}"]
 
   # tunnel inside cidr & preshared keys (optional)
-  tunnel1_inside_cidr = "${var.custom_tunnel1_inside_cidr}"
-  tunnel2_inside_cidr = "${var.custom_tunnel2_inside_cidr}"
+  tunnel1_inside_cidr   = "${var.custom_tunnel1_inside_cidr}"
+  tunnel2_inside_cidr   = "${var.custom_tunnel2_inside_cidr}"
   tunnel1_preshared_key = "${var.custom_tunnel1_preshared_key}"
   tunnel2_preshared_key = "${var.custom_tunnel2_preshared_key}"
 }
