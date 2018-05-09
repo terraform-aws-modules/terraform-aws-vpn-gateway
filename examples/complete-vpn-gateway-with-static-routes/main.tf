@@ -14,6 +14,12 @@ module "vpn_gateway" {
   vpc_id                       = "${module.vpc.vpc_id}"
   vpc_subnet_route_table_ids   = ["${module.vpc.private_route_table_ids}"]
   vpc_subnet_route_table_count = "${length(var.vpc_private_subnets)}"
+
+  # tunnel inside cidr & preshared keys (optional)
+  tunnel1_inside_cidr   = "169.254.33.88/30"
+  tunnel2_inside_cidr   = "169.254.33.100/30"
+  tunnel1_preshared_key = "0DTiAd2&O[>pdC#qMr~#C-CL"
+  tunnel2_preshared_key = "#Z15YI$_TiP*+rCaF<AD*bXu"
 }
 
 resource "aws_customer_gateway" "main" {

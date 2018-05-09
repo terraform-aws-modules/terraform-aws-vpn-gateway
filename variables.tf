@@ -44,3 +44,23 @@ variable "vpn_connection_static_routes_destinations" {
   type        = "list"
   default     = []
 }
+
+variable "tunnel1_inside_cidr" {
+  description = "The CIDR block of the inside IP addresses for the first VPN tunnel."
+  default     = ""
+}
+
+variable "tunnel2_inside_cidr" {
+  description = "The CIDR block of the inside IP addresses for the second VPN tunnel."
+  default     = ""
+}
+
+variable "tunnel1_preshared_key" {
+  description = "The preshared key of the first VPN tunnel."
+  default     = ""
+}
+
+variable "tunnel2_preshared_key" {
+  description = "The preshared key of the second VPN tunnel."
+  default     = ""
+}
