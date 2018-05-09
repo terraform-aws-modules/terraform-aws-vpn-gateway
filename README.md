@@ -14,6 +14,7 @@ This module also does not create a [Customer Gateway](https://www.terraform.io/d
 This module will create static routes for the VPN Connection if configured to create a VPN Connection resource with static routes and destinations for the routes have been provided.
 The static routes will then be automatically propagated to the VPC subnet routing tables (provided in `private_route_table_ids`) once a VPN tunnel status is `UP`.
 When static routes are disabled, the appliance behind the Customer Gateway needs to support BGP routing protocol in order for routes to be automatically discovered, and subsequently propagated to the VPC subnet routing tables.
+This module supports optional parameters for tunnel inside cidr and preshared keys. They can be supplied individually, too.
 
 Usage
 -----
@@ -28,6 +29,12 @@ module "vpn_gateway" {
   vpn_gateway_id          = "${module.vpc.vgw_id}"
   customer_gateway_id     = "${aws_customer_gateway.main.id}"
   private_route_table_ids = ["${module.vpc.private_route_table_ids}"]
+
+  # tunnel inside cidr & preshared keys (optional)
+  tunnel1_inside_cidr = "${var.custom_tunnel1_inside_cidr}"
+  tunnel2_inside_cidr = "${var.custom_tunnel2_inside_cidr}"
+  tunnel1_preshared_key = "${var.custom_tunnel1_preshared_key}"
+  tunnel2_preshared_key = "${var.custom_tunnel2_preshared_key}"
 }
 
 resource "aws_customer_gateway" "main" {
@@ -59,6 +66,12 @@ module "vpn_gateway" {
   customer_gateway_id = "${aws_customer_gateway.main.id}"
   vpc_id              = "${aws_vpc.vpc.vpc_id}"
   vpc_subnet_ids      = ["${aws_subnet.*.id}"]
+
+  # tunnel inside cidr & preshared keys (optional)
+  tunnel1_inside_cidr = "${var.custom_tunnel1_inside_cidr}"
+  tunnel2_inside_cidr = "${var.custom_tunnel2_inside_cidr}"
+  tunnel1_preshared_key = "${var.custom_tunnel1_preshared_key}"
+  tunnel2_preshared_key = "${var.custom_tunnel2_preshared_key}"
 }
 
 resource "aws_customer_gateway" "main" {
