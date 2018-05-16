@@ -1,5 +1,4 @@
-AWS VPN Gateway Terraform module
-================================
+# AWS VPN Gateway Terraform module
 
 Terraform module which creates [VPN gateway](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html) resources on AWS.
 
@@ -16,8 +15,7 @@ The static routes will then be automatically propagated to the VPC subnet routin
 When static routes are disabled, the appliance behind the Customer Gateway needs to support BGP routing protocol in order for routes to be automatically discovered, and subsequently propagated to the VPC subnet routing tables.
 This module supports optional parameters for tunnel inside cidr and preshared keys. They can be supplied individually, too.
 
-Usage
------
+## Usage
 
 ##### With [VPC module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws)
 
@@ -107,20 +105,51 @@ resource "aws_vpn_gateway" "vpn_gateway" {
 }
 ```
 
-Examples
---------
+## Examples
 
 * [Complete example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway) shows how to create all VPN Gateway resources.
 * [Complete example with static routes](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway-with-static-routes) shows how to create all VPN Gateway together with static routes.
 * [Minimal example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/minimal-vpn-gateway) shows how to create just VPN Gateway using this module.
 
-Authors
--------
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| create_vpn_connection | Set to false to prevent the creation of a VPN Connection. | string | `true` | no |
+| customer_gateway_id | The id of the Customer Gateway. | string | - | yes |
+| tags | Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`). | map | `<map>` | no |
+| tunnel1_inside_cidr | The CIDR block of the inside IP addresses for the first VPN tunnel. | string | `` | no |
+| tunnel1_preshared_key | The preshared key of the first VPN tunnel. | string | `` | no |
+| tunnel2_inside_cidr | The CIDR block of the inside IP addresses for the second VPN tunnel. | string | `` | no |
+| tunnel2_preshared_key | The preshared key of the second VPN tunnel. | string | `` | no |
+| vpc_id | The id of the VPC where the VPN Gateway lives. | string | - | yes |
+| vpc_subnet_route_table_count | The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`. | string | `0` | no |
+| vpc_subnet_route_table_ids | The ids of the VPC subnets for which routes from the VPN Gateway will be propagated. | list | `<list>` | no |
+| vpn_connection_static_routes_destinations | List of CIDRs to be used as destination for static routes (used with `vpn_connection_static_routes_only = true`). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc_subnet_route_table_ids`. | list | `<list>` | no |
+| vpn_connection_static_routes_only | Set to true for the created VPN connection to use static routes exclusively (only if `create_vpn_connection = true`). Static routes must be used for devices that don't support BGP. | string | `false` | no |
+| vpn_gateway_id | The id of the VPN Gateway. | string | - | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| vpn_connection_id | A list with the VPN Connection ID if `create_vpn_connection = true`, or empty otherwise |
+| vpn_connection_tunnel1_address | A list with the the public IP address of the first VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
+| vpn_connection_tunnel1_cgw_inside_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn_connection_tunnel1_vgw_inside_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn_connection_tunnel2_address | A list with the the public IP address of the second VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
+| vpn_connection_tunnel2_cgw_inside_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn_connection_tunnel2_vgw_inside_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Authors
 
 Currently maintained by [these awesome contributors](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/graphs/contributors).
 Module managed by [Anton Babenko](https://github.com/antonbabenko).
 
-License
--------
+## License
 
 Apache 2 Licensed. See LICENSE for full details.
