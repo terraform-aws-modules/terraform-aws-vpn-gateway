@@ -82,12 +82,14 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 }
 
 resource "aws_vpn_gateway_attachment" "default" {
+  count = "${var.create_vpn_connection ? 1 : 0}"
+
   vpc_id         = "${var.vpc_id}"
   vpn_gateway_id = "${var.vpn_gateway_id}"
 }
 
 resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
-  count = "${var.vpc_subnet_route_table_count}"
+  count = "${var.create_vpn_connection ? var.vpc_subnet_route_table_count : 0}"
 
   vpn_gateway_id = "${var.vpn_gateway_id}"
   route_table_id = "${element(var.vpc_subnet_route_table_ids, count.index)}"
