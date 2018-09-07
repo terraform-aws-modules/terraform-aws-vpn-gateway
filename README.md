@@ -118,7 +118,7 @@ resource "aws_vpn_gateway" "vpn_gateway" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | create_vpn_connection | Set to false to prevent the creation of a VPN Connection. | string | `true` | no |
-| create_vpn_gateway_attachment | Set to false to prevent attachment of the vGW to the VPC | string | `false` | no |
+| create_vpn_gateway_attachment | Set to false to prevent attachment of the vGW to the VPC | string | `true` | no |
 | customer_gateway_id | The id of the Customer Gateway. | string | - | yes |
 | tags | Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`). | map | `<map>` | no |
 | tunnel1_inside_cidr | The CIDR block of the inside IP addresses for the first VPN tunnel. | string | `` | no |

@@ -1,4 +1,3 @@
-
 locals {
   tunnel_details_not_specified = "${length(var.tunnel1_inside_cidr) == 0 && length(var.tunnel2_inside_cidr) == 0 && length(var.tunnel1_preshared_key) == 0 && length(var.tunnel2_preshared_key) == 0}"
 }

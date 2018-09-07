@@ -23,22 +23,23 @@ Run `terraform destroy` when you don't need these resources.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| vpc_private_subnets |  | string | `<list>` | no |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| vpn_connection_id |  |
-| vpn_connection_tunnel1_address |  |
-| vpn_connection_tunnel1_cgw_inside_address |  |
-| vpn_connection_tunnel1_vgw_inside_address |  |
-| vpn_connection_tunnel2_address |  |
-| vpn_connection_tunnel2_cgw_inside_address |  |
-| vpn_connection_tunnel2_vgw_inside_address |  |
+| vpn_gateway.vpn_connection_id |  |
+| vpn_gateway.vpn_connection_tunnel1_address |  |
+| vpn_gateway.vpn_connection_tunnel1_cgw_inside_address |  |
+| vpn_gateway.vpn_connection_tunnel1_vgw_inside_address |  |
+| vpn_gateway.vpn_connection_tunnel2_address |  |
+| vpn_gateway.vpn_connection_tunnel2_cgw_inside_address |  |
+| vpn_gateway.vpn_connection_tunnel2_vgw_inside_address |  |
+| vpn_gateway2.vpn_connection_id |  |
+| vpn_gateway2.vpn_connection_tunnel1_address |  |
+| vpn_gateway2.vpn_connection_tunnel1_cgw_inside_address |  |
+| vpn_gateway2.vpn_connection_tunnel1_vgw_inside_address |  |
+| vpn_gateway2.vpn_connection_tunnel2_address |  |
+| vpn_gateway2.vpn_connection_tunnel2_cgw_inside_address |  |
+| vpn_gateway2.vpn_connection_tunnel2_vgw_inside_address |  |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
