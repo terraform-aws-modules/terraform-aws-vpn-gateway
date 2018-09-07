@@ -64,3 +64,9 @@ variable "tunnel2_preshared_key" {
   description = "The preshared key of the second VPN tunnel."
   default     = ""
 }
+
+#Attachment can be already managed by the terraform-aws-vpc module by using the enable_vpn_gateway variable
+variable "create_vpn_gateway_attachment" {
+  description = "Set to false to prevent attachment of the vGW to the VPC"
+  default     = true
+}
