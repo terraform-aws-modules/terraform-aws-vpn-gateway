@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 module "vpn_gateway" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway.git"
+  source = "../../"
 
   vpn_gateway_id      = "${module.vpc.vgw_id}"
   customer_gateway_id = "${aws_customer_gateway.main.id}"
@@ -16,7 +16,7 @@ module "vpn_gateway" {
 }
 
 module "vpn_gateway2" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway.git"
+  source = "../../"
 
   vpn_gateway_id      = "${module.vpc.vgw_id}"
   customer_gateway_id = "${aws_customer_gateway.secondary.id}"

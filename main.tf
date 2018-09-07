@@ -1,5 +1,10 @@
+
+locals {
+  tunnel_details_not_specified = "${length(var.tunnel1_inside_cidr) == 0 && length(var.tunnel2_inside_cidr) == 0 && length(var.tunnel1_preshared_key) == 0 && length(var.tunnel2_preshared_key) == 0}"
+}
+
 resource "aws_vpn_connection" "default" {
-  count = "${var.create_vpn_connection && length(var.tunnel1_inside_cidr) == 0 && length(var.tunnel2_inside_cidr) == 0 && length(var.tunnel1_preshared_key) == 0 && length(var.tunnel2_preshared_key) == 0 ? 1 : 0}"
+  count = "${var.create_vpn_connection && local.tunnel_details_not_specified ? 1 : 0}"
 
   vpn_gateway_id      = "${var.vpn_gateway_id}"
   customer_gateway_id = "${var.customer_gateway_id}"
