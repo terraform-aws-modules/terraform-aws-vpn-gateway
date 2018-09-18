@@ -26,7 +26,9 @@ module "vpn_gateway" {
   vpc_id                  = "${module.vpc.vpc_id}"
   vpn_gateway_id          = "${module.vpc.vgw_id}"
   customer_gateway_id     = "${aws_customer_gateway.main.id}"
-  private_route_table_ids = ["${module.vpc.private_route_table_ids}"]
+
+  vpc_subnet_route_table_ids = ["${module.vpc.private_route_table_ids}"]
+  vpc_subnet_route_table_count = 3
 
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = "${var.custom_tunnel1_inside_cidr}"
