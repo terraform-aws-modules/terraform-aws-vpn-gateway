@@ -102,6 +102,10 @@ resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
 resource "aws_vpn_connection_route" "default" {
   count = "${var.create_vpn_connection ? (var.vpn_connection_static_routes_only ? length(var.vpn_connection_static_routes_destinations) : 0) : 0}"
 
-  vpn_connection_id      = "${element(split(",", (var.create_vpn_connection ? join(",", aws_vpn_connection.default.*.id) : "")), 0)}"
+  vpn_connection_id      = "${element(split(",", (var.create_vpn_connection ?
+                                                  join(",", concat(aws_vpn_connection.default.*.id,
+                                                                   aws_vpn_connection.tunnel.*.id,
+                                                                   aws_vpn_connection.preshared.*.id,
+                                                                   aws_vpn_connection.tunnel_preshared.*.id)) : "")), 0)}"
   destination_cidr_block = "${element(var.vpn_connection_static_routes_destinations, count.index)}"
 }
