@@ -1,4 +1,5 @@
 variable "vpc_private_subnets" {
+  type = "list"
   default = ["10.10.11.0/24", "10.10.12.0/24", "10.10.13.0/24"]
 }
 
@@ -18,8 +19,8 @@ module "vpn_gateway" {
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = "169.254.33.88/30"
   tunnel2_inside_cidr   = "169.254.33.100/30"
-  tunnel1_preshared_key = "0DTiAd2&O[>pdC#qMr~#C-CL"
-  tunnel2_preshared_key = "#Z15YI$_TiP*+rCaF<AD*bXu"
+  tunnel1_preshared_key = "1234567890abcdefghijklmn"
+  tunnel2_preshared_key = "abcdefghijklmn1234567890"
 }
 
 resource "aws_customer_gateway" "main" {
