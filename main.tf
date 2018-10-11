@@ -11,6 +11,7 @@ locals {
   create_tunner_with_preshared_key_only = "${local.internal_cidr_not_provided && local.preshared_key_provided }"
 }
 
+### Fully AWS managed
 resource "aws_vpn_connection" "default" {
   count = "${var.create_vpn_connection && local.tunnel_details_not_specified ? 1 : 0}"
 
