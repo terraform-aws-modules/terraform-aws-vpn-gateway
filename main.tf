@@ -1,7 +1,17 @@
 locals {
-  tunnel_details_not_specified = "${length(var.tunnel1_inside_cidr) == 0 && length(var.tunnel2_inside_cidr) == 0 && length(var.tunnel1_preshared_key) == 0 && length(var.tunnel2_preshared_key) == 0}"
+  preshared_key_provided     = "${length(var.tunnel1_preshared_key) > 0 && length(var.tunnel2_preshared_key) > 0}"
+  preshared_key_not_provided = "${!local.preshared_key_provided}"
+  internal_cidr_provided     = "${length(var.tunnel1_inside_cidr) > 0 && length(var.tunnel2_inside_cidr) > 0}"
+  internal_cidr_not_provided = "${!local.internal_cidr_provided}"
+
+  tunnel_details_not_specified = "${local.internal_cidr_not_provided && local.preshared_key_not_provided}"
+  tunnel_details_specified     = "${local.internal_cidr_provided && local.preshared_key_provided}"
+
+  create_tunner_with_internal_cidr_only = "${local.internal_cidr_provided && local.preshared_key_not_provided}"
+  create_tunner_with_preshared_key_only = "${local.internal_cidr_not_provided && local.preshared_key_provided }"
 }
 
+### Fully AWS managed
 resource "aws_vpn_connection" "default" {
   count = "${var.create_vpn_connection && local.tunnel_details_not_specified ? 1 : 0}"
 
@@ -21,7 +31,7 @@ resource "aws_vpn_connection" "default" {
 
 ### Tunnel Inside CIDR only
 resource "aws_vpn_connection" "tunnel" {
-  count = "${var.create_vpn_connection && length(var.tunnel1_inside_cidr) > 0 && length(var.tunnel2_inside_cidr) > 0 && length(var.tunnel1_preshared_key) == 0 && length(var.tunnel2_preshared_key) == 0 ? 1 : 0}"
+  count = "${var.create_vpn_connection && local.create_tunner_with_internal_cidr_only ? 1 : 0}"
 
   vpn_gateway_id      = "${var.vpn_gateway_id}"
   customer_gateway_id = "${var.customer_gateway_id}"
@@ -42,7 +52,7 @@ resource "aws_vpn_connection" "tunnel" {
 
 ### Preshared Key only
 resource "aws_vpn_connection" "preshared" {
-  count = "${var.create_vpn_connection && length(var.tunnel1_inside_cidr) == 0  && length(var.tunnel2_inside_cidr) == 0 && length(var.tunnel1_preshared_key) > 0 && length(var.tunnel2_preshared_key) > 0 ? 1 : 0}"
+  count = "${var.create_vpn_connection && local.create_tunner_with_preshared_key_only ? 1 : 0}"
 
   vpn_gateway_id      = "${var.vpn_gateway_id}"
   customer_gateway_id = "${var.customer_gateway_id}"
@@ -63,7 +73,7 @@ resource "aws_vpn_connection" "preshared" {
 
 ### Tunnel Inside CIDR and Preshared Key
 resource "aws_vpn_connection" "tunnel_preshared" {
-  count = "${var.create_vpn_connection && length(var.tunnel1_inside_cidr) > 0 && length(var.tunnel2_inside_cidr) > 0 && length(var.tunnel1_preshared_key) > 0 && length(var.tunnel2_preshared_key) > 0 ? 1 : 0}"
+  count = "${var.create_vpn_connection && local.tunnel_details_specified ? 1 : 0}"
 
   vpn_gateway_id      = "${var.vpn_gateway_id}"
   customer_gateway_id = "${var.customer_gateway_id}"
@@ -102,6 +112,6 @@ resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
 resource "aws_vpn_connection_route" "default" {
   count = "${var.create_vpn_connection ? (var.vpn_connection_static_routes_only ? length(var.vpn_connection_static_routes_destinations) : 0) : 0}"
 
-  vpn_connection_id      = "${element(split(",", (var.create_vpn_connection ? join(",", aws_vpn_connection.default.*.id) : "")), 0)}"
+  vpn_connection_id      = "${element(split(",", (local.create_tunner_with_internal_cidr_only ? join(",", aws_vpn_connection.tunnel.*.id) : (local.create_tunner_with_preshared_key_only ? join(",", aws_vpn_connection.preshared.*.id) : (local.tunnel_details_specified ? join(",", aws_vpn_connection.tunnel_preshared.*.id) : join(",", aws_vpn_connection.default.*.id))))), 0)}"
   destination_cidr_block = "${element(var.vpn_connection_static_routes_destinations, count.index)}"
 }
