@@ -17,7 +17,7 @@ variable "vpc_id" {
 
 variable "vpc_subnet_route_table_ids" {
   description = "The ids of the VPC subnets for which routes from the VPN Gateway will be propagated."
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -30,7 +30,7 @@ variable "vpc_subnet_route_table_count" {
 
 variable "tags" {
   description = "Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`)."
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
@@ -41,7 +41,7 @@ variable "vpn_connection_static_routes_only" {
 
 variable "vpn_connection_static_routes_destinations" {
   description = "List of CIDRs to be used as destination for static routes (used with `vpn_connection_static_routes_only = true`). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc_subnet_route_table_ids`."
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -70,3 +70,4 @@ variable "create_vpn_gateway_attachment" {
   description = "Set to false to prevent attachment of the vGW to the VPC"
   default     = true
 }
+

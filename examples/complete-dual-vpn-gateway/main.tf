@@ -2,27 +2,31 @@ provider "aws" {
   region = "eu-west-1"
 }
 
+terraform {
+  required_version = ">= 0.12"
+}
+
 module "vpn_gateway" {
   source = "../../"
 
-  vpn_gateway_id      = "${module.vpc.vgw_id}"
-  customer_gateway_id = "${aws_customer_gateway.main.id}"
+  vpn_gateway_id      = module.vpc.vgw_id
+  customer_gateway_id = aws_customer_gateway.main.id
 
   tunnel1_inside_cidr           = "169.254.33.88/30"
   tunnel2_inside_cidr           = "169.254.33.100/30"
-  vpc_id                        = "${module.vpc.vpc_id}"
+  vpc_id                        = module.vpc.vpc_id
   create_vpn_gateway_attachment = false
 }
 
 module "vpn_gateway2" {
   source = "../../"
 
-  vpn_gateway_id      = "${module.vpc.vgw_id}"
-  customer_gateway_id = "${aws_customer_gateway.secondary.id}"
+  vpn_gateway_id      = module.vpc.vgw_id
+  customer_gateway_id = aws_customer_gateway.secondary.id
 
   tunnel1_inside_cidr           = "169.254.34.88/30"
   tunnel2_inside_cidr           = "169.254.34.100/30"
-  vpc_id                        = "${module.vpc.vpc_id}"
+  vpc_id                        = module.vpc.vpc_id
   create_vpn_gateway_attachment = false
 }
 
@@ -31,7 +35,7 @@ resource "aws_customer_gateway" "main" {
   ip_address = "213.180.157.201"
   type       = "ipsec.1"
 
-  tags {
+  tags = {
     Name = "main-customer-gateway-complete-example"
   }
 }
@@ -41,7 +45,7 @@ resource "aws_customer_gateway" "secondary" {
   ip_address = "213.180.157.202"
   type       = "ipsec.1"
 
-  tags {
+  tags = {
     Name = "main-customer-gateway-complete-example"
   }
 }
@@ -71,3 +75,4 @@ module "vpc" {
     Name        = "complete"
   }
 }
+
