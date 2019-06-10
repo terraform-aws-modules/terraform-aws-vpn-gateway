@@ -23,20 +23,20 @@ This module supports optional parameters for tunnel inside cidr and preshared ke
 module "vpn_gateway" {
   source = "terraform-aws-modules/vpn-gateway/aws"
 
-  vpc_id                  = "${module.vpc.vpc_id}"
-  vpn_gateway_id          = "${module.vpc.vgw_id}"
-  customer_gateway_id     = "${aws_customer_gateway.main.id}"
+  vpc_id                  = module.vpc.vpc_id
+  vpn_gateway_id          = module.vpc.vgw_id
+  customer_gateway_id     = aws_customer_gateway.main.id
 
 
   # precalculated length of module variable vpc_subnet_route_table_ids
   vpc_subnet_route_table_count = 3
-  vpc_subnet_route_table_ids   = ["${module.vpc.private_route_table_ids}"]
+  vpc_subnet_route_table_ids   = module.vpc.private_route_table_ids
 
   # tunnel inside cidr & preshared keys (optional)
-  tunnel1_inside_cidr   = "${var.custom_tunnel1_inside_cidr}"
-  tunnel2_inside_cidr   = "${var.custom_tunnel2_inside_cidr}"
-  tunnel1_preshared_key = "${var.custom_tunnel1_preshared_key}"
-  tunnel2_preshared_key = "${var.custom_tunnel2_preshared_key}"
+  tunnel1_inside_cidr   = var.custom_tunnel1_inside_cidr
+  tunnel2_inside_cidr   = var.custom_tunnel2_inside_cidr
+  tunnel1_preshared_key = var.custom_tunnel1_preshared_key
+  tunnel2_preshared_key = var.custom_tunnel2_preshared_key
 }
 
 resource "aws_customer_gateway" "main" {
@@ -64,19 +64,19 @@ module "vpc" {
 module "vpn_gateway" {
   source = "terraform-aws-modules/vpn-gateway/aws"
 
-  vpn_gateway_id      = "${aws_vpn_gateway.vpn_gateway.id}"
-  customer_gateway_id = "${aws_customer_gateway.main.id}"
-  vpc_id              = "${aws_vpc.vpc.vpc_id}"
+  vpn_gateway_id      = aws_vpn_gateway.vpn_gateway.id
+  customer_gateway_id = aws_customer_gateway.main.id
+  vpc_id              = aws_vpc.vpc.vpc_id
 
   # precalculated length of module variable vpc_subnet_route_table_ids
   vpc_subnet_route_table_count = 3
-  vpc_subnet_route_table_ids   = ["${aws_subnet.*.id}"]
+  vpc_subnet_route_table_ids   = aws_subnet.*.id
 
   # tunnel inside cidr & preshared keys (optional)
-  tunnel1_inside_cidr   = "${var.custom_tunnel1_inside_cidr}"
-  tunnel2_inside_cidr   = "${var.custom_tunnel2_inside_cidr}"
-  tunnel1_preshared_key = "${var.custom_tunnel1_preshared_key}"
-  tunnel2_preshared_key = "${var.custom_tunnel2_preshared_key}"
+  tunnel1_inside_cidr   = var.custom_tunnel1_inside_cidr
+  tunnel2_inside_cidr   = var.custom_tunnel2_inside_cidr
+  tunnel1_preshared_key = var.custom_tunnel1_preshared_key
+  tunnel2_preshared_key = var.custom_tunnel2_preshared_key
 }
 
 resource "aws_customer_gateway" "main" {
@@ -94,19 +94,19 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_subnet" "one" {
-  vpc_id = "${aws_vpc.vpc.vpc_id}"
+  vpc_id = aws_vpc.vpc.vpc_id
 
   ...
 }
 
 resource "aws_subnet" "two" {
-  vpc_id = "${aws_vpc.vpc.vpc_id}"
+  vpc_id = aws_vpc.vpc.vpc_id
 
   ...
 }
 
 resource "aws_vpn_gateway" "vpn_gateway" {
-  vpc_id = "${aws_vpc.vpc.vpc_id}"
+  vpc_id = aws_vpc.vpc.vpc_id
 
   ...
 }
