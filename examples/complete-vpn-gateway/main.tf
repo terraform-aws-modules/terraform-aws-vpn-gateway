@@ -18,7 +18,7 @@ module "vpn_gateway" {
   customer_gateway_id = aws_customer_gateway.main.id
 
   vpc_id                       = module.vpc.vpc_id
-  vpc_subnet_route_table_ids   = [module.vpc.private_route_table_ids]
+  vpc_subnet_route_table_ids   = module.vpc.private_route_table_ids
   vpc_subnet_route_table_count = length(var.vpc_private_subnets)
 }
 
@@ -41,7 +41,7 @@ module "vpc" {
 
   azs             = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
   private_subnets = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
-  public_subnets  = [var.vpc_private_subnets]
+  public_subnets  = var.vpc_private_subnets
 
   enable_vpn_gateway = true
 
