@@ -125,4 +125,3 @@ resource "aws_vpn_connection_route" "default" {
   )
   destination_cidr_block = element(var.vpn_connection_static_routes_destinations, count.index)
 }
-
