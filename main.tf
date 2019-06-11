@@ -112,17 +112,7 @@ resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
 resource "aws_vpn_connection_route" "default" {
   count = var.create_vpn_connection && var.vpn_connection_static_routes_only ? length(var.vpn_connection_static_routes_destinations) : 0
 
-  vpn_connection_id = element(
-    concat(
-      tolist(
-        local.create_tunner_with_internal_cidr_only ? aws_vpn_connection.tunnel.*.id :
-        local.create_tunner_with_preshared_key_only ? aws_vpn_connection.preshared.*.id :
-        local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared.*.id :
-        aws_vpn_connection.default.*.id
-      ),
-      [""]
-    ),
-    0,
-  )
+  vpn_connection_id = local.create_tunner_with_internal_cidr_only ? aws_vpn_connection.tunnel.*.id : local.create_tunner_with_preshared_key_only ? aws_vpn_connection.preshared.*.id : local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared.*.id : aws_vpn_connection.default.*.id
+
   destination_cidr_block = element(var.vpn_connection_static_routes_destinations, count.index)
 }
