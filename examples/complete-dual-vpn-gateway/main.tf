@@ -2,10 +2,6 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-terraform {
-  required_version = ">= 0.12"
-}
-
 module "vpn_gateway" {
   source = "../../"
 
@@ -36,7 +32,7 @@ resource "aws_customer_gateway" "main" {
   type       = "ipsec.1"
 
   tags = {
-    Name = "main-customer-gateway-complete-example"
+    Name = "main-complete-dual-vpn-gateway"
   }
 }
 
@@ -46,14 +42,15 @@ resource "aws_customer_gateway" "secondary" {
   type       = "ipsec.1"
 
   tags = {
-    Name = "main-customer-gateway-complete-example"
+    Name = "secondary-complete-dual-vpn-gateway"
   }
 }
 
 module "vpc" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2.0"
 
-  name = "complete-example"
+  name = "complete-dual-vpn-gateway"
 
   cidr = "10.10.0.0/16"
 
@@ -63,6 +60,8 @@ module "vpc" {
   redshift_subnets = ["10.10.21.0/24", "10.10.22.0/24", "10.10.23.0/24"]
   intra_subnets    = ["10.10.31.0/24", "10.10.32.0/24", "10.10.33.0/24"]
   database_subnets = ["10.10.41.0/24", "10.10.42.0/24", "10.10.43.0/24"]
+
+  enable_nat_gateway = false
 
   #create vGW and set route propagation only for private networks
   enable_vpn_gateway                 = true

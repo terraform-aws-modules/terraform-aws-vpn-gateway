@@ -1,7 +1,3 @@
-terraform {
-  required_version = ">= 0.12"
-}
-
 locals {
   preshared_key_provided     = length(var.tunnel1_preshared_key) > 0 && length(var.tunnel2_preshared_key) > 0
   preshared_key_not_provided = false == local.preshared_key_provided
@@ -114,12 +110,17 @@ resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
 }
 
 resource "aws_vpn_connection_route" "default" {
-  count = var.create_vpn_connection ? var.vpn_connection_static_routes_only ? length(var.vpn_connection_static_routes_destinations) : 0 : 0
+  count = var.create_vpn_connection && var.vpn_connection_static_routes_only ? length(var.vpn_connection_static_routes_destinations) : 0
 
   vpn_connection_id = element(
-    split(
-      ",",
-      local.create_tunner_with_internal_cidr_only ? join(",", aws_vpn_connection.tunnel.*.id) : local.create_tunner_with_preshared_key_only ? join(",", aws_vpn_connection.preshared.*.id) : local.tunnel_details_specified ? join(",", aws_vpn_connection.tunnel_preshared.*.id) : join(",", aws_vpn_connection.default.*.id),
+    concat(
+      tolist(
+        local.create_tunner_with_internal_cidr_only ? aws_vpn_connection.tunnel.*.id :
+        local.create_tunner_with_preshared_key_only ? aws_vpn_connection.preshared.*.id :
+        local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared.*.id :
+        aws_vpn_connection.default.*.id
+      ),
+      [""]
     ),
     0,
   )

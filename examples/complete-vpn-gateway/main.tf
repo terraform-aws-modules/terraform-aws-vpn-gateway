@@ -1,9 +1,5 @@
 provider "aws" {
-  region = "eu-central-1"
-}
-
-terraform {
-  required_version = ">= 0.12"
+  region = "eu-west-1"
 }
 
 variable "vpc_private_subnets" {
@@ -28,20 +24,23 @@ resource "aws_customer_gateway" "main" {
   type       = "ipsec.1"
 
   tags = {
-    Name = "main-customer-gateway-complete-example"
+    Name = "complete-vpn-gateway"
   }
 }
 
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2.0"
 
-  name = "complete-example"
+  name = "complete-vpn-gateway"
 
   cidr = "10.10.0.0/16"
 
-  azs             = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
-  private_subnets = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
-  public_subnets  = var.vpc_private_subnets
+  azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  public_subnets  = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
+  private_subnets = var.vpc_private_subnets
+
+  enable_nat_gateway = false
 
   enable_vpn_gateway = true
 
