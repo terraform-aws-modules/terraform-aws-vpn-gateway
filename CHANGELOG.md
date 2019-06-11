@@ -4,16 +4,10 @@
 
 
 <a name="v2.0.0"></a>
-## [v2.0.0] - 2019-06-10
+## [v2.0.0] - 2019-06-11
 
-- Typed the variables
-- Update Readme with examples matching 0.12
-- Whitespace o/
-- Minimal example passses the plan
-- Static route example passes plan
-- Complete VPN example passes the plan.
-- Complete dual examples passes the plan.
-- Ran 012upgrade and restricted versions
+- Fixed aws_vpn_connection_route conditional expression
+- Upgraded module to support Terraform 0.12 ([#20](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/20))
 
 
 <a name="v1.6.1"></a>
