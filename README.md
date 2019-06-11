@@ -2,6 +2,14 @@
 
 Terraform module which creates [VPN gateway](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html) resources on AWS.
 
+## Terraform versions
+
+Terraform 0.12. Pin module version to `~> v2.0`. Submit pull-requests to `master` branch.
+
+Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraform011` branch.
+
+## Features
+
 This module creates:
 * a [VPN Connection](https://www.terraform.io/docs/providers/aws/r/vpn_connection.html) unless `create_vpn_connection = false`
 * a [VPN Gateway Attachment](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_attachment.html)
@@ -21,22 +29,22 @@ This module supports optional parameters for tunnel inside cidr and preshared ke
 
 ```hcl
 module "vpn_gateway" {
-  source = "terraform-aws-modules/vpn-gateway/aws"
+  source  = "terraform-aws-modules/vpn-gateway/aws"
+  version = "~> 2.0"
 
-  vpc_id                  = "${module.vpc.vpc_id}"
-  vpn_gateway_id          = "${module.vpc.vgw_id}"
-  customer_gateway_id     = "${aws_customer_gateway.main.id}"
-
+  vpc_id                  = module.vpc.vpc_id
+  vpn_gateway_id          = module.vpc.vgw_id
+  customer_gateway_id     = aws_customer_gateway.main.id
 
   # precalculated length of module variable vpc_subnet_route_table_ids
   vpc_subnet_route_table_count = 3
-  vpc_subnet_route_table_ids   = ["${module.vpc.private_route_table_ids}"]
+  vpc_subnet_route_table_ids   = module.vpc.private_route_table_ids
 
   # tunnel inside cidr & preshared keys (optional)
-  tunnel1_inside_cidr   = "${var.custom_tunnel1_inside_cidr}"
-  tunnel2_inside_cidr   = "${var.custom_tunnel2_inside_cidr}"
-  tunnel1_preshared_key = "${var.custom_tunnel1_preshared_key}"
-  tunnel2_preshared_key = "${var.custom_tunnel2_preshared_key}"
+  tunnel1_inside_cidr   = var.custom_tunnel1_inside_cidr
+  tunnel2_inside_cidr   = var.custom_tunnel2_inside_cidr
+  tunnel1_preshared_key = var.custom_tunnel1_preshared_key
+  tunnel2_preshared_key = var.custom_tunnel2_preshared_key
 }
 
 resource "aws_customer_gateway" "main" {
@@ -50,11 +58,12 @@ resource "aws_customer_gateway" "main" {
 }
 
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2.0"
 
   enable_vpn_gateway = true
 
-  ...
+  # ...
 }
 ```
 
@@ -62,21 +71,21 @@ module "vpc" {
 
 ```hcl
 module "vpn_gateway" {
-  source = "terraform-aws-modules/vpn-gateway/aws"
+  source  = "terraform-aws-modules/vpn-gateway/aws"
+  version = "~> 2.0"
 
-  vpn_gateway_id      = "${aws_vpn_gateway.vpn_gateway.id}"
-  customer_gateway_id = "${aws_customer_gateway.main.id}"
-  vpc_id              = "${aws_vpc.vpc.vpc_id}"
+  vpn_gateway_id      = aws_vpn_gateway.vpn_gateway.id
+  customer_gateway_id = aws_customer_gateway.main.id
+  vpc_id              = aws_vpc.vpc.vpc_id
 
-  # precalculated length of module variable vpc_subnet_route_table_ids
   vpc_subnet_route_table_count = 3
-  vpc_subnet_route_table_ids   = ["${aws_subnet.*.id}"]
+  vpc_subnet_route_table_ids   = ["rt-12322456", "rt-43433343", "rt-11223344"]
 
   # tunnel inside cidr & preshared keys (optional)
-  tunnel1_inside_cidr   = "${var.custom_tunnel1_inside_cidr}"
-  tunnel2_inside_cidr   = "${var.custom_tunnel2_inside_cidr}"
-  tunnel1_preshared_key = "${var.custom_tunnel1_preshared_key}"
-  tunnel2_preshared_key = "${var.custom_tunnel2_preshared_key}"
+  tunnel1_inside_cidr   = var.custom_tunnel1_inside_cidr
+  tunnel2_inside_cidr   = var.custom_tunnel2_inside_cidr
+  tunnel1_preshared_key = var.custom_tunnel1_preshared_key
+  tunnel2_preshared_key = var.custom_tunnel2_preshared_key
 }
 
 resource "aws_customer_gateway" "main" {
@@ -90,25 +99,13 @@ resource "aws_customer_gateway" "main" {
 }
 
 resource "aws_vpc" "vpc" {
-  ...
-}
-
-resource "aws_subnet" "one" {
-  vpc_id = "${aws_vpc.vpc.vpc_id}"
-
-  ...
-}
-
-resource "aws_subnet" "two" {
-  vpc_id = "${aws_vpc.vpc.vpc_id}"
-
-  ...
+  # ...
 }
 
 resource "aws_vpn_gateway" "vpn_gateway" {
-  vpc_id = "${aws_vpc.vpc.vpc_id}"
+  vpc_id = aws_vpc.vpc.vpc_id
 
-  ...
+  # ...
 }
 ```
 

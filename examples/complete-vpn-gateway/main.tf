@@ -1,21 +1,21 @@
 provider "aws" {
-  region = "eu-central-1"
+  region = "eu-west-1"
 }
 
 variable "vpc_private_subnets" {
-  type    = "list"
+  type    = list(string)
   default = ["10.10.11.0/24", "10.10.12.0/24", "10.10.13.0/24"]
 }
 
 module "vpn_gateway" {
   source = "../../"
 
-  vpn_gateway_id      = "${module.vpc.vgw_id}"
-  customer_gateway_id = "${aws_customer_gateway.main.id}"
+  vpn_gateway_id      = module.vpc.vgw_id
+  customer_gateway_id = aws_customer_gateway.main.id
 
-  vpc_id                       = "${module.vpc.vpc_id}"
-  vpc_subnet_route_table_ids   = ["${module.vpc.private_route_table_ids}"]
-  vpc_subnet_route_table_count = "${length(var.vpc_private_subnets)}"
+  vpc_id                       = module.vpc.vpc_id
+  vpc_subnet_route_table_ids   = module.vpc.private_route_table_ids
+  vpc_subnet_route_table_count = length(var.vpc_private_subnets)
 }
 
 resource "aws_customer_gateway" "main" {
@@ -23,21 +23,24 @@ resource "aws_customer_gateway" "main" {
   ip_address = "172.83.124.10"
   type       = "ipsec.1"
 
-  tags {
-    Name = "main-customer-gateway-complete-example"
+  tags = {
+    Name = "complete-vpn-gateway"
   }
 }
 
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2.0"
 
-  name = "complete-example"
+  name = "complete-vpn-gateway"
 
   cidr = "10.10.0.0/16"
 
-  azs             = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
-  private_subnets = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
-  public_subnets  = ["${var.vpc_private_subnets}"]
+  azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  public_subnets  = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
+  private_subnets = var.vpc_private_subnets
+
+  enable_nat_gateway = false
 
   enable_vpn_gateway = true
 
@@ -47,3 +50,4 @@ module "vpc" {
     Name        = "complete"
   }
 }
+
