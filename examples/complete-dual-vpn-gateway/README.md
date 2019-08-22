@@ -22,24 +22,23 @@ $ terraform apply
 Run `terraform destroy` when you don't need these resources.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| vpn_gateway.vpn_connection_id |  |
-| vpn_gateway.vpn_connection_tunnel1_address |  |
-| vpn_gateway.vpn_connection_tunnel1_cgw_inside_address |  |
-| vpn_gateway.vpn_connection_tunnel1_vgw_inside_address |  |
-| vpn_gateway.vpn_connection_tunnel2_address |  |
-| vpn_gateway.vpn_connection_tunnel2_cgw_inside_address |  |
-| vpn_gateway.vpn_connection_tunnel2_vgw_inside_address |  |
-| vpn_gateway2.vpn_connection_id |  |
-| vpn_gateway2.vpn_connection_tunnel1_address |  |
-| vpn_gateway2.vpn_connection_tunnel1_cgw_inside_address |  |
-| vpn_gateway2.vpn_connection_tunnel1_vgw_inside_address |  |
-| vpn_gateway2.vpn_connection_tunnel2_address |  |
-| vpn_gateway2.vpn_connection_tunnel2_cgw_inside_address |  |
-| vpn_gateway2.vpn_connection_tunnel2_vgw_inside_address |  |
+| vpn\_gateway2\_vpn\_connection\_id |  |
+| vpn\_gateway2\_vpn\_connection\_tunnel1\_address |  |
+| vpn\_gateway2\_vpn\_connection\_tunnel1\_cgw\_inside\_address |  |
+| vpn\_gateway2\_vpn\_connection\_tunnel1\_vgw\_inside\_address |  |
+| vpn\_gateway2\_vpn\_connection\_tunnel2\_address |  |
+| vpn\_gateway2\_vpn\_connection\_tunnel2\_cgw\_inside\_address |  |
+| vpn\_gateway2\_vpn\_connection\_tunnel2\_vgw\_inside\_address |  |
+| vpn\_gateway\_vpn\_connection\_id |  |
+| vpn\_gateway\_vpn\_connection\_tunnel1\_address |  |
+| vpn\_gateway\_vpn\_connection\_tunnel1\_cgw\_inside\_address |  |
+| vpn\_gateway\_vpn\_connection\_tunnel1\_vgw\_inside\_address |  |
+| vpn\_gateway\_vpn\_connection\_tunnel2\_address |  |
+| vpn\_gateway\_vpn\_connection\_tunnel2\_cgw\_inside\_address |  |
+| vpn\_gateway\_vpn\_connection\_tunnel2\_vgw\_inside\_address |  |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
