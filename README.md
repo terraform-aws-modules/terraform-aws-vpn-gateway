@@ -119,37 +119,36 @@ resource "aws_vpn_gateway" "vpn_gateway" {
 * [Minimal example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/minimal-vpn-gateway) shows how to create just VPN Gateway using this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| create_vpn_connection | Set to false to prevent the creation of a VPN Connection. | string | `true` | no |
-| create_vpn_gateway_attachment | Set to false to prevent attachment of the vGW to the VPC | string | `true` | no |
-| customer_gateway_id | The id of the Customer Gateway. | string | - | yes |
+| create\_vpn\_connection | Set to false to prevent the creation of a VPN Connection. | string | `"true"` | no |
+| create\_vpn\_gateway\_attachment | Set to false to prevent attachment of the vGW to the VPC | string | `"true"` | no |
+| customer\_gateway\_id | The id of the Customer Gateway. | string | n/a | yes |
 | tags | Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`). | map | `<map>` | no |
-| tunnel1_inside_cidr | The CIDR block of the inside IP addresses for the first VPN tunnel. | string | `` | no |
-| tunnel1_preshared_key | The preshared key of the first VPN tunnel. | string | `` | no |
-| tunnel2_inside_cidr | The CIDR block of the inside IP addresses for the second VPN tunnel. | string | `` | no |
-| tunnel2_preshared_key | The preshared key of the second VPN tunnel. | string | `` | no |
-| vpc_id | The id of the VPC where the VPN Gateway lives. | string | - | yes |
-| vpc_subnet_route_table_count | The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`. | string | `0` | no |
-| vpc_subnet_route_table_ids | The ids of the VPC subnets for which routes from the VPN Gateway will be propagated. | list | `<list>` | no |
-| vpn_connection_static_routes_destinations | List of CIDRs to be used as destination for static routes (used with `vpn_connection_static_routes_only = true`). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc_subnet_route_table_ids`. | list | `<list>` | no |
-| vpn_connection_static_routes_only | Set to true for the created VPN connection to use static routes exclusively (only if `create_vpn_connection = true`). Static routes must be used for devices that don't support BGP. | string | `false` | no |
-| vpn_gateway_id | The id of the VPN Gateway. | string | - | yes |
+| tunnel1\_inside\_cidr | The CIDR block of the inside IP addresses for the first VPN tunnel. | string | `""` | no |
+| tunnel1\_preshared\_key | The preshared key of the first VPN tunnel. | string | `""` | no |
+| tunnel2\_inside\_cidr | The CIDR block of the inside IP addresses for the second VPN tunnel. | string | `""` | no |
+| tunnel2\_preshared\_key | The preshared key of the second VPN tunnel. | string | `""` | no |
+| vpc\_id | The id of the VPC where the VPN Gateway lives. | string | n/a | yes |
+| vpc\_subnet\_route\_table\_count | The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`. | string | `"0"` | no |
+| vpc\_subnet\_route\_table\_ids | The ids of the VPC subnets for which routes from the VPN Gateway will be propagated. | list | `<list>` | no |
+| vpn\_connection\_static\_routes\_destinations | List of CIDRs to be used as destination for static routes (used with `vpn_connection_static_routes_only = true`). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc_subnet_route_table_ids`. | list | `<list>` | no |
+| vpn\_connection\_static\_routes\_only | Set to true for the created VPN connection to use static routes exclusively (only if `create_vpn_connection = true`). Static routes must be used for devices that don't support BGP. | string | `"false"` | no |
+| vpn\_gateway\_id | The id of the VPN Gateway. | string | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| vpn_connection_id | A list with the VPN Connection ID if `create_vpn_connection = true`, or empty otherwise |
-| vpn_connection_tunnel1_address | A list with the the public IP address of the first VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
-| vpn_connection_tunnel1_cgw_inside_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
-| vpn_connection_tunnel1_vgw_inside_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
-| vpn_connection_tunnel2_address | A list with the the public IP address of the second VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
-| vpn_connection_tunnel2_cgw_inside_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
-| vpn_connection_tunnel2_vgw_inside_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_id | A list with the VPN Connection ID if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel1\_address | A list with the the public IP address of the first VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel1\_cgw\_inside\_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel1\_vgw\_inside\_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel2\_address | A list with the the public IP address of the second VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel2\_cgw\_inside\_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel2\_vgw\_inside\_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

@@ -1,14 +1,14 @@
 locals {
   preshared_key_provided     = "${length(var.tunnel1_preshared_key) > 0 && length(var.tunnel2_preshared_key) > 0}"
-  preshared_key_not_provided = "${!local.preshared_key_provided}"
+  preshared_key_not_provided = "${! local.preshared_key_provided}"
   internal_cidr_provided     = "${length(var.tunnel1_inside_cidr) > 0 && length(var.tunnel2_inside_cidr) > 0}"
-  internal_cidr_not_provided = "${!local.internal_cidr_provided}"
+  internal_cidr_not_provided = "${! local.internal_cidr_provided}"
 
   tunnel_details_not_specified = "${local.internal_cidr_not_provided && local.preshared_key_not_provided}"
   tunnel_details_specified     = "${local.internal_cidr_provided && local.preshared_key_provided}"
 
   create_tunner_with_internal_cidr_only = "${local.internal_cidr_provided && local.preshared_key_not_provided}"
-  create_tunner_with_preshared_key_only = "${local.internal_cidr_not_provided && local.preshared_key_provided }"
+  create_tunner_with_preshared_key_only = "${local.internal_cidr_not_provided && local.preshared_key_provided}"
 }
 
 ### Fully AWS managed

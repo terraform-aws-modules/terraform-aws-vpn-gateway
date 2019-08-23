@@ -31,7 +31,7 @@ resource "aws_customer_gateway" "main" {
 }
 
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
   version = "~> 1.0"
 
   name = "minimal-example"
