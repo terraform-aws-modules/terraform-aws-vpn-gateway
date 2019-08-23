@@ -3,9 +3,15 @@
 
 
 
+<a name="v2.2.0"></a>
+## [v2.2.0] - 0001-01-01
+
+
+
 <a name="v2.1.0"></a>
 ## [v2.1.0] - 2019-08-22
 
+- Updated CHANGELOG
 - Updated README and pre-commit
 - Updated example with variables ([#24](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/24))
 
@@ -118,7 +124,8 @@ underscore characters
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.2.0...HEAD
+[v2.2.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.1.0...v2.2.0
 [v2.1.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.0.0...v2.1.0
 [v2.0.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v1.6.1...v2.0.0
 [v1.6.1]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v1.6.0...v1.6.1
