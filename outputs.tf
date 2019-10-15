@@ -96,3 +96,16 @@ output "vpn_connection_tunnel2_vgw_inside_address" {
   )
 }
 
+output "transit_gateway_attachment_id" {
+  description = "The transit gateway attachment ID that was generated when attaching this VPN connections."
+  value = element(
+    concat(
+      aws_vpn_connection.default.*.transit_gateway_attachment_id,
+      aws_vpn_connection.tunnel.*.transit_gateway_attachment_id,
+      aws_vpn_connection.preshared.*.transit_gateway_attachment_id,
+      aws_vpn_connection.tunnel_preshared.*.transit_gateway_attachment_id,
+      [""],
+    ),
+    0,
+  )
+}

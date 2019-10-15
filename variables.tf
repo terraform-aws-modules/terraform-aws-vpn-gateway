@@ -1,6 +1,18 @@
 variable "vpn_gateway_id" {
   description = "The id of the VPN Gateway."
   type        = string
+  default     = null
+}
+
+variable "connect_to_transit_gateway" {
+  description = "Connect to a TGW (true) rather than a VPN gateway (false, default)"
+  type        = bool
+  default     = false
+}
+variable "transit_gateway_id" {
+  description = "The ID of the Transit Gateway."
+  type        = string
+  default     = null
 }
 
 variable "customer_gateway_id" {
@@ -17,6 +29,7 @@ variable "create_vpn_connection" {
 variable "vpc_id" {
   description = "The id of the VPC where the VPN Gateway lives."
   type        = string
+  default     = null
 }
 
 variable "vpc_subnet_route_table_ids" {

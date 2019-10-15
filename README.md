@@ -22,6 +22,7 @@ This module will create static routes for the VPN Connection if configured to cr
 The static routes will then be automatically propagated to the VPC subnet routing tables (provided in `private_route_table_ids`) once a VPN tunnel status is `UP`.
 When static routes are disabled, the appliance behind the Customer Gateway needs to support BGP routing protocol in order for routes to be automatically discovered, and subsequently propagated to the VPC subnet routing tables.
 This module supports optional parameters for tunnel inside cidr and preshared keys. They can be supplied individually, too.
+If you want to use the Transit Gateway support you are responsible for creating the transit gateway, the route tables and the association yourself outside of this module.
 
 ## Usage
 
@@ -120,25 +121,28 @@ resource "aws_vpn_gateway" "vpn_gateway" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| connect\_to\_transit\_gateway | Whether to connect to a transit gateway(true) or a VPN gateway (false) | bool | `"false"` | no |
 | create\_vpn\_connection | Set to false to prevent the creation of a VPN Connection. | bool | `"true"` | no |
 | create\_vpn\_gateway\_attachment | Set to false to prevent attachment of the vGW to the VPC | bool | `"true"` | no |
 | customer\_gateway\_id | The id of the Customer Gateway. | string | n/a | yes |
 | tags | Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`). | map(string) | `{}` | no |
+| transit\_gateway\_id | The transit gateway ID to link the VPN connection to | string | null | no |
 | tunnel1\_inside\_cidr | The CIDR block of the inside IP addresses for the first VPN tunnel. | string | `""` | no |
 | tunnel1\_preshared\_key | The preshared key of the first VPN tunnel. | string | `""` | no |
 | tunnel2\_inside\_cidr | The CIDR block of the inside IP addresses for the second VPN tunnel. | string | `""` | no |
 | tunnel2\_preshared\_key | The preshared key of the second VPN tunnel. | string | `""` | no |
-| vpc\_id | The id of the VPC where the VPN Gateway lives. | string | n/a | yes |
+| vpc\_id | The id of the VPC where the VPN Gateway lives. (Required if specifying a vpn_gateway_id) | string | n/a | yes |
 | vpc\_subnet\_route\_table\_count | The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`. | number | `"0"` | no |
 | vpc\_subnet\_route\_table\_ids | The ids of the VPC subnets for which routes from the VPN Gateway will be propagated. | list(string) | `[]` | no |
 | vpn\_connection\_static\_routes\_destinations | List of CIDRs to be used as destination for static routes (used with `vpn_connection_static_routes_only = true`). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc_subnet_route_table_ids`. | list(string) | `[]` | no |
 | vpn\_connection\_static\_routes\_only | Set to true for the created VPN connection to use static routes exclusively (only if `create_vpn_connection = true`). Static routes must be used for devices that don't support BGP. | bool | `"false"` | no |
-| vpn\_gateway\_id | The id of the VPN Gateway. | string | n/a | yes |
+| vpn\_gateway\_id | The id of the VPN Gateway. (Mutually exclusive with `transit_gateway_id`) | string | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| transit\_gateway\_attachment\_id | The resulting transit gateway attachment ID if `transit_gateway_id` was set as input |
 | vpn\_connection\_id | A list with the VPN Connection ID if `create_vpn_connection = true`, or empty otherwise |
 | vpn\_connection\_tunnel1\_address | A list with the the public IP address of the first VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
 | vpn\_connection\_tunnel1\_cgw\_inside\_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
