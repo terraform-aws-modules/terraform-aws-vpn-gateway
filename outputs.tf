@@ -32,3 +32,8 @@ output "vpn_connection_tunnel2_vgw_inside_address" {
   description = "A list with the the RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise"
   value       = "${element(concat(aws_vpn_connection.default.*.tunnel2_vgw_inside_address, aws_vpn_connection.tunnel.*.tunnel2_vgw_inside_address, aws_vpn_connection.preshared.*.tunnel2_vgw_inside_address, aws_vpn_connection.tunnel_preshared.*.tunnel2_vgw_inside_address, list("")), 0)}"
 }
+
+output "vpn_connection_customer_gateway_configuration" {
+  description = "The configuration information for the VPN connection's customer gateway (in the native XML format) if `create_vpn_connection = true`, or empty otherwise"
+  value       = "${element(concat(aws_vpn_connection.default.*.customer_gateway_configuration, aws_vpn_connection.tunnel.*.customer_gateway_configuration, aws_vpn_connection.preshared.*.customer_gateway_configuration, aws_vpn_connection.tunnel_preshared.*.customer_gateway_configuration, list("")), 0)}"
+}
