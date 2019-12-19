@@ -96,3 +96,17 @@ output "vpn_connection_tunnel2_vgw_inside_address" {
   )
 }
 
+output "vpn_connection_customer_gateway_configuration" {
+  description = "The configuration information for the VPN connection's customer gateway (in the native XML format) if `create_vpn_connection = true`, or empty otherwise"
+  value = element(
+    concat(
+      aws_vpn_connection.default.*.customer_gateway_configuration,
+      aws_vpn_connection.tunnel.*.customer_gateway_configuration,
+      aws_vpn_connection.preshared.*.customer_gateway_configuration,
+      aws_vpn_connection.tunnel_preshared.*.customer_gateway_configuration,
+      [""],
+    ),
+    0,
+  )
+}
+
