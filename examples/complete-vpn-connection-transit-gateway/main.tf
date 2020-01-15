@@ -68,7 +68,6 @@ module "vpc" {
   tags = {
     Owner       = "user"
     Environment = "staging"
-    Name        = "complete"
   }
 }
 
