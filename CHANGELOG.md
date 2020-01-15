@@ -3,9 +3,33 @@
 
 
 
+<a name="v2.4.0"></a>
+## [v2.4.0] - 2020-01-15
+
+- Add support for Transit Gateway ([#26](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/26))
+- Updated CHANGELOG
+- Also output the connection configuration ([#28](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/28))
+- Updated CHANGELOG
+- Updated CHANGELOG
+- Updated README and pre-commit
+- Updated example with variables ([#24](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/24))
+- Updated CHANGELOG
+- Fixed aws_vpn_connection_route conditional expression
+- Upgraded module to support Terraform 0.12 ([#20](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/20))
+
+
+<a name="v1.8.0"></a>
+## [v1.8.0] - 2019-12-19
+
+- Also output the connection configuration ([#29](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/29))
+- Fixed formatting after [#25](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/25)
+- Terraform011 ([#25](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/25))
+
+
 <a name="v2.3.0"></a>
 ## [v2.3.0] - 2019-12-19
 
+- Updated CHANGELOG
 - Also output the connection configuration ([#28](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/28))
 - Updated CHANGELOG
 - Updated CHANGELOG
@@ -145,7 +169,9 @@ underscore characters
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.4.0...HEAD
+[v2.4.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v1.8.0...v2.4.0
+[v1.8.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.3.0...v1.8.0
 [v2.3.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v1.7.0...v2.3.0
 [v1.7.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.2.0...v1.7.0
 [v2.2.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.1.0...v2.2.0
