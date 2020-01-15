@@ -9,13 +9,19 @@ locals {
 
   create_tunner_with_internal_cidr_only = local.internal_cidr_provided && local.preshared_key_not_provided
   create_tunner_with_preshared_key_only = local.internal_cidr_not_provided && local.preshared_key_provided
+
+  connect_to_transit_gateway = var.transit_gateway_id != ""
+  connection_identifier      = local.connect_to_transit_gateway ? "TGW ${var.transit_gateway_id}" : "VPC ${var.vpc_id}"
+  name_tag                   = "VPN Connection between ${local.connection_identifier} and Customer Gateway ${var.customer_gateway_id}"
 }
 
 ### Fully AWS managed
 resource "aws_vpn_connection" "default" {
   count = var.create_vpn_connection && local.tunnel_details_not_specified ? 1 : 0
 
-  vpn_gateway_id      = var.vpn_gateway_id
+  vpn_gateway_id     = var.vpn_gateway_id
+  transit_gateway_id = var.transit_gateway_id
+
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
@@ -23,7 +29,7 @@ resource "aws_vpn_connection" "default" {
 
   tags = merge(
     {
-      "Name" = "VPN Connection between VPC ${var.vpc_id} and Customer Gateway ${var.customer_gateway_id}"
+      "Name" = local.name_tag
     },
     var.tags,
   )
@@ -33,7 +39,9 @@ resource "aws_vpn_connection" "default" {
 resource "aws_vpn_connection" "tunnel" {
   count = var.create_vpn_connection && local.create_tunner_with_internal_cidr_only ? 1 : 0
 
-  vpn_gateway_id      = var.vpn_gateway_id
+  vpn_gateway_id     = var.vpn_gateway_id
+  transit_gateway_id = var.transit_gateway_id
+
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
@@ -44,7 +52,7 @@ resource "aws_vpn_connection" "tunnel" {
 
   tags = merge(
     {
-      "Name" = "VPN Connection between VPC ${var.vpc_id} and Customer Gateway ${var.customer_gateway_id}"
+      "Name" = local.name_tag
     },
     var.tags,
   )
@@ -54,7 +62,9 @@ resource "aws_vpn_connection" "tunnel" {
 resource "aws_vpn_connection" "preshared" {
   count = var.create_vpn_connection && local.create_tunner_with_preshared_key_only ? 1 : 0
 
-  vpn_gateway_id      = var.vpn_gateway_id
+  vpn_gateway_id     = var.vpn_gateway_id
+  transit_gateway_id = var.transit_gateway_id
+
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
@@ -65,7 +75,7 @@ resource "aws_vpn_connection" "preshared" {
 
   tags = merge(
     {
-      "Name" = "VPN Connection between VPC ${var.vpc_id} and Customer Gateway ${var.customer_gateway_id}"
+      "Name" = local.name_tag
     },
     var.tags,
   )
@@ -75,7 +85,9 @@ resource "aws_vpn_connection" "preshared" {
 resource "aws_vpn_connection" "tunnel_preshared" {
   count = var.create_vpn_connection && local.tunnel_details_specified ? 1 : 0
 
-  vpn_gateway_id      = var.vpn_gateway_id
+  vpn_gateway_id     = var.vpn_gateway_id
+  transit_gateway_id = var.transit_gateway_id
+
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
@@ -89,28 +101,28 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   tags = merge(
     {
-      "Name" = "VPN Connection between VPC ${var.vpc_id} and Customer Gateway ${var.customer_gateway_id}"
+      "Name" = local.name_tag
     },
     var.tags,
   )
 }
 
 resource "aws_vpn_gateway_attachment" "default" {
-  count = var.create_vpn_connection && var.create_vpn_gateway_attachment ? 1 : 0
+  count = var.create_vpn_connection && var.create_vpn_gateway_attachment && ! local.connect_to_transit_gateway ? 1 : 0
 
   vpc_id         = var.vpc_id
   vpn_gateway_id = var.vpn_gateway_id
 }
 
 resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
-  count = var.create_vpn_connection ? var.vpc_subnet_route_table_count : 0
+  count = var.create_vpn_connection && ! local.connect_to_transit_gateway ? var.vpc_subnet_route_table_count : 0
 
   vpn_gateway_id = var.vpn_gateway_id
   route_table_id = element(var.vpc_subnet_route_table_ids, count.index)
 }
 
 resource "aws_vpn_connection_route" "default" {
-  count = var.create_vpn_connection && var.vpn_connection_static_routes_only ? length(var.vpn_connection_static_routes_destinations) : 0
+  count = var.create_vpn_connection && var.vpn_connection_static_routes_only && ! local.connect_to_transit_gateway ? length(var.vpn_connection_static_routes_destinations) : 0
 
   vpn_connection_id = local.create_tunner_with_internal_cidr_only ? aws_vpn_connection.tunnel[0].id : local.create_tunner_with_preshared_key_only ? aws_vpn_connection.preshared[0].id : local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared[0].id : aws_vpn_connection.default[0].id
 
