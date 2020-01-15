@@ -4,11 +4,6 @@ variable "vpn_gateway_id" {
   default     = null
 }
 
-variable "connect_to_transit_gateway" {
-  description = "Connect to a TGW (true) rather than a VPN gateway (false, default)"
-  type        = bool
-  default     = false
-}
 variable "transit_gateway_id" {
   description = "The ID of the Transit Gateway."
   type        = string

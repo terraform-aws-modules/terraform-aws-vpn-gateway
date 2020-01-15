@@ -1,8 +1,6 @@
-# Complete VPN Gateway Setup with Transit Gateway
+# Complete VPN Connection with Transit Gateway
 
-Configuration in this directory creates set of VPN Gateway related resources which may be sufficient for staging or production environment (look into [minimal-vpn-gateway](../minimal-vpn-gateway) for more simplified setup).
-
-There will be a VPN Connection created which is linked to a transit gateway. This transit gateway is linked to a sample VPC which will be created for you.
+Configuration in this directory creates two VPN Connections (one per Customer Gateway) linked to Transit Gateway which is connected to private subnets of VPC.
 
 ## Usage
 
@@ -29,11 +27,12 @@ Run `terraform destroy` when you don't need these resources.
 | Name | Description |
 |------|-------------|
 | vpn\_connection\_id |  |
+| vpn\_connection\_transit\_gateway\_attachment\_id |  |
 | vpn\_connection\_tunnel1\_address |  |
 | vpn\_connection\_tunnel1\_cgw\_inside\_address |  |
 | vpn\_connection\_tunnel1\_vgw\_inside\_address |  |
 | vpn\_connection\_tunnel2\_address |  |
 | vpn\_connection\_tunnel2\_cgw\_inside\_address |  |
 | vpn\_connection\_tunnel2\_vgw\_inside\_address |  |
-| transit\_gateway\_attachment\_id | |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

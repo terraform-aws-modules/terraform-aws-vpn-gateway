@@ -12,32 +12,30 @@ variable "vpc_public_subnets" {
   default = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
 }
 
-module "vpn_gateway" {
+module "vpn_gateway_1" {
   source = "../../"
 
-  create_vpn_gateway_attachment = false
+  transit_gateway_id  = aws_ec2_transit_gateway.this.id
+  customer_gateway_id = module.vpc.cgw_ids[0]
 
-  transit_gateway_id         = aws_ec2_transit_gateway.example.id
-  customer_gateway_id        = aws_customer_gateway.main.id
-  connect_to_transit_gateway = true
+  # tunnel inside cidr & preshared keys (optional)
+  tunnel1_inside_cidr   = "169.254.44.88/30"
+  tunnel2_inside_cidr   = "169.254.44.100/30"
+  tunnel1_preshared_key = "1234567890abcdefghijklmn"
+  tunnel2_preshared_key = "abcdefghijklmn1234567890"
+}
+
+module "vpn_gateway_2" {
+  source = "../../"
+
+  transit_gateway_id  = aws_ec2_transit_gateway.this.id
+  customer_gateway_id = module.vpc.cgw_ids[1]
 
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = "169.254.33.88/30"
   tunnel2_inside_cidr   = "169.254.33.100/30"
   tunnel1_preshared_key = "1234567890abcdefghijklmn"
   tunnel2_preshared_key = "abcdefghijklmn1234567890"
-
-}
-
-resource "aws_customer_gateway" "main" {
-  bgp_asn    = 65000
-  ip_address = "172.83.124.11"
-  type       = "ipsec.1"
-
-  tags = {
-    Name = "complete-vpn-gateway-transit-gateway"
-  }
-
 }
 
 module "vpc" {
@@ -56,6 +54,17 @@ module "vpc" {
 
   enable_vpn_gateway = false
 
+  customer_gateways = {
+    IP1 = {
+      bgp_asn    = 65220
+      ip_address = "172.83.124.10"
+    },
+    IP2 = {
+      bgp_asn    = 65220
+      ip_address = "172.83.124.11"
+    }
+  }
+
   tags = {
     Owner       = "user"
     Environment = "staging"
@@ -63,12 +72,12 @@ module "vpc" {
   }
 }
 
-resource "aws_ec2_transit_gateway" "example" {
-  description = "complete-vpn-gateway-transit-gateway"
+resource "aws_ec2_transit_gateway" "this" {
+  description = "complete-vpn-connection-transit-gateway"
 }
 
-resource "aws_ec2_transit_gateway_vpc_attachment" "example" {
+resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
   subnet_ids         = module.vpc.private_subnets
-  transit_gateway_id = aws_ec2_transit_gateway.example.id
+  transit_gateway_id = aws_ec2_transit_gateway.this.id
   vpc_id             = module.vpc.vpc_id
 }
