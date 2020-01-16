@@ -83,9 +83,16 @@ variable "tunnel2_preshared_key" {
   default     = ""
 }
 
-#Attachment can be already managed by the terraform-aws-vpc module by using the enable_vpn_gateway variable
+# Attachment can be already managed by the terraform-aws-vpc module by using the enable_vpn_gateway variable
 variable "create_vpn_gateway_attachment" {
-  description = "Set to false to prevent attachment of the vGW to the VPC"
+  description = "Set to false to prevent attachment of the VGW to the VPC"
   type        = bool
   default     = true
+}
+
+# Use terraform-aws-transit-gateway module to create TGW required resources and set `connect_to_transit_gateway = true` here
+variable "connect_to_transit_gateway" {
+  description = "Set to false to disable attachment of the VPN connection route to the VPN connection (TGW uses another resource for that)"
+  type        = bool
+  default     = false
 }

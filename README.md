@@ -22,7 +22,8 @@ This module will create static routes for the VPN Connection if configured to cr
 The static routes will then be automatically propagated to the VPC subnet routing tables (provided in `private_route_table_ids`) once a VPN tunnel status is `UP`.
 When static routes are disabled, the appliance behind the Customer Gateway needs to support BGP routing protocol in order for routes to be automatically discovered, and subsequently propagated to the VPC subnet routing tables.
 This module supports optional parameters for tunnel inside cidr and preshared keys. They can be supplied individually, too.
-If you want to use the Transit Gateway support you are responsible for creating the transit gateway, the route tables and the association yourself outside of this module.
+
+If you want to use the Transit Gateway support you are responsible for creating the transit gateway resources (eg, using [terraform-aws-transit-gateway module](https://github.com/terraform-aws-modules/terraform-aws-transit-gateway)).
 
 ## Usage
 
@@ -119,8 +120,9 @@ module "vpn_gateway" {
   source  = "terraform-aws-modules/vpn-gateway/aws"
   version = "~> 2.0"
 
-  transit_gateway_id  = aws_ec2_transit_gateway.this.id
-  customer_gateway_id = module.vpc.cgw_ids[0]
+  connect_to_transit_gateway = true
+  transit_gateway_id         = aws_ec2_transit_gateway.this.id
+  customer_gateway_id        = module.vpc.cgw_ids[0]
 
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = var.custom_tunnel1_inside_cidr
@@ -159,7 +161,73 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
   vpc_id             = module.vpc.vpc_id
   transit_gateway_id = aws_ec2_transit_gateway.this.id
 }
+```
 
+##### With VPC and Transit Gateway modules
+
+```hcl
+module "vpn_gateway" {
+  source  = "terraform-aws-modules/vpn-gateway/aws"
+  version = "~> 2.0"
+
+  connect_to_transit_gateway = true
+  transit_gateway_id         = module.tgw.this_ec2_transit_gateway_id
+  customer_gateway_id        = module.vpc.cgw_ids[0]
+
+  # tunnel inside cidr & preshared keys (optional)
+  tunnel1_inside_cidr   = var.custom_tunnel1_inside_cidr
+  tunnel2_inside_cidr   = var.custom_tunnel2_inside_cidr
+  tunnel1_preshared_key = var.custom_tunnel1_preshared_key
+  tunnel2_preshared_key = var.custom_tunnel2_preshared_key
+}
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2.0"
+
+  enable_vpn_gateway = true
+  amazon_side_asn    = 64620
+  
+  customer_gateways = {
+    IP1 = {
+      bgp_asn    = 65220
+      ip_address = "172.83.124.10"
+    },
+    IP2 = {
+      bgp_asn    = 65220
+      ip_address = "172.83.124.11"
+    }
+  }
+
+  # ...
+}
+
+module "tgw" {
+  source  = "terraform-aws-modules/transit-gateway/aws"
+  version = "~> 1.0"
+
+  name            = "my-tgw"
+  description     = "My TGW shared with several other AWS accounts"
+  amazon_side_asn = 64532
+
+  vpc_attachments = {
+    vpc1 = {
+      vpc_id      = "vpc-12345678" # module.vpc.vpc_id <- will not work since computed values can't be used in `count`
+      subnet_ids  = ["subnet-123456", "subnet-111222233"] # module.vpc.public_subnets <- will not work since computed values can't be used in `count`
+      dns_support = true
+
+      tgw_routes = [
+        {
+          destination_cidr_block = "30.0.0.0/16"
+        },
+        {
+          blackhole              = true
+          destination_cidr_block = "0.0.0.0/0"
+        }
+      ]
+    }
+  }
+}
 ```
 
 ## Examples
@@ -174,8 +242,9 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| connect\_to\_transit\_gateway | Set to false to disable attachment of the VPN connection route to the VPN connection \(TGW uses another resource for that\) | bool | `"false"` | no |
 | create\_vpn\_connection | Set to false to prevent the creation of a VPN Connection. | bool | `"true"` | no |
-| create\_vpn\_gateway\_attachment | Set to false to prevent attachment of the vGW to the VPC | bool | `"true"` | no |
+| create\_vpn\_gateway\_attachment | Set to false to prevent attachment of the VGW to the VPC | bool | `"true"` | no |
 | customer\_gateway\_id | The id of the Customer Gateway. | string | n/a | yes |
 | tags | Set of tags to be added to the VPN Connection resource \(only if `create\_vpn\_connection = true`\). | map(string) | `{}` | no |
 | transit\_gateway\_id | The ID of the Transit Gateway. | string | `"null"` | no |
