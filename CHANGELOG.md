@@ -3,9 +3,16 @@
 
 
 
+<a name="v2.5.0"></a>
+## [v2.5.0] - 2020-01-16
+
+- Fixed count and computed values bug
+
+
 <a name="v2.4.0"></a>
 ## [v2.4.0] - 2020-01-15
 
+- Updated CHANGELOG
 - Add support for Transit Gateway ([#26](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/26))
 - Updated CHANGELOG
 - Also output the connection configuration ([#28](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/28))
@@ -169,7 +176,8 @@ underscore characters
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.4.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.5.0...HEAD
+[v2.5.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v1.8.0...v2.4.0
 [v1.8.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.3.0...v1.8.0
 [v2.3.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v1.7.0...v2.3.0
