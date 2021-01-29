@@ -10,8 +10,8 @@ locals {
   create_tunner_with_internal_cidr_only = local.internal_cidr_provided && local.preshared_key_not_provided
   create_tunner_with_preshared_key_only = local.internal_cidr_not_provided && local.preshared_key_provided
 
-  connection_identifier = var.connect_to_transit_gateway ? "TGW ${var.transit_gateway_id}" : "VPC ${var.vpc_id}"
-  name_tag              = "VPN Connection between ${local.connection_identifier} and Customer Gateway ${var.customer_gateway_id}"
+  connection_identifier = var.connect_to_transit_gateway ? "TGW ${var.transit_gateway_id}" : "VPC ${var.vpc_name}"
+  name_tag              = "VPN Connection between ${local.connection_identifier} and Customer Gateway ${var.customer_gateway_name}"
 }
 
 ### Fully AWS managed
