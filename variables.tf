@@ -15,6 +15,11 @@ variable "customer_gateway_id" {
   type        = string
 }
 
+variable "customer_gateway_name" {
+  description = "The Name of the Customer Gateway."
+  type        = string
+}
+
 variable "create_vpn_connection" {
   description = "Set to false to prevent the creation of a VPN Connection."
   type        = bool
@@ -23,6 +28,12 @@ variable "create_vpn_connection" {
 
 variable "vpc_id" {
   description = "The id of the VPC where the VPN Gateway lives."
+  type        = string
+  default     = null
+}
+
+variable "vpc_name" {
+  description = "The Name of the VPC where the VPN Gateway lives."
   type        = string
   default     = null
 }
