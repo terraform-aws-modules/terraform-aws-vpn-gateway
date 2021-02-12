@@ -26,6 +26,48 @@ resource "aws_vpn_connection" "default" {
 
   static_routes_only = var.vpn_connection_static_routes_only
 
+  tunnel1_phase1_dh_group_numbers = var.tunnel1_phase1_dh_group_numbers
+  tunnel2_phase1_dh_group_numbers = var.tunnel2_phase1_dh_group_numbers
+
+  tunnel1_phase1_encryption_algorithms = var.tunnel1_phase1_encryption_algorithms
+  tunnel2_phase1_encryption_algorithms = var.tunnel2_phase1_encryption_algorithms
+
+  tunnel1_phase1_integrity_algorithms = var.tunnel1_phase1_integrity_algorithms
+  tunnel2_phase1_integrity_algorithms = var.tunnel2_phase1_integrity_algorithms
+
+  tunnel1_phase1_lifetime_seconds = var.tunnel1_phase1_lifetime_seconds
+  tunnel2_phase1_lifetime_seconds = var.tunnel2_phase1_lifetime_seconds
+
+  tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
+  tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
+
+  tunnel1_phase2_dh_group_numbers = var.tunnel1_phase2_dh_group_numbers
+  tunnel2_phase2_dh_group_numbers = var.tunnel2_phase2_dh_group_numbers
+
+  tunnel1_phase2_encryption_algorithms = var.tunnel1_phase2_encryption_algorithms
+  tunnel2_phase2_encryption_algorithms = var.tunnel2_phase2_encryption_algorithms
+
+  tunnel1_phase2_integrity_algorithms = var.tunnel1_phase2_integrity_algorithms
+  tunnel2_phase2_integrity_algorithms = var.tunnel2_phase2_integrity_algorithms
+
+  tunnel1_phase2_lifetime_seconds = var.tunnel1_phase2_lifetime_seconds
+  tunnel2_phase2_lifetime_seconds = var.tunnel2_phase2_lifetime_seconds
+
+  tunnel1_rekey_fuzz_percentage = var.tunnel1_rekey_fuzz_percentage
+  tunnel2_rekey_fuzz_percentage = var.tunnel2_rekey_fuzz_percentage
+
+  tunnel1_rekey_margin_time_seconds = var.tunnel1_rekey_margin_time_seconds
+  tunnel2_rekey_margin_time_seconds = var.tunnel2_rekey_margin_time_seconds
+
+  tunnel1_replay_window_size = var.tunnel1_replay_window_size
+  tunnel2_replay_window_size = var.tunnel2_replay_window_size
+
+  tunnel1_startup_action = var.tunnel1_startup_action
+  tunnel2_startup_action = var.tunnel2_startup_action
+
+  tunnel1_ike_versions = var.tunnel1_ike_versions
+  tunnel2_ike_versions = var.tunnel2_ike_versions
+
   tags = merge(
     {
       "Name" = local.name_tag
@@ -49,6 +91,48 @@ resource "aws_vpn_connection" "tunnel" {
   tunnel1_inside_cidr = var.tunnel1_inside_cidr
   tunnel2_inside_cidr = var.tunnel2_inside_cidr
 
+  tunnel1_phase1_dh_group_numbers = var.tunnel1_phase1_dh_group_numbers
+  tunnel2_phase1_dh_group_numbers = var.tunnel2_phase1_dh_group_numbers
+
+  tunnel1_phase1_encryption_algorithms = var.tunnel1_phase1_encryption_algorithms
+  tunnel2_phase1_encryption_algorithms = var.tunnel2_phase1_encryption_algorithms
+
+  tunnel1_phase1_integrity_algorithms = var.tunnel1_phase1_integrity_algorithms
+  tunnel2_phase1_integrity_algorithms = var.tunnel2_phase1_integrity_algorithms
+
+  tunnel1_phase1_lifetime_seconds = var.tunnel1_phase1_lifetime_seconds
+  tunnel2_phase1_lifetime_seconds = var.tunnel2_phase1_lifetime_seconds
+
+  tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
+  tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
+
+  tunnel1_phase2_dh_group_numbers = var.tunnel1_phase2_dh_group_numbers
+  tunnel2_phase2_dh_group_numbers = var.tunnel2_phase2_dh_group_numbers
+
+  tunnel1_phase2_encryption_algorithms = var.tunnel1_phase2_encryption_algorithms
+  tunnel2_phase2_encryption_algorithms = var.tunnel2_phase2_encryption_algorithms
+
+  tunnel1_phase2_integrity_algorithms = var.tunnel1_phase2_integrity_algorithms
+  tunnel2_phase2_integrity_algorithms = var.tunnel2_phase2_integrity_algorithms
+
+  tunnel1_phase2_lifetime_seconds = var.tunnel1_phase2_lifetime_seconds
+  tunnel2_phase2_lifetime_seconds = var.tunnel2_phase2_lifetime_seconds
+
+  tunnel1_rekey_fuzz_percentage = var.tunnel1_rekey_fuzz_percentage
+  tunnel2_rekey_fuzz_percentage = var.tunnel2_rekey_fuzz_percentage
+
+  tunnel1_rekey_margin_time_seconds = var.tunnel1_rekey_margin_time_seconds
+  tunnel2_rekey_margin_time_seconds = var.tunnel2_rekey_margin_time_seconds
+
+  tunnel1_replay_window_size = var.tunnel1_replay_window_size
+  tunnel2_replay_window_size = var.tunnel2_replay_window_size
+
+  tunnel1_startup_action = var.tunnel1_startup_action
+  tunnel2_startup_action = var.tunnel2_startup_action
+
+  tunnel1_ike_versions = var.tunnel1_ike_versions
+  tunnel2_ike_versions = var.tunnel2_ike_versions
+
   tags = merge(
     {
       "Name" = local.name_tag
@@ -61,7 +145,7 @@ resource "aws_vpn_connection" "tunnel" {
 resource "aws_vpn_connection" "preshared" {
   count = var.create_vpn_connection && local.create_tunner_with_preshared_key_only ? 1 : 0
 
-  vpn_gateway_id     = var.vpn_gateway_id
+  #vpn_gateway_id     = var.vpn_gateway_id
   transit_gateway_id = var.transit_gateway_id
 
   customer_gateway_id = var.customer_gateway_id
@@ -71,6 +155,48 @@ resource "aws_vpn_connection" "preshared" {
 
   tunnel1_preshared_key = var.tunnel1_preshared_key
   tunnel2_preshared_key = var.tunnel2_preshared_key
+
+  tunnel1_phase1_dh_group_numbers = var.tunnel1_phase1_dh_group_numbers
+  tunnel2_phase1_dh_group_numbers = var.tunnel2_phase1_dh_group_numbers
+
+  tunnel1_phase1_encryption_algorithms = var.tunnel1_phase1_encryption_algorithms
+  tunnel2_phase1_encryption_algorithms = var.tunnel2_phase1_encryption_algorithms
+
+  tunnel1_phase1_integrity_algorithms = var.tunnel1_phase1_integrity_algorithms
+  tunnel2_phase1_integrity_algorithms = var.tunnel2_phase1_integrity_algorithms
+
+  tunnel1_phase1_lifetime_seconds = var.tunnel1_phase1_lifetime_seconds
+  tunnel2_phase1_lifetime_seconds = var.tunnel2_phase1_lifetime_seconds
+
+  tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
+  tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
+
+  tunnel1_phase2_dh_group_numbers = var.tunnel1_phase2_dh_group_numbers
+  tunnel2_phase2_dh_group_numbers = var.tunnel2_phase2_dh_group_numbers
+
+  tunnel1_phase2_encryption_algorithms = var.tunnel1_phase2_encryption_algorithms
+  tunnel2_phase2_encryption_algorithms = var.tunnel2_phase2_encryption_algorithms
+
+  tunnel1_phase2_integrity_algorithms = var.tunnel1_phase2_integrity_algorithms
+  tunnel2_phase2_integrity_algorithms = var.tunnel2_phase2_integrity_algorithms
+
+  tunnel1_phase2_lifetime_seconds = var.tunnel1_phase2_lifetime_seconds
+  tunnel2_phase2_lifetime_seconds = var.tunnel2_phase2_lifetime_seconds
+
+  tunnel1_rekey_fuzz_percentage = var.tunnel1_rekey_fuzz_percentage
+  tunnel2_rekey_fuzz_percentage = var.tunnel2_rekey_fuzz_percentage
+
+  tunnel1_rekey_margin_time_seconds = var.tunnel1_rekey_margin_time_seconds
+  tunnel2_rekey_margin_time_seconds = var.tunnel2_rekey_margin_time_seconds
+
+  tunnel1_replay_window_size = var.tunnel1_replay_window_size
+  tunnel2_replay_window_size = var.tunnel2_replay_window_size
+
+  tunnel1_startup_action = var.tunnel1_startup_action
+  tunnel2_startup_action = var.tunnel2_startup_action
+
+  tunnel1_ike_versions = var.tunnel1_ike_versions
+  tunnel2_ike_versions = var.tunnel2_ike_versions
 
   tags = merge(
     {
@@ -97,6 +223,48 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   tunnel1_preshared_key = var.tunnel1_preshared_key
   tunnel2_preshared_key = var.tunnel2_preshared_key
+
+  tunnel1_phase1_dh_group_numbers = var.tunnel1_phase1_dh_group_numbers
+  tunnel2_phase1_dh_group_numbers = var.tunnel2_phase1_dh_group_numbers
+
+  tunnel1_phase1_encryption_algorithms = var.tunnel1_phase1_encryption_algorithms
+  tunnel2_phase1_encryption_algorithms = var.tunnel2_phase1_encryption_algorithms
+
+  tunnel1_phase1_integrity_algorithms = var.tunnel1_phase1_integrity_algorithms
+  tunnel2_phase1_integrity_algorithms = var.tunnel2_phase1_integrity_algorithms
+
+  tunnel1_phase1_lifetime_seconds = var.tunnel1_phase1_lifetime_seconds
+  tunnel2_phase1_lifetime_seconds = var.tunnel2_phase1_lifetime_seconds
+
+  tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
+  tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
+
+  tunnel1_phase2_dh_group_numbers = var.tunnel1_phase2_dh_group_numbers
+  tunnel2_phase2_dh_group_numbers = var.tunnel2_phase2_dh_group_numbers
+
+  tunnel1_phase2_encryption_algorithms = var.tunnel1_phase2_encryption_algorithms
+  tunnel2_phase2_encryption_algorithms = var.tunnel2_phase2_encryption_algorithms
+
+  tunnel1_phase2_integrity_algorithms = var.tunnel1_phase2_integrity_algorithms
+  tunnel2_phase2_integrity_algorithms = var.tunnel2_phase2_integrity_algorithms
+
+  tunnel1_phase2_lifetime_seconds = var.tunnel1_phase2_lifetime_seconds
+  tunnel2_phase2_lifetime_seconds = var.tunnel2_phase2_lifetime_seconds
+
+  tunnel1_rekey_fuzz_percentage = var.tunnel1_rekey_fuzz_percentage
+  tunnel2_rekey_fuzz_percentage = var.tunnel2_rekey_fuzz_percentage
+
+  tunnel1_rekey_margin_time_seconds = var.tunnel1_rekey_margin_time_seconds
+  tunnel2_rekey_margin_time_seconds = var.tunnel2_rekey_margin_time_seconds
+
+  tunnel1_replay_window_size = var.tunnel1_replay_window_size
+  tunnel2_replay_window_size = var.tunnel2_replay_window_size
+
+  tunnel1_startup_action = var.tunnel1_startup_action
+  tunnel2_startup_action = var.tunnel2_startup_action
+
+  tunnel1_ike_versions = var.tunnel1_ike_versions
+  tunnel2_ike_versions = var.tunnel2_ike_versions
 
   tags = merge(
     {
