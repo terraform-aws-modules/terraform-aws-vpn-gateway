@@ -103,6 +103,9 @@ resource "aws_vpn_connection" "tunnel" {
   tunnel1_phase1_lifetime_seconds = var.tunnel1_phase1_lifetime_seconds
   tunnel2_phase1_lifetime_seconds = var.tunnel2_phase1_lifetime_seconds
 
+  tunnel1_dpd_timeout_seconds = var.tunnel1_dpd_timeout_seconds
+  tunnel2_dpd_timeout_seconds = var.tunnel2_dpd_timeout_seconds
+
   tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
   tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
 

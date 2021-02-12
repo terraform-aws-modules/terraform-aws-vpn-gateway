@@ -133,7 +133,17 @@ variable "tunnel1_phase1_lifetime_seconds" {
   default     = null
 }
 variable "tunnel2_phase1_lifetime_seconds" {
-  description = "(Optional, Default 28800) The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800."
+  description = "(Optional, Default 28800) The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800"
+  type        = number
+  default     = null
+}
+variable "tunnel1_dpd_timeout_seconds" {
+  description = "(Optional, Default 30) The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30"
+  type        = number
+  default     = null
+}
+variable "tunnel2_dpd_timeout_seconds" {
+  description = "(Optional, Default 30) The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30"
   type        = number
   default     = null
 }
