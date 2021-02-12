@@ -7,8 +7,8 @@ locals {
   tunnel_details_not_specified = local.internal_cidr_not_provided && local.preshared_key_not_provided
   tunnel_details_specified     = local.internal_cidr_provided && local.preshared_key_provided
 
-  create_tunner_with_internal_cidr_only = local.internal_cidr_provided && local.preshared_key_not_provided
-  create_tunner_with_preshared_key_only = local.internal_cidr_not_provided && local.preshared_key_provided
+  create_tunnel_with_internal_cidr_only = local.internal_cidr_provided && local.preshared_key_not_provided
+  create_tunnel_with_preshared_key_only = local.internal_cidr_not_provided && local.preshared_key_provided
 
   connection_identifier = var.connect_to_transit_gateway ? "TGW ${var.transit_gateway_id}" : "VPC ${var.vpc_id}"
   name_tag              = "VPN Connection between ${local.connection_identifier} and Customer Gateway ${var.customer_gateway_id}"
@@ -78,7 +78,7 @@ resource "aws_vpn_connection" "default" {
 
 ### Tunnel Inside CIDR only
 resource "aws_vpn_connection" "tunnel" {
-  count = var.create_vpn_connection && local.create_tunner_with_internal_cidr_only ? 1 : 0
+  count = var.create_vpn_connection && local.create_tunnel_with_internal_cidr_only ? 1 : 0
 
   vpn_gateway_id     = var.vpn_gateway_id
   transit_gateway_id = var.transit_gateway_id
@@ -143,7 +143,7 @@ resource "aws_vpn_connection" "tunnel" {
 
 ### Preshared Key only
 resource "aws_vpn_connection" "preshared" {
-  count = var.create_vpn_connection && local.create_tunner_with_preshared_key_only ? 1 : 0
+  count = var.create_vpn_connection && local.create_tunnel_with_preshared_key_only ? 1 : 0
 
   #vpn_gateway_id     = var.vpn_gateway_id
   transit_gateway_id = var.transit_gateway_id
@@ -291,7 +291,7 @@ resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
 resource "aws_vpn_connection_route" "default" {
   count = var.create_vpn_connection && var.vpn_connection_static_routes_only && ! var.connect_to_transit_gateway ? length(var.vpn_connection_static_routes_destinations) : 0
 
-  vpn_connection_id = local.create_tunner_with_internal_cidr_only ? aws_vpn_connection.tunnel[0].id : local.create_tunner_with_preshared_key_only ? aws_vpn_connection.preshared[0].id : local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared[0].id : aws_vpn_connection.default[0].id
+  vpn_connection_id = local.create_tunnel_with_internal_cidr_only ? aws_vpn_connection.tunnel[0].id : local.create_tunnel_with_preshared_key_only ? aws_vpn_connection.preshared[0].id : local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared[0].id : aws_vpn_connection.default[0].id
 
   destination_cidr_block = element(var.vpn_connection_static_routes_destinations, count.index)
 }
