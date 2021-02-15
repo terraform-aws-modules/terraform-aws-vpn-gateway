@@ -22,23 +22,40 @@ $ terraform apply
 Run `terraform destroy` when you don't need these resources.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.21 |
+| aws | >= 3.22 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 3.22 |
+
+## Inputs
+
+No input.
+
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| vpn\_gateway2\_vpn\_connection\_id |  |
-| vpn\_gateway2\_vpn\_connection\_tunnel1\_address |  |
-| vpn\_gateway2\_vpn\_connection\_tunnel1\_cgw\_inside\_address |  |
-| vpn\_gateway2\_vpn\_connection\_tunnel1\_vgw\_inside\_address |  |
-| vpn\_gateway2\_vpn\_connection\_tunnel2\_address |  |
-| vpn\_gateway2\_vpn\_connection\_tunnel2\_cgw\_inside\_address |  |
-| vpn\_gateway2\_vpn\_connection\_tunnel2\_vgw\_inside\_address |  |
-| vpn\_gateway\_vpn\_connection\_id |  |
-| vpn\_gateway\_vpn\_connection\_tunnel1\_address |  |
-| vpn\_gateway\_vpn\_connection\_tunnel1\_cgw\_inside\_address |  |
-| vpn\_gateway\_vpn\_connection\_tunnel1\_vgw\_inside\_address |  |
-| vpn\_gateway\_vpn\_connection\_tunnel2\_address |  |
-| vpn\_gateway\_vpn\_connection\_tunnel2\_cgw\_inside\_address |  |
-| vpn\_gateway\_vpn\_connection\_tunnel2\_vgw\_inside\_address |  |
+| vpn\_gateway2\_vpn\_connection\_id | n/a |
+| vpn\_gateway2\_vpn\_connection\_tunnel1\_address | n/a |
+| vpn\_gateway2\_vpn\_connection\_tunnel1\_cgw\_inside\_address | n/a |
+| vpn\_gateway2\_vpn\_connection\_tunnel1\_vgw\_inside\_address | n/a |
+| vpn\_gateway2\_vpn\_connection\_tunnel2\_address | n/a |
+| vpn\_gateway2\_vpn\_connection\_tunnel2\_cgw\_inside\_address | n/a |
+| vpn\_gateway2\_vpn\_connection\_tunnel2\_vgw\_inside\_address | n/a |
+| vpn\_gateway\_vpn\_connection\_id | n/a |
+| vpn\_gateway\_vpn\_connection\_tunnel1\_address | n/a |
+| vpn\_gateway\_vpn\_connection\_tunnel1\_cgw\_inside\_address | n/a |
+| vpn\_gateway\_vpn\_connection\_tunnel1\_vgw\_inside\_address | n/a |
+| vpn\_gateway\_vpn\_connection\_tunnel2\_address | n/a |
+| vpn\_gateway\_vpn\_connection\_tunnel2\_cgw\_inside\_address | n/a |
+| vpn\_gateway\_vpn\_connection\_tunnel2\_vgw\_inside\_address | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
