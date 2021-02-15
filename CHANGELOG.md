@@ -1,6 +1,16 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+
+<a name="v2.6.0"></a>
+## [v2.6.0] - 2021-02-15
+
+- feat: Added VPN connection additional args ([#46](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/46))
 
 
 <a name="v2.5.0"></a>
@@ -12,15 +22,10 @@
 <a name="v2.4.0"></a>
 ## [v2.4.0] - 2020-01-15
 
-- Updated CHANGELOG
 - Add support for Transit Gateway ([#26](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/26))
-- Updated CHANGELOG
 - Also output the connection configuration ([#28](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/28))
-- Updated CHANGELOG
-- Updated CHANGELOG
 - Updated README and pre-commit
 - Updated example with variables ([#24](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/24))
-- Updated CHANGELOG
 - Fixed aws_vpn_connection_route conditional expression
 - Upgraded module to support Terraform 0.12 ([#20](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/20))
 
@@ -36,13 +41,9 @@
 <a name="v2.3.0"></a>
 ## [v2.3.0] - 2019-12-19
 
-- Updated CHANGELOG
 - Also output the connection configuration ([#28](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/28))
-- Updated CHANGELOG
-- Updated CHANGELOG
 - Updated README and pre-commit
 - Updated example with variables ([#24](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/24))
-- Updated CHANGELOG
 - Fixed aws_vpn_connection_route conditional expression
 - Upgraded module to support Terraform 0.12 ([#20](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/20))
 
@@ -57,13 +58,11 @@
 <a name="v2.2.0"></a>
 ## [v2.2.0] - 2019-08-23
 
-- Updated CHANGELOG
 
 
 <a name="v2.1.0"></a>
 ## [v2.1.0] - 2019-08-22
 
-- Updated CHANGELOG
 - Updated README and pre-commit
 - Updated example with variables ([#24](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/24))
 
@@ -71,7 +70,6 @@
 <a name="v2.0.0"></a>
 ## [v2.0.0] - 2019-06-11
 
-- Updated CHANGELOG
 - Fixed aws_vpn_connection_route conditional expression
 - Upgraded module to support Terraform 0.12 ([#20](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/20))
 
@@ -160,7 +158,6 @@ underscore characters
 ## v1.0.1 - 2018-01-10
 
 - Fixed bugs, updated examples, readme
-- Merge pull request [#2](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/2) from miguelaferreira/master
 - Add static routes
 - Add examples
 - Add outputs
@@ -176,7 +173,8 @@ underscore characters
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.5.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.6.0...HEAD
+[v2.6.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.5.0...v2.6.0
 [v2.5.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v1.8.0...v2.4.0
 [v1.8.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.3.0...v1.8.0
