@@ -238,40 +238,83 @@ module "tgw" {
 * [Minimal example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/minimal-vpn-gateway) shows how to create just VPN Gateway using this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.21 |
+| aws | >= 3.22 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 3.22 |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| connect\_to\_transit\_gateway | Set to false to disable attachment of the VPN connection route to the VPN connection \(TGW uses another resource for that\) | bool | `"false"` | no |
-| create\_vpn\_connection | Set to false to prevent the creation of a VPN Connection. | bool | `"true"` | no |
-| create\_vpn\_gateway\_attachment | Set to false to prevent attachment of the VGW to the VPC | bool | `"true"` | no |
-| customer\_gateway\_id | The id of the Customer Gateway. | string | n/a | yes |
-| tags | Set of tags to be added to the VPN Connection resource \(only if `create\_vpn\_connection = true`\). | map(string) | `{}` | no |
-| transit\_gateway\_id | The ID of the Transit Gateway. | string | `"null"` | no |
-| tunnel1\_inside\_cidr | The CIDR block of the inside IP addresses for the first VPN tunnel. | string | `""` | no |
-| tunnel1\_preshared\_key | The preshared key of the first VPN tunnel. | string | `""` | no |
-| tunnel2\_inside\_cidr | The CIDR block of the inside IP addresses for the second VPN tunnel. | string | `""` | no |
-| tunnel2\_preshared\_key | The preshared key of the second VPN tunnel. | string | `""` | no |
-| vpc\_id | The id of the VPC where the VPN Gateway lives. | string | `"null"` | no |
-| vpc\_subnet\_route\_table\_count | The number of subnet route table ids being passed in via `vpc\_subnet\_route\_table\_ids`. | number | `"0"` | no |
-| vpc\_subnet\_route\_table\_ids | The ids of the VPC subnets for which routes from the VPN Gateway will be propagated. | list(string) | `[]` | no |
-| vpn\_connection\_static\_routes\_destinations | List of CIDRs to be used as destination for static routes \(used with `vpn\_connection\_static\_routes\_only = true`\). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc\_subnet\_route\_table\_ids`. | list(string) | `[]` | no |
-| vpn\_connection\_static\_routes\_only | Set to true for the created VPN connection to use static routes exclusively \(only if `create\_vpn\_connection = true`\). Static routes must be used for devices that don't support BGP. | bool | `"false"` | no |
-| vpn\_gateway\_id | The id of the VPN Gateway. | string | `"null"` | no |
+|------|-------------|------|---------|:--------:|
+| connect\_to\_transit\_gateway | Set to false to disable attachment of the VPN connection route to the VPN connection (TGW uses another resource for that) | `bool` | `false` | no |
+| create\_vpn\_connection | Set to false to prevent the creation of a VPN Connection. | `bool` | `true` | no |
+| create\_vpn\_gateway\_attachment | Set to false to prevent attachment of the VGW to the VPC | `bool` | `true` | no |
+| customer\_gateway\_id | The id of the Customer Gateway. | `string` | n/a | yes |
+| tags | Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`). | `map(string)` | `{}` | no |
+| transit\_gateway\_id | The ID of the Transit Gateway. | `string` | `null` | no |
+| tunnel1\_dpd\_timeout\_action | (Optional, Default clear) The action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear \| none \| restart | `string` | `null` | no |
+| tunnel1\_dpd\_timeout\_seconds | (Optional, Default 30) The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30 | `number` | `null` | no |
+| tunnel1\_ike\_versions | (Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 \| ikev2 | `list(string)` | `null` | no |
+| tunnel1\_inside\_cidr | The CIDR block of the inside IP addresses for the first VPN tunnel. | `string` | `""` | no |
+| tunnel1\_phase1\_dh\_group\_numbers | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are 2 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
+| tunnel1\_phase1\_encryption\_algorithms | (Optional) List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 \| AES256 \| AES128-GCM-16 \| AES256-GCM-16 | `list(string)` | `null` | no |
+| tunnel1\_phase1\_integrity\_algorithms | (Optional) One or more integrity algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 \| SHA2-256 \| SHA2-384 \| SHA2-512 | `list(string)` | `null` | no |
+| tunnel1\_phase1\_lifetime\_seconds | (Optional, Default 28800) The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800 | `number` | `null` | no |
+| tunnel1\_phase2\_dh\_group\_numbers | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 \| 5 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
+| tunnel1\_phase2\_encryption\_algorithms | (Optional) List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 \| AES256 \| AES128-GCM-16 \| AES256-GCM-16 | `list(string)` | `null` | no |
+| tunnel1\_phase2\_integrity\_algorithms | (Optional) List of one or more integrity algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are SHA1 \| SHA2-256 \| SHA2-384 \| SHA2-512 | `list(string)` | `null` | no |
+| tunnel1\_phase2\_lifetime\_seconds | (Optional, Default 3600) The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600 | `number` | `null` | no |
+| tunnel1\_preshared\_key | The preshared key of the first VPN tunnel. | `string` | `""` | no |
+| tunnel1\_rekey\_fuzz\_percentage | (Optional, Default 100) The percentage of the rekey window for the first VPN tunnel (determined by tunnel1\_rekey\_margin\_time\_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100 | `number` | `null` | no |
+| tunnel1\_rekey\_margin\_time\_seconds | (Optional, Default 540) The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1\_rekey\_fuzz\_percentage. Valid value is between 60 and half of tunnel1\_phase2\_lifetime\_seconds | `number` | `null` | no |
+| tunnel1\_replay\_window\_size | (Optional, Default 1024) The number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048. | `number` | `null` | no |
+| tunnel1\_startup\_action | (Optional, Default add) The action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add \| start | `string` | `null` | no |
+| tunnel2\_dpd\_timeout\_action | (Optional, Default clear) The action to take after DPD timeout occurs for the second VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear \| none \| restart | `string` | `null` | no |
+| tunnel2\_dpd\_timeout\_seconds | (Optional, Default 30) The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30 | `number` | `null` | no |
+| tunnel2\_ike\_versions | (Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 \| ikev2 | `list(string)` | `null` | no |
+| tunnel2\_inside\_cidr | The CIDR block of the inside IP addresses for the second VPN tunnel. | `string` | `""` | no |
+| tunnel2\_phase1\_dh\_group\_numbers | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are 2 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
+| tunnel2\_phase1\_encryption\_algorithms | (Optional) List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 \| AES256 \| AES128-GCM-16 \| AES256-GCM-16 | `list(string)` | `null` | no |
+| tunnel2\_phase1\_integrity\_algorithms | (Optional) One or more integrity algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 \| SHA2-256 \| SHA2-384 \| SHA2-512 | `list(string)` | `null` | no |
+| tunnel2\_phase1\_lifetime\_seconds | (Optional, Default 28800) The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800 | `number` | `null` | no |
+| tunnel2\_phase2\_dh\_group\_numbers | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 \| 5 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
+| tunnel2\_phase2\_encryption\_algorithms | (Optional) List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 \| AES256 \| AES128-GCM-16 \| AES256-GCM-16 | `list(string)` | `null` | no |
+| tunnel2\_phase2\_integrity\_algorithms | (Optional) List of one or more integrity algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are SHA1 \| SHA2-256 \| SHA2-384 \| SHA2-512 | `list(string)` | `null` | no |
+| tunnel2\_phase2\_lifetime\_seconds | (Optional, Default 3600) The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600 | `number` | `null` | no |
+| tunnel2\_preshared\_key | The preshared key of the second VPN tunnel. | `string` | `""` | no |
+| tunnel2\_rekey\_fuzz\_percentage | (Optional, Default 100) The percentage of the rekey window for the second VPN tunnel (determined by tunnel1\_rekey\_margin\_time\_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100 | `number` | `null` | no |
+| tunnel2\_rekey\_margin\_time\_seconds | (Optional, Default 540) The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2\_rekey\_fuzz\_percentage. Valid value is between 60 and half of tunnel2\_phase2\_lifetime\_seconds | `number` | `null` | no |
+| tunnel2\_replay\_window\_size | (Optional, Default 1024) The number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048. | `number` | `null` | no |
+| tunnel2\_startup\_action | (Optional, Default add) The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add \| start | `string` | `null` | no |
+| vpc\_id | The id of the VPC where the VPN Gateway lives. | `string` | `null` | no |
+| vpc\_subnet\_route\_table\_count | The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`. | `number` | `0` | no |
+| vpc\_subnet\_route\_table\_ids | The ids of the VPC subnets for which routes from the VPN Gateway will be propagated. | `list(string)` | `[]` | no |
+| vpn\_connection\_static\_routes\_destinations | List of CIDRs to be used as destination for static routes (used with `vpn_connection_static_routes_only = true`). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc_subnet_route_table_ids`. | `list(string)` | `[]` | no |
+| vpn\_connection\_static\_routes\_only | Set to true for the created VPN connection to use static routes exclusively (only if `create_vpn_connection = true`). Static routes must be used for devices that don't support BGP. | `bool` | `false` | no |
+| vpn\_gateway\_id | The id of the VPN Gateway. | `string` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| vpn\_connection\_customer\_gateway\_configuration | The configuration information for the VPN connection's customer gateway \(in the native XML format\) if `create\_vpn\_connection = true`, or empty otherwise |
-| vpn\_connection\_id | A list with the VPN Connection ID if `create\_vpn\_connection = true`, or empty otherwise |
+| vpn\_connection\_customer\_gateway\_configuration | The configuration information for the VPN connection's customer gateway (in the native XML format) if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_id | A list with the VPN Connection ID if `create_vpn_connection = true`, or empty otherwise |
 | vpn\_connection\_transit\_gateway\_attachment\_id | The transit gateway attachment ID that was generated when attaching this VPN connection. |
-| vpn\_connection\_tunnel1\_address | A list with the the public IP address of the first VPN tunnel if `create\_vpn\_connection = true`, or empty otherwise |
-| vpn\_connection\_tunnel1\_cgw\_inside\_address | A list with the the RFC 6890 link-local address of the first VPN tunnel \(Customer Gateway Side\) if `create\_vpn\_connection = true`, or empty otherwise |
-| vpn\_connection\_tunnel1\_vgw\_inside\_address | A list with the the RFC 6890 link-local address of the first VPN tunnel \(VPN Gateway Side\) if `create\_vpn\_connection = true`, or empty otherwise |
-| vpn\_connection\_tunnel2\_address | A list with the the public IP address of the second VPN tunnel if `create\_vpn\_connection = true`, or empty otherwise |
-| vpn\_connection\_tunnel2\_cgw\_inside\_address | A list with the the RFC 6890 link-local address of the second VPN tunnel \(Customer Gateway Side\) if `create\_vpn\_connection = true`, or empty otherwise |
-| vpn\_connection\_tunnel2\_vgw\_inside\_address | A list with the the RFC 6890 link-local address of the second VPN tunnel \(VPN Gateway Side\) if `create\_vpn\_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel1\_address | A list with the the public IP address of the first VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel1\_cgw\_inside\_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel1\_vgw\_inside\_address | A list with the the RFC 6890 link-local address of the first VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel2\_address | A list with the the public IP address of the second VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel2\_cgw\_inside\_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
+| vpn\_connection\_tunnel2\_vgw\_inside\_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
