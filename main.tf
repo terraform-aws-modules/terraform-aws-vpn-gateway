@@ -148,7 +148,7 @@ resource "aws_vpn_connection" "tunnel" {
 resource "aws_vpn_connection" "preshared" {
   count = var.create_vpn_connection && local.create_tunnel_with_preshared_key_only ? 1 : 0
 
-  #vpn_gateway_id     = var.vpn_gateway_id
+  vpn_gateway_id     = var.vpn_gateway_id
   transit_gateway_id = var.transit_gateway_id
 
   customer_gateway_id = var.customer_gateway_id
