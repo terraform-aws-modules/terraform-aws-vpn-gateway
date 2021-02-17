@@ -30,6 +30,19 @@ Run `terraform destroy` when you don't need these resources.
 |------|---------|
 | aws | >= 3.22 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| vpc | terraform-aws-modules/vpc/aws | ~> 2.0 |
+| vpn_gateway | ../../ |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_customer_gateway](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/customer_gateway) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -47,5 +60,4 @@ Run `terraform destroy` when you don't need these resources.
 | vpn\_connection\_tunnel2\_address | n/a |
 | vpn\_connection\_tunnel2\_cgw\_inside\_address | n/a |
 | vpn\_connection\_tunnel2\_vgw\_inside\_address | n/a |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
