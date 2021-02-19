@@ -40,8 +40,8 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name |
 |------|
-| [aws_ec2_transit_gateway](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/ec2_transit_gateway) |
 | [aws_ec2_transit_gateway_vpc_attachment](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/ec2_transit_gateway_vpc_attachment) |
+| [aws_ec2_transit_gateway](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/ec2_transit_gateway) |
 
 ## Inputs
 

@@ -259,8 +259,8 @@ No Modules.
 
 | Name |
 |------|
-| [aws_vpn_connection](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_connection) |
 | [aws_vpn_connection_route](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_connection_route) |
+| [aws_vpn_connection](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_connection) |
 | [aws_vpn_gateway_attachment](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_gateway_attachment) |
 | [aws_vpn_gateway_route_propagation](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_gateway_route_propagation) |
 
