@@ -251,6 +251,19 @@ module "tgw" {
 |------|---------|
 | aws | >= 3.22 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_vpn_connection_route](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_connection_route) |
+| [aws_vpn_connection](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_connection) |
+| [aws_vpn_gateway_attachment](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_gateway_attachment) |
+| [aws_vpn_gateway_route_propagation](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/vpn_gateway_route_propagation) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -315,7 +328,6 @@ module "tgw" {
 | vpn\_connection\_tunnel2\_address | A list with the the public IP address of the second VPN tunnel if `create_vpn_connection = true`, or empty otherwise |
 | vpn\_connection\_tunnel2\_cgw\_inside\_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
 | vpn\_connection\_tunnel2\_vgw\_inside\_address | A list with the the RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side) if `create_vpn_connection = true`, or empty otherwise |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors
