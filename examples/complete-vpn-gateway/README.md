@@ -41,23 +41,23 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name |
 |------|
-| [aws_customer_gateway](https://registry.terraform.io/providers/hashicorp/aws/3.22/docs/resources/customer_gateway) |
+| [aws_customer_gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/customer_gateway) |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| vpc\_private\_subnets | n/a | `list(string)` | <pre>[<br>  "10.10.11.0/24",<br>  "10.10.12.0/24",<br>  "10.10.13.0/24"<br>]</pre> | no |
+| vpc\_private\_subnets | List of private subnets | `list(string)` | <pre>[<br>  "10.10.11.0/24",<br>  "10.10.12.0/24",<br>  "10.10.13.0/24"<br>]</pre> | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| vpn\_connection\_id | n/a |
-| vpn\_connection\_tunnel1\_address | n/a |
-| vpn\_connection\_tunnel1\_cgw\_inside\_address | n/a |
-| vpn\_connection\_tunnel1\_vgw\_inside\_address | n/a |
-| vpn\_connection\_tunnel2\_address | n/a |
-| vpn\_connection\_tunnel2\_cgw\_inside\_address | n/a |
-| vpn\_connection\_tunnel2\_vgw\_inside\_address | n/a |
+| vpn\_connection\_id | VPN id |
+| vpn\_connection\_tunnel1\_address | Tunnel1 address |
+| vpn\_connection\_tunnel1\_cgw\_inside\_address | Tunnel1 CGW address |
+| vpn\_connection\_tunnel1\_vgw\_inside\_address | Tunnel1 VGW address |
+| vpn\_connection\_tunnel2\_address | Tunnel2 address |
+| vpn\_connection\_tunnel2\_cgw\_inside\_address | Tunnel2 CGW address |
+| vpn\_connection\_tunnel2\_vgw\_inside\_address | Tunnel2 VGW address |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
