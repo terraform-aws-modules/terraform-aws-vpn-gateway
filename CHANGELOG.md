@@ -7,6 +7,15 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.8.0"></a>
+## [v2.8.0] - 2021-03-25
+
+- feat: Added dpd_timeout_seconds variable to the "default" tunnel resource ([#51](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/51))
+- chore: align ci-cd static checks to use individual minimum Terraform versions ([#50](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/50))
+- chore: Run pre-commit hooks ([#49](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/49))
+- chore: add ci-cd workflow for pre-commit checks ([#48](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/48))
+
+
 <a name="v2.7.0"></a>
 ## [v2.7.0] - 2021-02-20
 
@@ -179,7 +188,8 @@ underscore characters
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.7.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.8.0...HEAD
+[v2.8.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.7.0...v2.8.0
 [v2.7.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.6.0...v2.7.0
 [v2.6.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.5.0...v2.6.0
 [v2.5.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.4.0...v2.5.0
