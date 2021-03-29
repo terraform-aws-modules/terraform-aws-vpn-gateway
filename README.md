@@ -318,6 +318,7 @@ No modules.
 | <a name="input_vpn_connection_static_routes_only"></a> [vpn\_connection\_static\_routes\_only](#input\_vpn\_connection\_static\_routes\_only) | Set to true for the created VPN connection to use static routes exclusively (only if `create_vpn_connection = true`). Static routes must be used for devices that don't support BGP. | `bool` | `false` | no |
 | <a name="input_vpn_gateway_id"></a> [vpn\_gateway\_id](#input\_vpn\_gateway\_id) | The id of the VPN Gateway. | `string` | `null` | no |
 | <a name="input_local_ipv4_network_cidr"></a> [local\_ipv4\_network\_cidr](#input\_local\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection. | `list(string)` | `[]` | no |
+| <a name="remote_ipv4_network_cidr"></a> [remote\_ipv4\_network\_cidr](#input\_remote\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the AWS side of the VPN connection. | `list(string)` | `[]` | no |
 
 ## Outputs
 
