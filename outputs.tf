@@ -112,6 +112,7 @@ output "vpn_connection_transit_gateway_attachment_id" {
 
 output "vpn_connection_customer_gateway_configuration" {
   description = "The configuration information for the VPN connection's customer gateway (in the native XML format) if `create_vpn_connection = true`, or empty otherwise"
+  sensitive   = true
   value = element(
     concat(
       aws_vpn_connection.default.*.customer_gateway_configuration,
