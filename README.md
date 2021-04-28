@@ -171,7 +171,7 @@ module "vpn_gateway" {
   version = "~> 2.0"
 
   connect_to_transit_gateway = true
-  transit_gateway_id         = module.tgw.this_ec2_transit_gateway_id
+  transit_gateway_id         = module.tgw.ec2_transit_gateway_id
   customer_gateway_id        = module.vpc.cgw_ids[0]
 
   # tunnel inside cidr & preshared keys (optional)
@@ -183,7 +183,7 @@ module "vpn_gateway" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   enable_vpn_gateway = true
   amazon_side_asn    = 64620
@@ -204,7 +204,7 @@ module "vpc" {
 
 module "tgw" {
   source  = "terraform-aws-modules/transit-gateway/aws"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   name            = "my-tgw"
   description     = "My TGW shared with several other AWS accounts"
