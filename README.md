@@ -2,19 +2,14 @@
 
 Terraform module which creates [VPN gateway](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html) resources on AWS.
 
-## Terraform versions
-
-Terraform 0.12. Pin module version to `~> v2.0`. Submit pull-requests to `master` branch.
-
-Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraform011` branch.
-
 ## Features
 
 This module creates:
-* a [VPN Connection](https://www.terraform.io/docs/providers/aws/r/vpn_connection.html) unless `create_vpn_connection = false`
-* a [VPN Gateway Attachment](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_attachment.html)
-* one or more [VPN Gateway Route Propagation](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_route_propagation.html) depending on how many routing tables exists in a VPC
-* one or more [VPN Connection Route](https://www.terraform.io/docs/providers/aws/r/vpn_connection_route.html) if `create_vpn_connection = true` and `vpn_connection_static_routes_only = true`, and depending on the number of destinations provided in variable `vpn_connection_static_routes_destinations` (which must be inline with `vpc_subnet_route_table_count`)
+
+- a [VPN Connection](https://www.terraform.io/docs/providers/aws/r/vpn_connection.html) unless `create_vpn_connection = false`
+- a [VPN Gateway Attachment](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_attachment.html)
+- one or more [VPN Gateway Route Propagation](https://www.terraform.io/docs/providers/aws/r/vpn_gateway_route_propagation.html) depending on how many routing tables exists in a VPC
+- one or more [VPN Connection Route](https://www.terraform.io/docs/providers/aws/r/vpn_connection_route.html) if `create_vpn_connection = true` and `vpn_connection_static_routes_only = true`, and depending on the number of destinations provided in variable `vpn_connection_static_routes_destinations` (which must be inline with `vpc_subnet_route_table_count`)
 
 This module does not create a [VPN Gateway](https://www.terraform.io/docs/providers/aws/r/vpn_gateway.html) resource because it is meant to be used in combination with the [VPC module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws) that will create that resource (when `enable_vpn_gateway = true`).
 This module also does not create a [Customer Gateway](https://www.terraform.io/docs/providers/aws/r/customer_gateway.html) resource.
@@ -27,7 +22,7 @@ If you want to use the Transit Gateway support you are responsible for creating 
 
 ## Usage
 
-##### With [VPC module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws)
+### With [VPC module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws)
 
 ```hcl
 module "vpn_gateway" {
@@ -55,7 +50,7 @@ module "vpc" {
 
   enable_vpn_gateway = true
   amazon_side_asn    = 64620
-  
+
   customer_gateways = {
     IP1 = {
       bgp_asn    = 65220
@@ -71,7 +66,7 @@ module "vpc" {
 }
 ```
 
-##### Without VPC module
+### Without VPC module
 
 ```hcl
 module "vpn_gateway" {
@@ -113,7 +108,7 @@ resource "aws_vpn_gateway" "vpn_gateway" {
 }
 ```
 
-##### With VPC module and Transit Gateway resources
+### With VPC module and Transit Gateway resources
 
 ```hcl
 module "vpn_gateway" {
@@ -137,7 +132,7 @@ module "vpc" {
 
   enable_vpn_gateway = true
   amazon_side_asn    = 64620
-  
+
   customer_gateways = {
     IP1 = {
       bgp_asn    = 65220
@@ -163,7 +158,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 }
 ```
 
-##### With VPC and Transit Gateway modules
+### With VPC and Transit Gateway modules
 
 ```hcl
 module "vpn_gateway" {
@@ -187,7 +182,7 @@ module "vpc" {
 
   enable_vpn_gateway = true
   amazon_side_asn    = 64620
-  
+
   customer_gateways = {
     IP1 = {
       bgp_asn    = 65220
@@ -232,10 +227,10 @@ module "tgw" {
 
 ## Examples
 
-* [Complete example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway) shows how to create all VPN Gateway resources and integration with VPC module.
-* [Complete example with Transit Gateway](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-connection-transit-gateway) shows how to create VPN Connection between Transit Gateway and Customer Gateway.
-* [Complete example with static routes](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway-with-static-routes) shows how to create all VPN Gateway together with static routes.
-* [Minimal example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/minimal-vpn-gateway) shows how to create just VPN Gateway using this module.
+- [Complete example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway) shows how to create all VPN Gateway resources and integration with VPC module.
+- [Complete example with Transit Gateway](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-connection-transit-gateway) shows how to create VPN Connection between Transit Gateway and Customer Gateway.
+- [Complete example with static routes](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway-with-static-routes) shows how to create all VPN Gateway together with static routes.
+- [Minimal example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/minimal-vpn-gateway) shows how to create just VPN Gateway using this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -335,9 +330,8 @@ No modules.
 
 ## Authors
 
-Currently maintained by [these awesome contributors](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/graphs/contributors).
-Module managed by [Anton Babenko](https://github.com/antonbabenko).
+Module is maintained by [Anton Babenko](https://github.com/antonbabenko) with help from [these awesome contributors](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/graphs/contributors).
 
 ## License
 
-Apache 2 Licensed. See LICENSE for full details.
+Apache 2 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/LICENSE) for full details.
