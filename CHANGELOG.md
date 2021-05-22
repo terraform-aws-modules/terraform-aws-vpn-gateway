@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.10.0"></a>
+## [v2.10.0] - 2021-05-22
+
+- feat: adding preshared key outputs to module ([#55](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/55))
+- chore: update CI/CD to use stable `terraform-docs` release artifact and discoverable Apache2.0 license ([#57](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/57))
+
+
 <a name="v2.9.0"></a>
 ## [v2.9.0] - 2021-04-28
 
@@ -33,18 +40,6 @@ All notable changes to this project will be documented in this file.
 ## [v2.6.0] - 2021-02-15
 
 - feat: Added VPN connection additional args ([#46](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/46))
-- Merge pull request [#38](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/38) from terraform-aws-modules/terraform-provider-githubfile-1584635458784012000
-- [ci skip] Create ".chglog/CHANGELOG.tpl.md".
-- Merge pull request [#36](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/36) from terraform-aws-modules/terraform-provider-githubfile-1584537657030206000
-- Merge pull request [#37](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/37) from terraform-aws-modules/terraform-provider-githubfile-1584537657030208000
-- [ci skip] Create ".editorconfig".
-- [ci skip] Create ".pre-commit-config.yaml".
-- Merge pull request [#34](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/34) from terraform-aws-modules/terraform-provider-githubfile-1584537627642609000
-- Merge pull request [#35](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/35) from terraform-aws-modules/terraform-provider-githubfile-1584537627642722000
-- Merge pull request [#32](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/32) from terraform-aws-modules/terraform-provider-githubfile-1584537627642728000
-- [ci skip] Create ".gitignore".
-- [ci skip] Create "Makefile".
-- [ci skip] Create "LICENSE".
 
 
 <a name="v2.5.0"></a>
@@ -192,7 +187,6 @@ underscore characters
 ## v1.0.1 - 2018-01-10
 
 - Fixed bugs, updated examples, readme
-- Merge pull request [#2](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/2) from miguelaferreira/master
 - Add static routes
 - Add examples
 - Add outputs
@@ -208,7 +202,8 @@ underscore characters
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.9.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.10.0...HEAD
+[v2.10.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.9.0...v2.10.0
 [v2.9.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.8.0...v2.9.0
 [v2.8.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.7.0...v2.8.0
 [v2.7.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.6.0...v2.7.0
