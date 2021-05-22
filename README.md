@@ -317,6 +317,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_tunnel1_preshared_key"></a> [tunnel1\_preshared\_key](#output\_tunnel1\_preshared\_key) | The preshared key of the first VPN tunnel. |
+| <a name="output_tunnel2_preshared_key"></a> [tunnel2\_preshared\_key](#output\_tunnel2\_preshared\_key) | The preshared key of the second VPN tunnel. |
 | <a name="output_vpn_connection_customer_gateway_configuration"></a> [vpn\_connection\_customer\_gateway\_configuration](#output\_vpn\_connection\_customer\_gateway\_configuration) | The configuration information for the VPN connection's customer gateway (in the native XML format) if `create_vpn_connection = true`, or empty otherwise |
 | <a name="output_vpn_connection_id"></a> [vpn\_connection\_id](#output\_vpn\_connection\_id) | A list with the VPN Connection ID if `create_vpn_connection = true`, or empty otherwise |
 | <a name="output_vpn_connection_transit_gateway_attachment_id"></a> [vpn\_connection\_transit\_gateway\_attachment\_id](#output\_vpn\_connection\_transit\_gateway\_attachment\_id) | The transit gateway attachment ID that was generated when attaching this VPN connection. |
