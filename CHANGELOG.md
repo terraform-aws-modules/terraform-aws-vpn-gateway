@@ -7,6 +7,20 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.10.0"></a>
+## [v2.10.0] - 2021-05-22
+
+- feat: adding preshared key outputs to module ([#55](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/55))
+- chore: update CI/CD to use stable `terraform-docs` release artifact and discoverable Apache2.0 license ([#57](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/57))
+
+
+<a name="v2.9.0"></a>
+## [v2.9.0] - 2021-04-28
+
+- chore: Updated versions in README ([#56](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/56))
+- chore: update documentation and pin `terraform_docs` version to avoid future changes ([#52](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/52))
+
+
 <a name="v2.8.0"></a>
 ## [v2.8.0] - 2021-03-25
 
@@ -188,7 +202,9 @@ underscore characters
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.8.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.10.0...HEAD
+[v2.10.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.9.0...v2.10.0
+[v2.9.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.8.0...v2.9.0
 [v2.8.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.7.0...v2.8.0
 [v2.7.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.6.0...v2.7.0
 [v2.6.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.5.0...v2.6.0
