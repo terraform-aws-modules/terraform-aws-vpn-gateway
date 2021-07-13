@@ -71,6 +71,9 @@ resource "aws_vpn_connection" "default" {
   tunnel1_ike_versions = var.tunnel1_ike_versions
   tunnel2_ike_versions = var.tunnel2_ike_versions
 
+  local_ipv4_network_cidr  = var.local_ipv4_network_cidr
+  remote_ipv4_network_cidr = var.remote_ipv4_network_cidr
+
   tags = merge(
     {
       "Name" = local.name_tag
@@ -139,6 +142,9 @@ resource "aws_vpn_connection" "tunnel" {
   tunnel1_ike_versions = var.tunnel1_ike_versions
   tunnel2_ike_versions = var.tunnel2_ike_versions
 
+  local_ipv4_network_cidr  = var.local_ipv4_network_cidr
+  remote_ipv4_network_cidr = var.remote_ipv4_network_cidr
+
   tags = merge(
     {
       "Name" = local.name_tag
@@ -203,6 +209,9 @@ resource "aws_vpn_connection" "preshared" {
 
   tunnel1_ike_versions = var.tunnel1_ike_versions
   tunnel2_ike_versions = var.tunnel2_ike_versions
+
+  local_ipv4_network_cidr  = var.local_ipv4_network_cidr
+  remote_ipv4_network_cidr = var.remote_ipv4_network_cidr
 
   tags = merge(
     {
@@ -271,6 +280,9 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   tunnel1_ike_versions = var.tunnel1_ike_versions
   tunnel2_ike_versions = var.tunnel2_ike_versions
+
+  local_ipv4_network_cidr  = var.local_ipv4_network_cidr
+  remote_ipv4_network_cidr = var.remote_ipv4_network_cidr
 
   tags = merge(
     {
