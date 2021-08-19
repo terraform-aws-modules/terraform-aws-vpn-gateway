@@ -247,3 +247,13 @@ variable "tunnel2_ike_versions" {
   type        = list(string)
   default     = null
 }
+variable "local_ipv4_network_cidr" {
+  description = "(Optional) The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection."
+  type        = string
+  default     = "0.0.0.0/0"
+}
+variable "remote_ipv4_network_cidr" {
+  description = "(Optional) The IPv4 CIDR on the AWS side of the VPN connection."
+  type        = string
+  default     = "0.0.0.0/0"
+}

@@ -26,14 +26,14 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.21 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.22 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.31 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.43 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.22 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.43 |
 
 ## Modules
 
