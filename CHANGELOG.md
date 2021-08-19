@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.11.0"></a>
+## [v2.11.0] - 2021-08-19
+
+- feat: Add support for local and remote ipv4 cidr ([#58](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/58))
+
+
 <a name="v2.10.0"></a>
 ## [v2.10.0] - 2021-05-22
 
@@ -202,7 +208,8 @@ underscore characters
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.10.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.11.0...HEAD
+[v2.11.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.10.0...v2.11.0
 [v2.10.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.9.0...v2.10.0
 [v2.9.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.8.0...v2.9.0
 [v2.8.0]: https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.7.0...v2.8.0
