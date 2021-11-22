@@ -35,7 +35,7 @@ Run `terraform destroy` when you don't need these resources.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 2.0 |
-| <a name="module_vpn_gateway"></a> [vpn\_gateway](#module\_vpn\_gateway) | ../../ |  |
+| <a name="module_vpn_gateway"></a> [vpn\_gateway](#module\_vpn\_gateway) | ../../ | n/a |
 
 ## Resources
 
