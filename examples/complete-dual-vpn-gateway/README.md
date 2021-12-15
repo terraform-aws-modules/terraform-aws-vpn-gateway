@@ -26,22 +26,22 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.21 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.22 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.31 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.43 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.22 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.43 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 2.0 |
-| <a name="module_vpn_gateway"></a> [vpn\_gateway](#module\_vpn\_gateway) | ../../ |  |
-| <a name="module_vpn_gateway2"></a> [vpn\_gateway2](#module\_vpn\_gateway2) | ../../ |  |
+| <a name="module_vpn_gateway"></a> [vpn\_gateway](#module\_vpn\_gateway) | ../../ | n/a |
+| <a name="module_vpn_gateway2"></a> [vpn\_gateway2](#module\_vpn\_gateway2) | ../../ | n/a |
 
 ## Resources
 
