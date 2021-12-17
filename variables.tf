@@ -18,6 +18,7 @@ variable "customer_gateway_id" {
 variable "customer_gateway_name" {
   description = "The Name of the Customer Gateway."
   type        = string
+  default     = ""
 }
 
 variable "create_vpn_connection" {
