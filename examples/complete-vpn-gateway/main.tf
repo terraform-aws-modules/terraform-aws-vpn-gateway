@@ -2,11 +2,6 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-variable "vpc_private_subnets" {
-  type    = list(string)
-  default = ["10.10.11.0/24", "10.10.12.0/24", "10.10.13.0/24"]
-}
-
 module "vpn_gateway" {
   source = "../../"
 
@@ -16,6 +11,8 @@ module "vpn_gateway" {
   vpc_id                       = module.vpc.vpc_id
   vpc_subnet_route_table_ids   = module.vpc.private_route_table_ids
   vpc_subnet_route_table_count = length(var.vpc_private_subnets)
+  local_ipv4_network_cidr      = "0.0.0.0/0"
+  remote_ipv4_network_cidr     = module.vpc.vpc_cidr_block
 }
 
 resource "aws_customer_gateway" "main" {
