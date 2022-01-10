@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+### [2.11.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.11.0...v2.11.1) (2022-01-10)
+
+
+### Bug Fixes
+
+* update CI/CD process to enable auto-release workflow ([#60](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/60)) ([706ce3b](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/706ce3b48ac0dd789b711ede93e3dac366c6b1ab))
+
 <a name="v2.11.0"></a>
 ## [v2.11.0] - 2021-08-19
 
