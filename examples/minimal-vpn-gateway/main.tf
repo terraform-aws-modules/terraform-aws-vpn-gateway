@@ -47,4 +47,3 @@ module "vpc" {
     Name        = "complete"
   }
 }
-
