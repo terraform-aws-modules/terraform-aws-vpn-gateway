@@ -122,6 +122,7 @@ output "vpn_connection_customer_gateway_configuration" {
     ),
     0,
   )
+  sensitive = true
 }
 
 output "tunnel1_preshared_key" {
