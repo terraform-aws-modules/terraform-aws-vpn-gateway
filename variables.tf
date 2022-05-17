@@ -247,6 +247,11 @@ variable "tunnel2_ike_versions" {
   type        = list(string)
   default     = null
 }
+variable  " var.tunnel_inside_ip_version" {
+  description = "(Optional) Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway."
+  type        = string
+  default     = "ipv4"
+}
 variable "local_ipv4_network_cidr" {
   description = "(Optional) The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection."
   type        = string
@@ -257,3 +262,14 @@ variable "remote_ipv4_network_cidr" {
   type        = string
   default     = "0.0.0.0/0"
 }
+variable "local_ipv6_network_cidr" {
+  description = "(Optional) The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection."
+  type        = string
+  default     = "::/0"
+}
+variable "remote_ipv6_network_cidr" {
+  description = "(Optional) The IPv6 CIDR on AWS side of the VPN connection."
+  type        = string
+  default     = "::/0"
+}
+
