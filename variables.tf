@@ -247,7 +247,7 @@ variable "tunnel2_ike_versions" {
   type        = list(string)
   default     = null
 }
-variable  " var.tunnel_inside_ip_version" {
+variable "tunnel_inside_ip_version" {
   description = "(Optional) Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway."
   type        = string
   default     = "ipv4"
