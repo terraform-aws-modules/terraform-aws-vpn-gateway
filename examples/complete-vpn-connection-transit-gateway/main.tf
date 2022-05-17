@@ -21,6 +21,8 @@ module "vpn_gateway_2" {
   transit_gateway_id  = aws_ec2_transit_gateway.this.id
   customer_gateway_id = module.vpc.cgw_ids[1]
 
+  tunnel_inside_ip_version = "ipv6"
+  
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = "169.254.33.88/30"
   tunnel2_inside_cidr   = "169.254.33.100/30"
