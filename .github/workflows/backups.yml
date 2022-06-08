@@ -1,0 +1,23 @@
+---
+
+name: Backup Github Respository
+
+# -------------------------------------------------------------------------------------------------
+# When to run
+# -------------------------------------------------------------------------------------------------
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  backup:
+    uses: Flaconi/github-reusable-workflow/.github/workflows/backups.yml@stable
+    with:
+      enabled: True
+      region: eu-central-1
+    secrets:
+      iam_role_arn: ${{ secrets.BACKUP_REPO_IAM_ROLE }}
+      bucket_name: ${{ secrets.BACKUP_REPO_BUCKET }}
+      git_read_token: ${{ secrets.REPO_READ_TOKEN }}
