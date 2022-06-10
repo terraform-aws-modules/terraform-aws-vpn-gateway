@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.12.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.11.1...v2.12.0) (2022-06-10)
+
+
+### Features
+
+* Add support for ipv6 ([#66](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/66)) ([32dacc2](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/32dacc2dfe2ccc3e6a18e0b1eeee7892b7f7ea29))
+
 ### [2.11.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.11.0...v2.11.1) (2022-01-10)
 
 
