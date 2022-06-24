@@ -32,3 +32,9 @@ output "vpn_connection_tunnel2_vgw_inside_address" {
   description = "Tunnel2 VGW address"
   value       = module.vpn_gateway.vpn_connection_tunnel2_vgw_inside_address
 }
+
+output "vpn_connection_customer_gateway_configuration" {
+  description = "Customer Gateway Configuration (sensitive)"
+  value       = module.vpn_gateway.vpn_connection_customer_gateway_configuration
+  sensitive   = true
+}
