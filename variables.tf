@@ -47,6 +47,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "enable_acceleration" {
+  description = "Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway."
+  type        = bool
+  default     = false
+}
+
 variable "vpn_connection_static_routes_only" {
   description = "Set to true for the created VPN connection to use static routes exclusively (only if `create_vpn_connection = true`). Static routes must be used for devices that don't support BGP."
   type        = bool

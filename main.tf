@@ -12,6 +12,8 @@ locals {
 
   connection_identifier = var.connect_to_transit_gateway ? "TGW ${var.transit_gateway_id}" : "VPC ${var.vpc_id}"
   name_tag              = "VPN Connection between ${local.connection_identifier} and Customer Gateway ${var.customer_gateway_id}"
+
+  enable_acceleration = var.enable_acceleration && var.connect_to_transit_gateway
 }
 
 ### Fully AWS managed
@@ -23,6 +25,8 @@ resource "aws_vpn_connection" "default" {
 
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
+
+  enable_acceleration = local.enable_acceleration
 
   static_routes_only = var.vpn_connection_static_routes_only
 
@@ -96,6 +100,8 @@ resource "aws_vpn_connection" "tunnel" {
 
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
+
+  enable_acceleration = local.enable_acceleration
 
   static_routes_only = var.vpn_connection_static_routes_only
 
@@ -173,6 +179,8 @@ resource "aws_vpn_connection" "preshared" {
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
+  enable_acceleration = local.enable_acceleration
+
   static_routes_only = var.vpn_connection_static_routes_only
 
   tunnel1_preshared_key = var.tunnel1_preshared_key
@@ -245,6 +253,8 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
+
+  enable_acceleration = local.enable_acceleration
 
   static_routes_only = var.vpn_connection_static_routes_only
 
