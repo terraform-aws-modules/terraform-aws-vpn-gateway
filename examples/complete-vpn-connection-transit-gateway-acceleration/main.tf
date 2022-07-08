@@ -10,7 +10,7 @@ module "vpn_gateway_1" {
   customer_gateway_id = module.vpc.cgw_ids[0]
 
   tunnel_inside_ip_version = "ipv6"
-  enable_acceleration = true
+  enable_acceleration      = true
 
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = "169.254.44.88/30"
@@ -30,7 +30,7 @@ module "vpn_gateway_2" {
   customer_gateway_id = module.vpc.cgw_ids[1]
 
   tunnel_inside_ip_version = "ipv6"
-  enable_acceleration = true
+  enable_acceleration      = true
 
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = "169.254.33.88/30"

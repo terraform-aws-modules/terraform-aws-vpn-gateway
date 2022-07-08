@@ -323,21 +323,21 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 }
 
 resource "aws_vpn_gateway_attachment" "default" {
-  count = var.create_vpn_connection && var.create_vpn_gateway_attachment && !var.connect_to_transit_gateway ? 1 : 0
+  count = var.create_vpn_connection && var.create_vpn_gateway_attachment && ! var.connect_to_transit_gateway ? 1 : 0
 
   vpc_id         = var.vpc_id
   vpn_gateway_id = var.vpn_gateway_id
 }
 
 resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
-  count = var.create_vpn_connection && !var.connect_to_transit_gateway ? var.vpc_subnet_route_table_count : 0
+  count = var.create_vpn_connection && ! var.connect_to_transit_gateway ? var.vpc_subnet_route_table_count : 0
 
   vpn_gateway_id = var.vpn_gateway_id
   route_table_id = element(var.vpc_subnet_route_table_ids, count.index)
 }
 
 resource "aws_vpn_connection_route" "default" {
-  count = var.create_vpn_connection && var.vpn_connection_static_routes_only && !var.connect_to_transit_gateway ? length(var.vpn_connection_static_routes_destinations) : 0
+  count = var.create_vpn_connection && var.vpn_connection_static_routes_only && ! var.connect_to_transit_gateway ? length(var.vpn_connection_static_routes_destinations) : 0
 
   vpn_connection_id = local.create_tunnel_with_internal_cidr_only ? aws_vpn_connection.tunnel[0].id : local.create_tunnel_with_preshared_key_only ? aws_vpn_connection.preshared[0].id : local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared[0].id : aws_vpn_connection.default[0].id
 
