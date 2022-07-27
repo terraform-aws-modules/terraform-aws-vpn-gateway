@@ -1,3 +1,28 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+### [2.12.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.12.0...v2.12.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* Fixed default CIDR values for both ipv4 and ipv6 ([#70](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/70)) ([3eac796](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/3eac796d6793bf1d657ed8466f5e3ee9ef7b3ef9))
+
+## [2.12.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.11.1...v2.12.0) (2022-06-10)
+
+
+### Features
+
+* Add support for ipv6 ([#66](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/66)) ([32dacc2](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/32dacc2dfe2ccc3e6a18e0b1eeee7892b7f7ea29))
+
+### [2.11.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.11.0...v2.11.1) (2022-01-10)
+
+
+### Bug Fixes
+
+* update CI/CD process to enable auto-release workflow ([#60](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/60)) ([706ce3b](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/706ce3b48ac0dd789b711ede93e3dac366c6b1ab))
+
 <a name="v2.11.0"></a>
 ## [v2.11.0] - 2021-08-19
 
