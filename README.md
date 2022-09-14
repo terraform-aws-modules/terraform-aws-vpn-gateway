@@ -244,13 +244,13 @@ module "tgw" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.31 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.43 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.30.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.43 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.30.0 |
 
 ## Modules
 
@@ -278,6 +278,8 @@ No modules.
 | <a name="input_customer_gateway_id"></a> [customer\_gateway\_id](#input\_customer\_gateway\_id) | The id of the Customer Gateway. | `string` | n/a | yes |
 | <a name="input_local_ipv4_network_cidr"></a> [local\_ipv4\_network\_cidr](#input\_local\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection. | `string` | `null` | no |
 | <a name="input_local_ipv6_network_cidr"></a> [local\_ipv6\_network\_cidr](#input\_local\_ipv6\_network\_cidr) | (Optional) The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection. | `string` | `null` | no |
+| <a name="input_log_group_arn"></a> [log\_group\_arn](#input\_log\_group\_arn) | Optional) The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to. | `string` | `null` | no |
+| <a name="input_log_output_format"></a> [log\_output\_format](#input\_log\_output\_format) | (Optional) Set log format. Default format is json. Possible values are: json and text. The default is json | `string` | `"json"` | no |
 | <a name="input_remote_ipv4_network_cidr"></a> [remote\_ipv4\_network\_cidr](#input\_remote\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the AWS side of the VPN connection. | `string` | `null` | no |
 | <a name="input_remote_ipv6_network_cidr"></a> [remote\_ipv6\_network\_cidr](#input\_remote\_ipv6\_network\_cidr) | (Optional) The IPv6 CIDR on AWS side of the VPN connection. | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`). | `map(string)` | `{}` | no |
@@ -286,6 +288,7 @@ No modules.
 | <a name="input_tunnel1_dpd_timeout_seconds"></a> [tunnel1\_dpd\_timeout\_seconds](#input\_tunnel1\_dpd\_timeout\_seconds) | (Optional, Default 30) The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30 | `number` | `null` | no |
 | <a name="input_tunnel1_ike_versions"></a> [tunnel1\_ike\_versions](#input\_tunnel1\_ike\_versions) | (Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 \| ikev2 | `list(string)` | `null` | no |
 | <a name="input_tunnel1_inside_cidr"></a> [tunnel1\_inside\_cidr](#input\_tunnel1\_inside\_cidr) | The CIDR block of the inside IP addresses for the first VPN tunnel. | `string` | `""` | no |
+| <a name="input_tunnel1_log_options_enabled"></a> [tunnel1\_log\_options\_enabled](#input\_tunnel1\_log\_options\_enabled) | (Optional) Enable or disable VPN tunnel logging feature. | `bool` | `false` | no |
 | <a name="input_tunnel1_phase1_dh_group_numbers"></a> [tunnel1\_phase1\_dh\_group\_numbers](#input\_tunnel1\_phase1\_dh\_group\_numbers) | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are 2 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
 | <a name="input_tunnel1_phase1_encryption_algorithms"></a> [tunnel1\_phase1\_encryption\_algorithms](#input\_tunnel1\_phase1\_encryption\_algorithms) | (Optional) List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 \| AES256 \| AES128-GCM-16 \| AES256-GCM-16 | `list(string)` | `null` | no |
 | <a name="input_tunnel1_phase1_integrity_algorithms"></a> [tunnel1\_phase1\_integrity\_algorithms](#input\_tunnel1\_phase1\_integrity\_algorithms) | (Optional) One or more integrity algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 \| SHA2-256 \| SHA2-384 \| SHA2-512 | `list(string)` | `null` | no |
@@ -303,6 +306,7 @@ No modules.
 | <a name="input_tunnel2_dpd_timeout_seconds"></a> [tunnel2\_dpd\_timeout\_seconds](#input\_tunnel2\_dpd\_timeout\_seconds) | (Optional, Default 30) The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30 | `number` | `null` | no |
 | <a name="input_tunnel2_ike_versions"></a> [tunnel2\_ike\_versions](#input\_tunnel2\_ike\_versions) | (Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 \| ikev2 | `list(string)` | `null` | no |
 | <a name="input_tunnel2_inside_cidr"></a> [tunnel2\_inside\_cidr](#input\_tunnel2\_inside\_cidr) | The CIDR block of the inside IP addresses for the second VPN tunnel. | `string` | `""` | no |
+| <a name="input_tunnel2_log_options_enabled"></a> [tunnel2\_log\_options\_enabled](#input\_tunnel2\_log\_options\_enabled) | (Optional) Enable or disable VPN tunnel logging feature. | `bool` | `false` | no |
 | <a name="input_tunnel2_phase1_dh_group_numbers"></a> [tunnel2\_phase1\_dh\_group\_numbers](#input\_tunnel2\_phase1\_dh\_group\_numbers) | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are 2 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
 | <a name="input_tunnel2_phase1_encryption_algorithms"></a> [tunnel2\_phase1\_encryption\_algorithms](#input\_tunnel2\_phase1\_encryption\_algorithms) | (Optional) List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 \| AES256 \| AES128-GCM-16 \| AES256-GCM-16 | `list(string)` | `null` | no |
 | <a name="input_tunnel2_phase1_integrity_algorithms"></a> [tunnel2\_phase1\_integrity\_algorithms](#input\_tunnel2\_phase1\_integrity\_algorithms) | (Optional) One or more integrity algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 \| SHA2-256 \| SHA2-384 \| SHA2-512 | `list(string)` | `null` | no |
