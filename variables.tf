@@ -306,3 +306,31 @@ variable "remote_ipv6_network_cidr" {
   type        = string
   default     = null
 }
+
+variable "tunnel1_log_options_enabled" {
+  description = "(Optional) Enable or disable VPN tunnel logging feature."
+  type        = bool
+  default     = false
+
+}
+
+variable "tunnel2_log_options_enabled" {
+  description = "(Optional) Enable or disable VPN tunnel logging feature."
+  type        = bool
+  default     = false
+
+}
+
+variable "log_group_arn" {
+  description = "Optional) The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to."
+  type        = string
+  default     = null
+
+}
+
+variable "log_output_format" {
+  description = "(Optional) Set log format. Default format is json. Possible values are: json and text. The default is json"
+  type        = string
+  default     = "json"
+
+}

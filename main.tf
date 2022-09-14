@@ -79,6 +79,23 @@ resource "aws_vpn_connection" "default" {
   local_ipv6_network_cidr  = var.local_ipv6_network_cidr
   remote_ipv6_network_cidr = var.remote_ipv6_network_cidr
 
+  tunnel1_log_options {
+    cloudwatch_log_options {
+      log_enabled       = var.tunnel1_log_options_enabled
+      log_group_arn     = var.tunnel1_log_options_enabled == true ? var.log_group_arn : null
+      log_output_format = var.tunnel1_log_options_enabled == true ? var.log_output_format : null
+    }
+  }
+
+  tunnel2_log_options {
+    cloudwatch_log_options {
+      log_enabled       = var.tunnel2_log_options_enabled
+      log_group_arn     = var.tunnel2_log_options_enabled == true ? var.log_group_arn : null
+      log_output_format = var.tunnel2_log_options_enabled == true ? var.log_output_format : null
+    }
+  }
+
+
   tags = merge(
     {
       "Name" = local.name_tag
@@ -155,6 +172,22 @@ resource "aws_vpn_connection" "tunnel" {
   local_ipv6_network_cidr  = var.local_ipv6_network_cidr
   remote_ipv6_network_cidr = var.remote_ipv6_network_cidr
 
+  tunnel1_log_options {
+    cloudwatch_log_options {
+      log_enabled       = var.tunnel1_log_options_enabled
+      log_group_arn     = var.tunnel1_log_options_enabled == true ? var.log_group_arn : null
+      log_output_format = var.tunnel1_log_options_enabled == true ? var.log_output_format : null
+    }
+  }
+
+  tunnel2_log_options {
+    cloudwatch_log_options {
+      log_enabled       = var.tunnel2_log_options_enabled
+      log_group_arn     = var.tunnel2_log_options_enabled == true ? var.log_group_arn : null
+      log_output_format = var.tunnel2_log_options_enabled == true ? var.log_output_format : null
+    }
+  }
+
   tags = merge(
     {
       "Name" = local.name_tag
@@ -227,6 +260,22 @@ resource "aws_vpn_connection" "preshared" {
 
   local_ipv6_network_cidr  = var.local_ipv6_network_cidr
   remote_ipv6_network_cidr = var.remote_ipv6_network_cidr
+
+  tunnel1_log_options {
+    cloudwatch_log_options {
+      log_enabled       = var.tunnel1_log_options_enabled
+      log_group_arn     = var.tunnel1_log_options_enabled == true ? var.log_group_arn : null
+      log_output_format = var.tunnel1_log_options_enabled == true ? var.log_output_format : null
+    }
+  }
+
+  tunnel2_log_options {
+    cloudwatch_log_options {
+      log_enabled       = var.tunnel2_log_options_enabled
+      log_group_arn     = var.tunnel2_log_options_enabled == true ? var.log_group_arn : null
+      log_output_format = var.tunnel2_log_options_enabled == true ? var.log_output_format : null
+    }
+  }
 
   tags = merge(
     {
@@ -303,6 +352,22 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   local_ipv6_network_cidr  = var.local_ipv6_network_cidr
   remote_ipv6_network_cidr = var.remote_ipv6_network_cidr
+
+  tunnel1_log_options {
+    cloudwatch_log_options {
+      log_enabled       = var.tunnel1_log_options_enabled
+      log_group_arn     = var.tunnel1_log_options_enabled == true ? var.log_group_arn : null
+      log_output_format = var.tunnel1_log_options_enabled == true ? var.log_output_format : null
+    }
+  }
+
+  tunnel2_log_options {
+    cloudwatch_log_options {
+      log_enabled       = var.tunnel2_log_options_enabled
+      log_group_arn     = var.tunnel2_log_options_enabled == true ? var.log_group_arn : null
+      log_output_format = var.tunnel2_log_options_enabled == true ? var.log_output_format : null
+    }
+  }
 
   tags = merge(
     {
