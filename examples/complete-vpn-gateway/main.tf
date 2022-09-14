@@ -13,6 +13,15 @@ module "vpn_gateway" {
   vpc_subnet_route_table_count = length(var.vpc_private_subnets)
   local_ipv4_network_cidr      = "0.0.0.0/0"
   remote_ipv4_network_cidr     = module.vpc.vpc_cidr_block
+  tunnel1_log_options_enabled  = true
+  tunnel2_log_options_enabled  = true
+  log_group_arn                = aws_cloudwatch_log_group.vpn_logs.arn
+
+}
+
+resource "aws_cloudwatch_log_group" "vpn_logs" {
+  name = "Yada"
+
 }
 
 resource "aws_customer_gateway" "main" {
