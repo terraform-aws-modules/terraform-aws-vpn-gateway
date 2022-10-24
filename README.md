@@ -278,6 +278,7 @@ No modules.
 | <a name="input_customer_gateway_id"></a> [customer\_gateway\_id](#input\_customer\_gateway\_id) | The id of the Customer Gateway. | `string` | n/a | yes |
 | <a name="input_local_ipv4_network_cidr"></a> [local\_ipv4\_network\_cidr](#input\_local\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection. | `string` | `null` | no |
 | <a name="input_local_ipv6_network_cidr"></a> [local\_ipv6\_network\_cidr](#input\_local\_ipv6\_network\_cidr) | (Optional) The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection. | `string` | `null` | no |
+| <a name="input_outside_ip_address_type"></a> [outside\_ip\_address\_type](#input\_outside\_ip\_address\_type) | (Optional) Indicates if a Public S2S VPN or Private S2S VPN over AWS Direct Connect. | `string` | `"PublicIpv4"` | no |
 | <a name="input_remote_ipv4_network_cidr"></a> [remote\_ipv4\_network\_cidr](#input\_remote\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the AWS side of the VPN connection. | `string` | `null` | no |
 | <a name="input_remote_ipv6_network_cidr"></a> [remote\_ipv6\_network\_cidr](#input\_remote\_ipv6\_network\_cidr) | (Optional) The IPv6 CIDR on AWS side of the VPN connection. | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`). | `map(string)` | `{}` | no |
