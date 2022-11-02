@@ -108,6 +108,9 @@ resource "aws_vpn_connection" "default" {
   local_ipv4_network_cidr  = var.local_ipv4_network_cidr
   remote_ipv4_network_cidr = var.remote_ipv4_network_cidr
 
+  local_ipv6_network_cidr  = var.local_ipv6_network_cidr
+  remote_ipv6_network_cidr = var.remote_ipv6_network_cidr
+
   tags = merge(
     {
       "Name" = local.name_tag
@@ -213,6 +216,9 @@ resource "aws_vpn_connection" "tunnel" {
   local_ipv4_network_cidr  = var.local_ipv4_network_cidr
   remote_ipv4_network_cidr = var.remote_ipv4_network_cidr
 
+  local_ipv6_network_cidr  = var.local_ipv6_network_cidr
+  remote_ipv6_network_cidr = var.remote_ipv6_network_cidr
+
   tags = merge(
     {
       "Name" = local.name_tag
@@ -314,6 +320,9 @@ resource "aws_vpn_connection" "preshared" {
 
   local_ipv4_network_cidr  = var.local_ipv4_network_cidr
   remote_ipv4_network_cidr = var.remote_ipv4_network_cidr
+
+  local_ipv6_network_cidr  = var.local_ipv6_network_cidr
+  remote_ipv6_network_cidr = var.remote_ipv6_network_cidr
 
   tags = merge(
     {
@@ -419,6 +428,9 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   local_ipv4_network_cidr  = var.local_ipv4_network_cidr
   remote_ipv4_network_cidr = var.remote_ipv4_network_cidr
+
+  local_ipv6_network_cidr  = var.local_ipv6_network_cidr
+  remote_ipv6_network_cidr = var.remote_ipv6_network_cidr
 
   tags = merge(
     {

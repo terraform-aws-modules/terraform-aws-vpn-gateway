@@ -69,4 +69,3 @@ output "vpn_gateway2_vpn_connection_tunnel2_vgw_inside_address" {
   description = "Tunnel2 VGW address"
   value       = module.vpn_gateway2.vpn_connection_tunnel2_vgw_inside_address
 }
-
