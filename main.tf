@@ -86,7 +86,7 @@ resource "aws_vpn_connection" "default" {
       }
     }
   }
-  
+
   dynamic "tunnel2_log_options" {
     for_each = [var.tunnel2_log_options]
 
@@ -194,7 +194,7 @@ resource "aws_vpn_connection" "tunnel" {
       }
     }
   }
-  
+
   dynamic "tunnel2_log_options" {
     for_each = [var.tunnel2_log_options]
 
@@ -299,7 +299,7 @@ resource "aws_vpn_connection" "preshared" {
       }
     }
   }
-  
+
   dynamic "tunnel2_log_options" {
     for_each = [var.tunnel2_log_options]
 
@@ -407,7 +407,7 @@ resource "aws_vpn_connection" "tunnel_preshared" {
       }
     }
   }
-  
+
   dynamic "tunnel2_log_options" {
     for_each = [var.tunnel2_log_options]
 

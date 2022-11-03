@@ -279,21 +279,21 @@ variable "tunnel2_ike_versions" {
 
 variable "tunnel1_log_options" {
   description = "(Optional) Options for sending VPN tunnel logs to CloudWatch."
-  type        = map(object({
+  type = map(object({
     log_enabled       = bool
     log_group_arn     = string
     log_output_format = string
   }))
-  default     = {}
+  default = {}
 }
 variable "tunnel2_log_options" {
   description = "(Optional) Options for sending VPN tunnel logs to CloudWatch."
-  type        = map(object({
+  type = map(object({
     log_enabled       = bool
     log_group_arn     = string
     log_output_format = string
   }))
-  default     = {}
+  default = {}
 }
 
 variable "tunnel_inside_ip_version" {
