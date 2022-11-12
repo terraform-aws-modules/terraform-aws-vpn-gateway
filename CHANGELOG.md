@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.12.1...v3.0.0) (2022-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update supported Terraform min version to v1.0+ and AWS provider to v4.0+ (#77)
+
+### Features
+
+* Update supported Terraform min version to v1.0+ and AWS provider to v4.0+ ([#77](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/77)) ([b7db0ba](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/b7db0ba561244fb21075b56a52410f5fcd92009b))
+
 ### [2.12.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v2.12.0...v2.12.1) (2022-06-14)
 
 
