@@ -79,9 +79,9 @@ resource "aws_vpn_connection" "default" {
         for_each = tunnel1_log_options.value
 
         content {
-          log_enabled       = cloudwatch_log_options.value.log_enabled
-          log_group_arn     = cloudwatch_log_options.value.log_group_arn
-          log_output_format = cloudwatch_log_options.value.log_output_format
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
         }
       }
     }
@@ -95,9 +95,9 @@ resource "aws_vpn_connection" "default" {
         for_each = tunnel2_log_options.value
 
         content {
-          log_enabled       = cloudwatch_log_options.value.log_enabled
-          log_group_arn     = cloudwatch_log_options.value.log_group_arn
-          log_output_format = cloudwatch_log_options.value.log_output_format
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
         }
       }
     }
