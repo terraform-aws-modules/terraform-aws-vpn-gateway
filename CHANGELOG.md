@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.0.1...v3.1.0) (2022-11-15)
+
+
+### Features
+
+* Added logging ([#76](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/76)) ([ba043a6](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/ba043a64bc8378eb3043e65737bf9d6f9910cdbe))
+
 ### [3.0.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.0.0...v3.0.1) (2022-11-15)
 
 
