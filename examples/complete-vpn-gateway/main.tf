@@ -13,6 +13,21 @@ module "vpn_gateway" {
   vpc_subnet_route_table_count = length(var.vpc_private_subnets)
   local_ipv4_network_cidr      = "0.0.0.0/0"
   remote_ipv4_network_cidr     = module.vpc.vpc_cidr_block
+
+  tunnel1_log_options = {
+    cloudwatch_log_options = {
+      log_enabled       = true
+      log_group_arn     = aws_cloudwatch_log_group.tunnel1_logs.arn
+      log_output_format = "text"
+    }
+  }
+  tunnel2_log_options = {
+    cloudwatch_log_options = {
+      log_enabled       = true
+      log_group_arn     = aws_cloudwatch_log_group.tunnel2_logs.arn
+      log_output_format = "text"
+    }
+  }
 }
 
 resource "aws_customer_gateway" "main" {
@@ -46,4 +61,14 @@ module "vpc" {
     Environment = "staging"
     Name        = "complete"
   }
+}
+
+resource "aws_cloudwatch_log_group" "tunnel1_logs" {
+  name              = "complete-vpn-tunnel1-logs"
+  retention_in_days = 7
+}
+
+resource "aws_cloudwatch_log_group" "tunnel2_logs" {
+  name              = "complete-vpn-tunnel2-logs"
+  retention_in_days = 7
 }

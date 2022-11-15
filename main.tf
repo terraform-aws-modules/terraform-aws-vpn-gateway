@@ -71,6 +71,38 @@ resource "aws_vpn_connection" "default" {
   tunnel1_ike_versions = var.tunnel1_ike_versions
   tunnel2_ike_versions = var.tunnel2_ike_versions
 
+  dynamic "tunnel1_log_options" {
+    for_each = [var.tunnel1_log_options]
+
+    content {
+      dynamic "cloudwatch_log_options" {
+        for_each = tunnel1_log_options.value
+
+        content {
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+        }
+      }
+    }
+  }
+
+  dynamic "tunnel2_log_options" {
+    for_each = [var.tunnel2_log_options]
+
+    content {
+      dynamic "cloudwatch_log_options" {
+        for_each = tunnel2_log_options.value
+
+        content {
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+        }
+      }
+    }
+  }
+
   tunnel_inside_ip_version = var.tunnel_inside_ip_version
 
   local_ipv4_network_cidr  = var.local_ipv4_network_cidr
@@ -147,6 +179,38 @@ resource "aws_vpn_connection" "tunnel" {
   tunnel1_ike_versions = var.tunnel1_ike_versions
   tunnel2_ike_versions = var.tunnel2_ike_versions
 
+  dynamic "tunnel1_log_options" {
+    for_each = [var.tunnel1_log_options]
+
+    content {
+      dynamic "cloudwatch_log_options" {
+        for_each = tunnel1_log_options.value
+
+        content {
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+        }
+      }
+    }
+  }
+
+  dynamic "tunnel2_log_options" {
+    for_each = [var.tunnel2_log_options]
+
+    content {
+      dynamic "cloudwatch_log_options" {
+        for_each = tunnel2_log_options.value
+
+        content {
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+        }
+      }
+    }
+  }
+
   tunnel_inside_ip_version = var.tunnel_inside_ip_version
 
   local_ipv4_network_cidr  = var.local_ipv4_network_cidr
@@ -219,6 +283,38 @@ resource "aws_vpn_connection" "preshared" {
 
   tunnel1_ike_versions = var.tunnel1_ike_versions
   tunnel2_ike_versions = var.tunnel2_ike_versions
+
+  dynamic "tunnel1_log_options" {
+    for_each = [var.tunnel1_log_options]
+
+    content {
+      dynamic "cloudwatch_log_options" {
+        for_each = tunnel1_log_options.value
+
+        content {
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+        }
+      }
+    }
+  }
+
+  dynamic "tunnel2_log_options" {
+    for_each = [var.tunnel2_log_options]
+
+    content {
+      dynamic "cloudwatch_log_options" {
+        for_each = tunnel2_log_options.value
+
+        content {
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+        }
+      }
+    }
+  }
 
   tunnel_inside_ip_version = var.tunnel_inside_ip_version
 
@@ -295,6 +391,38 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   tunnel1_ike_versions = var.tunnel1_ike_versions
   tunnel2_ike_versions = var.tunnel2_ike_versions
+
+  dynamic "tunnel1_log_options" {
+    for_each = [var.tunnel1_log_options]
+
+    content {
+      dynamic "cloudwatch_log_options" {
+        for_each = tunnel1_log_options.value
+
+        content {
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+        }
+      }
+    }
+  }
+
+  dynamic "tunnel2_log_options" {
+    for_each = [var.tunnel2_log_options]
+
+    content {
+      dynamic "cloudwatch_log_options" {
+        for_each = tunnel2_log_options.value
+
+        content {
+          log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
+          log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
+          log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+        }
+      }
+    }
+  }
 
   tunnel_inside_ip_version = var.tunnel_inside_ip_version
 

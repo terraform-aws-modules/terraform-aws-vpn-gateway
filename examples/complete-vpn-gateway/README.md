@@ -41,6 +41,8 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Type |
 |------|------|
+| [aws_cloudwatch_log_group.tunnel1_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_cloudwatch_log_group.tunnel2_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_customer_gateway.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/customer_gateway) | resource |
 
 ## Inputs
