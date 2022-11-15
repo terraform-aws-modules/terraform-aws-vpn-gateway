@@ -282,6 +282,7 @@ variable "tunnel1_log_options" {
   type        = any
   default     = {}
 }
+
 variable "tunnel2_log_options" {
   description = "(Optional) Options for sending VPN tunnel logs to CloudWatch."
   type        = any
