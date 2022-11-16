@@ -5,32 +5,44 @@ provider "aws" {
 module "vpn_gateway_1" {
   source = "../../"
 
+  vpc_id              = module.vpc.vpc_id
   transit_gateway_id  = aws_ec2_transit_gateway.this.id
   customer_gateway_id = module.vpc.cgw_ids[0]
+
+  tunnel_inside_ip_version = "ipv6"
 
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = "169.254.44.88/30"
   tunnel2_inside_cidr   = "169.254.44.100/30"
   tunnel1_preshared_key = "1234567890abcdefghijklmn"
   tunnel2_preshared_key = "abcdefghijklmn1234567890"
+
+  create_vpn_gateway_attachment = false
+  connect_to_transit_gateway    = true
 }
 
 module "vpn_gateway_2" {
   source = "../../"
 
+  vpc_id              = module.vpc.vpc_id
   transit_gateway_id  = aws_ec2_transit_gateway.this.id
   customer_gateway_id = module.vpc.cgw_ids[1]
+
+  tunnel_inside_ip_version = "ipv6"
 
   # tunnel inside cidr & preshared keys (optional)
   tunnel1_inside_cidr   = "169.254.33.88/30"
   tunnel2_inside_cidr   = "169.254.33.100/30"
   tunnel1_preshared_key = "1234567890abcdefghijklmn"
   tunnel2_preshared_key = "abcdefghijklmn1234567890"
+
+  create_vpn_gateway_attachment = false
+  connect_to_transit_gateway    = true
 }
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name = "complete-vpn-gateway-transit-gateway"
 

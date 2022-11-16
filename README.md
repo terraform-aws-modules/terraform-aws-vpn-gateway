@@ -46,7 +46,7 @@ module "vpn_gateway" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   enable_vpn_gateway = true
   amazon_side_asn    = 64620
@@ -115,7 +115,10 @@ module "vpn_gateway" {
   source  = "terraform-aws-modules/vpn-gateway/aws"
   version = "~> 2.0"
 
-  connect_to_transit_gateway = true
+  create_vpn_gateway_attachment = false
+  connect_to_transit_gateway    = true
+
+  vpc_id                     = module.vpc.vpc_id
   transit_gateway_id         = aws_ec2_transit_gateway.this.id
   customer_gateway_id        = module.vpc.cgw_ids[0]
 
@@ -128,9 +131,9 @@ module "vpn_gateway" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
-  enable_vpn_gateway = true
+  enable_vpn_gateway = false
   amazon_side_asn    = 64620
 
   customer_gateways = {
@@ -165,7 +168,10 @@ module "vpn_gateway" {
   source  = "terraform-aws-modules/vpn-gateway/aws"
   version = "~> 2.0"
 
-  connect_to_transit_gateway = true
+  create_vpn_gateway_attachment = false
+  connect_to_transit_gateway    = true
+
+  vpc_id                     = module.vpc.vpc_id
   transit_gateway_id         = module.tgw.ec2_transit_gateway_id
   customer_gateway_id        = module.vpc.cgw_ids[0]
 
@@ -180,7 +186,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 3.0"
 
-  enable_vpn_gateway = true
+  enable_vpn_gateway = false
   amazon_side_asn    = 64620
 
   customer_gateways = {
@@ -237,14 +243,14 @@ module "tgw" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.31 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.43 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.43 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
 
 ## Modules
 
@@ -270,14 +276,17 @@ No modules.
 | <a name="input_create_vpn_connection"></a> [create\_vpn\_connection](#input\_create\_vpn\_connection) | Set to false to prevent the creation of a VPN Connection. | `bool` | `true` | no |
 | <a name="input_create_vpn_gateway_attachment"></a> [create\_vpn\_gateway\_attachment](#input\_create\_vpn\_gateway\_attachment) | Set to false to prevent attachment of the VGW to the VPC | `bool` | `true` | no |
 | <a name="input_customer_gateway_id"></a> [customer\_gateway\_id](#input\_customer\_gateway\_id) | The id of the Customer Gateway. | `string` | n/a | yes |
-| <a name="input_local_ipv4_network_cidr"></a> [local\_ipv4\_network\_cidr](#input\_local\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection. | `string` | `"0.0.0.0/0"` | no |
-| <a name="input_remote_ipv4_network_cidr"></a> [remote\_ipv4\_network\_cidr](#input\_remote\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the AWS side of the VPN connection. | `string` | `"0.0.0.0/0"` | no |
+| <a name="input_local_ipv4_network_cidr"></a> [local\_ipv4\_network\_cidr](#input\_local\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection. | `string` | `null` | no |
+| <a name="input_local_ipv6_network_cidr"></a> [local\_ipv6\_network\_cidr](#input\_local\_ipv6\_network\_cidr) | (Optional) The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection. | `string` | `null` | no |
+| <a name="input_remote_ipv4_network_cidr"></a> [remote\_ipv4\_network\_cidr](#input\_remote\_ipv4\_network\_cidr) | (Optional) The IPv4 CIDR on the AWS side of the VPN connection. | `string` | `null` | no |
+| <a name="input_remote_ipv6_network_cidr"></a> [remote\_ipv6\_network\_cidr](#input\_remote\_ipv6\_network\_cidr) | (Optional) The IPv6 CIDR on AWS side of the VPN connection. | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Set of tags to be added to the VPN Connection resource (only if `create_vpn_connection = true`). | `map(string)` | `{}` | no |
 | <a name="input_transit_gateway_id"></a> [transit\_gateway\_id](#input\_transit\_gateway\_id) | The ID of the Transit Gateway. | `string` | `null` | no |
 | <a name="input_tunnel1_dpd_timeout_action"></a> [tunnel1\_dpd\_timeout\_action](#input\_tunnel1\_dpd\_timeout\_action) | (Optional, Default clear) The action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear \| none \| restart | `string` | `null` | no |
 | <a name="input_tunnel1_dpd_timeout_seconds"></a> [tunnel1\_dpd\_timeout\_seconds](#input\_tunnel1\_dpd\_timeout\_seconds) | (Optional, Default 30) The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30 | `number` | `null` | no |
 | <a name="input_tunnel1_ike_versions"></a> [tunnel1\_ike\_versions](#input\_tunnel1\_ike\_versions) | (Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 \| ikev2 | `list(string)` | `null` | no |
 | <a name="input_tunnel1_inside_cidr"></a> [tunnel1\_inside\_cidr](#input\_tunnel1\_inside\_cidr) | The CIDR block of the inside IP addresses for the first VPN tunnel. | `string` | `""` | no |
+| <a name="input_tunnel1_log_options"></a> [tunnel1\_log\_options](#input\_tunnel1\_log\_options) | (Optional) Options for sending VPN tunnel logs to CloudWatch. | `any` | `{}` | no |
 | <a name="input_tunnel1_phase1_dh_group_numbers"></a> [tunnel1\_phase1\_dh\_group\_numbers](#input\_tunnel1\_phase1\_dh\_group\_numbers) | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are 2 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
 | <a name="input_tunnel1_phase1_encryption_algorithms"></a> [tunnel1\_phase1\_encryption\_algorithms](#input\_tunnel1\_phase1\_encryption\_algorithms) | (Optional) List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 \| AES256 \| AES128-GCM-16 \| AES256-GCM-16 | `list(string)` | `null` | no |
 | <a name="input_tunnel1_phase1_integrity_algorithms"></a> [tunnel1\_phase1\_integrity\_algorithms](#input\_tunnel1\_phase1\_integrity\_algorithms) | (Optional) One or more integrity algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 \| SHA2-256 \| SHA2-384 \| SHA2-512 | `list(string)` | `null` | no |
@@ -295,6 +304,7 @@ No modules.
 | <a name="input_tunnel2_dpd_timeout_seconds"></a> [tunnel2\_dpd\_timeout\_seconds](#input\_tunnel2\_dpd\_timeout\_seconds) | (Optional, Default 30) The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30 | `number` | `null` | no |
 | <a name="input_tunnel2_ike_versions"></a> [tunnel2\_ike\_versions](#input\_tunnel2\_ike\_versions) | (Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 \| ikev2 | `list(string)` | `null` | no |
 | <a name="input_tunnel2_inside_cidr"></a> [tunnel2\_inside\_cidr](#input\_tunnel2\_inside\_cidr) | The CIDR block of the inside IP addresses for the second VPN tunnel. | `string` | `""` | no |
+| <a name="input_tunnel2_log_options"></a> [tunnel2\_log\_options](#input\_tunnel2\_log\_options) | (Optional) Options for sending VPN tunnel logs to CloudWatch. | `any` | `{}` | no |
 | <a name="input_tunnel2_phase1_dh_group_numbers"></a> [tunnel2\_phase1\_dh\_group\_numbers](#input\_tunnel2\_phase1\_dh\_group\_numbers) | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are 2 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
 | <a name="input_tunnel2_phase1_encryption_algorithms"></a> [tunnel2\_phase1\_encryption\_algorithms](#input\_tunnel2\_phase1\_encryption\_algorithms) | (Optional) List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 \| AES256 \| AES128-GCM-16 \| AES256-GCM-16 | `list(string)` | `null` | no |
 | <a name="input_tunnel2_phase1_integrity_algorithms"></a> [tunnel2\_phase1\_integrity\_algorithms](#input\_tunnel2\_phase1\_integrity\_algorithms) | (Optional) One or more integrity algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 \| SHA2-256 \| SHA2-384 \| SHA2-512 | `list(string)` | `null` | no |
@@ -308,6 +318,7 @@ No modules.
 | <a name="input_tunnel2_rekey_margin_time_seconds"></a> [tunnel2\_rekey\_margin\_time\_seconds](#input\_tunnel2\_rekey\_margin\_time\_seconds) | (Optional, Default 540) The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2\_rekey\_fuzz\_percentage. Valid value is between 60 and half of tunnel2\_phase2\_lifetime\_seconds | `number` | `null` | no |
 | <a name="input_tunnel2_replay_window_size"></a> [tunnel2\_replay\_window\_size](#input\_tunnel2\_replay\_window\_size) | (Optional, Default 1024) The number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048. | `number` | `null` | no |
 | <a name="input_tunnel2_startup_action"></a> [tunnel2\_startup\_action](#input\_tunnel2\_startup\_action) | (Optional, Default add) The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add \| start | `string` | `null` | no |
+| <a name="input_tunnel_inside_ip_version"></a> [tunnel\_inside\_ip\_version](#input\_tunnel\_inside\_ip\_version) | (Optional) Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 \| ipv6. ipv6 Supports only EC2 Transit Gateway. | `string` | `"ipv4"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the VPC where the VPN Gateway lives. | `string` | `null` | no |
 | <a name="input_vpc_subnet_route_table_count"></a> [vpc\_subnet\_route\_table\_count](#input\_vpc\_subnet\_route\_table\_count) | The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`. | `number` | `0` | no |
 | <a name="input_vpc_subnet_route_table_ids"></a> [vpc\_subnet\_route\_table\_ids](#input\_vpc\_subnet\_route\_table\_ids) | The ids of the VPC subnets for which routes from the VPN Gateway will be propagated. | `list(string)` | `[]` | no |
