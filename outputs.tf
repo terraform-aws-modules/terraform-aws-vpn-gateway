@@ -86,6 +86,7 @@ output "vpn_connection_customer_gateway_configuration" {
     aws_vpn_connection.preshared[0].customer_gateway_configuration,
     aws_vpn_connection.tunnel_preshared[0].customer_gateway_configuration,
   "")
+  sensitive = true
 }
 
 output "tunnel1_preshared_key" {
