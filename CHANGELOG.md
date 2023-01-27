@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.1.1...v3.2.0) (2023-01-27)
+
+
+### Features
+
+* Set `vpn_connection_customer_gateway_configuration` output to `sensitive = true` ([#83](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/83)) ([cd02770](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/cd0277072676c87d86c7b277e54e262b424af5cb))
+
 ### [3.1.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.1.0...v3.1.1) (2023-01-24)
 
 
