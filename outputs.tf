@@ -92,9 +92,11 @@ output "vpn_connection_customer_gateway_configuration" {
 output "tunnel1_preshared_key" {
   description = "The preshared key of the first VPN tunnel."
   value       = var.tunnel1_preshared_key
+  sensitive   = true
 }
 
 output "tunnel2_preshared_key" {
   description = "The preshared key of the second VPN tunnel."
   value       = var.tunnel2_preshared_key
+  sensitive   = true
 }
