@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.3.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.2.0...v3.3.0) (2023-03-06)
+
+
+### Features
+
+* Set tunnel PSK outputs to `sensitive = true` ([#86](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/86)) ([4b0db3b](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/4b0db3b4b30c4bfa1cb406b42c6bd2d3177c7a43))
+
 ## [3.2.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.1.1...v3.2.0) (2023-01-27)
 
 
