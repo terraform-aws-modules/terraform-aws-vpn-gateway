@@ -272,7 +272,7 @@ variable "tunnel1_ike_versions" {
 }
 
 variable "tunnel2_ike_versions" {
-  description = "(Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2"
+  description = "(Optional) The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2"
   type        = list(string)
   default     = null
 }
