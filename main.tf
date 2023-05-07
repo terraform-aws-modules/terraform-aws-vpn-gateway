@@ -44,6 +44,9 @@ resource "aws_vpn_connection" "default" {
   tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
   tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
 
+  tunnel1_enable_tunnel_lifecycle_control = var.tunnel1_enable_tunnel_lifecycle_control
+  tunnel2_enable_tunnel_lifecycle_control = var.tunnel2_enable_tunnel_lifecycle_control
+
   tunnel1_phase2_dh_group_numbers = var.tunnel1_phase2_dh_group_numbers
   tunnel2_phase2_dh_group_numbers = var.tunnel2_phase2_dh_group_numbers
 
@@ -152,6 +155,9 @@ resource "aws_vpn_connection" "tunnel" {
   tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
   tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
 
+  tunnel1_enable_tunnel_lifecycle_control = var.tunnel1_enable_tunnel_lifecycle_control
+  tunnel2_enable_tunnel_lifecycle_control = var.tunnel2_enable_tunnel_lifecycle_control
+
   tunnel1_phase2_dh_group_numbers = var.tunnel1_phase2_dh_group_numbers
   tunnel2_phase2_dh_group_numbers = var.tunnel2_phase2_dh_group_numbers
 
@@ -256,6 +262,9 @@ resource "aws_vpn_connection" "preshared" {
 
   tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
   tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
+
+  tunnel1_enable_tunnel_lifecycle_control = var.tunnel1_enable_tunnel_lifecycle_control
+  tunnel2_enable_tunnel_lifecycle_control = var.tunnel2_enable_tunnel_lifecycle_control
 
   tunnel1_phase2_dh_group_numbers = var.tunnel1_phase2_dh_group_numbers
   tunnel2_phase2_dh_group_numbers = var.tunnel2_phase2_dh_group_numbers
@@ -364,6 +373,9 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   tunnel1_dpd_timeout_action = var.tunnel1_dpd_timeout_action
   tunnel2_dpd_timeout_action = var.tunnel2_dpd_timeout_action
+
+  tunnel1_enable_tunnel_lifecycle_control = var.tunnel1_enable_tunnel_lifecycle_control
+  tunnel2_enable_tunnel_lifecycle_control = var.tunnel2_enable_tunnel_lifecycle_control
 
   tunnel1_phase2_dh_group_numbers = var.tunnel1_phase2_dh_group_numbers
   tunnel2_phase2_dh_group_numbers = var.tunnel2_phase2_dh_group_numbers

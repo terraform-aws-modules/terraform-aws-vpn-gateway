@@ -318,3 +318,15 @@ variable "remote_ipv6_network_cidr" {
   type        = string
   default     = null
 }
+
+variable "tunnel1_enable_tunnel_lifecycle_control" {
+  description = "(Optional) Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false"
+  type        = bool
+  default     = null
+}
+
+variable "tunnel2_enable_tunnel_lifecycle_control" {
+  description = "(Optional) Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false"
+  type        = bool
+  default     = null
+}
