@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.4.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.3.0...v3.4.0) (2023-05-18)
+
+
+### Features
+
+* Add `enable_tunnel_lifecycle_control` arguments ([#88](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/88)) ([23dec42](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/23dec42171e76d4cd8b59b70a21105df8a849774))
+
 ## [3.3.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.2.0...v3.3.0) (2023-03-06)
 
 
