@@ -244,13 +244,13 @@ module "tgw" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.66 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.66 |
 
 ## Modules
 
@@ -304,7 +304,7 @@ No modules.
 | <a name="input_tunnel2_dpd_timeout_action"></a> [tunnel2\_dpd\_timeout\_action](#input\_tunnel2\_dpd\_timeout\_action) | (Optional, Default clear) The action to take after DPD timeout occurs for the second VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear \| none \| restart | `string` | `null` | no |
 | <a name="input_tunnel2_dpd_timeout_seconds"></a> [tunnel2\_dpd\_timeout\_seconds](#input\_tunnel2\_dpd\_timeout\_seconds) | (Optional, Default 30) The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30 | `number` | `null` | no |
 | <a name="input_tunnel2_enable_tunnel_lifecycle_control"></a> [tunnel2\_enable\_tunnel\_lifecycle\_control](#input\_tunnel2\_enable\_tunnel\_lifecycle\_control) | (Optional) Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true \| false | `bool` | `null` | no |
-| <a name="input_tunnel2_ike_versions"></a> [tunnel2\_ike\_versions](#input\_tunnel2\_ike\_versions) | (Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 \| ikev2 | `list(string)` | `null` | no |
+| <a name="input_tunnel2_ike_versions"></a> [tunnel2\_ike\_versions](#input\_tunnel2\_ike\_versions) | (Optional) The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 \| ikev2 | `list(string)` | `null` | no |
 | <a name="input_tunnel2_inside_cidr"></a> [tunnel2\_inside\_cidr](#input\_tunnel2\_inside\_cidr) | The CIDR block of the inside IP addresses for the second VPN tunnel. | `string` | `""` | no |
 | <a name="input_tunnel2_log_options"></a> [tunnel2\_log\_options](#input\_tunnel2\_log\_options) | (Optional) Options for sending VPN tunnel logs to CloudWatch. | `any` | `{}` | no |
 | <a name="input_tunnel2_phase1_dh_group_numbers"></a> [tunnel2\_phase1\_dh\_group\_numbers](#input\_tunnel2\_phase1\_dh\_group\_numbers) | (Optional) List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are 2 \| 14 \| 15 \| 16 \| 17 \| 18 \| 19 \| 20 \| 21 \| 22 \| 23 \| 24 | `list(number)` | `null` | no |
