@@ -272,7 +272,7 @@ variable "tunnel1_ike_versions" {
 }
 
 variable "tunnel2_ike_versions" {
-  description = "(Optional) The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2"
+  description = "(Optional) The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2"
   type        = list(string)
   default     = null
 }
@@ -316,5 +316,17 @@ variable "local_ipv6_network_cidr" {
 variable "remote_ipv6_network_cidr" {
   description = "(Optional) The IPv6 CIDR on AWS side of the VPN connection."
   type        = string
+  default     = null
+}
+
+variable "tunnel1_enable_tunnel_lifecycle_control" {
+  description = "(Optional) Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false"
+  type        = bool
+  default     = null
+}
+
+variable "tunnel2_enable_tunnel_lifecycle_control" {
+  description = "(Optional) Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false"
+  type        = bool
   default     = null
 }
