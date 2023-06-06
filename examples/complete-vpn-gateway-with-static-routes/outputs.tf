@@ -32,3 +32,15 @@ output "vpn_connection_tunnel2_vgw_inside_address" {
   description = "Tunnel2 VGW address"
   value       = module.vpn_gateway.vpn_connection_tunnel2_vgw_inside_address
 }
+
+output "vpn_connection_tunnel1_preshared_key" {
+  description = "Tunnel1 preshared key"
+  value       = module.vpn_gateway.tunnel1_preshared_key
+  sensitive   = true
+}
+
+output "vpn_connection_tunnel2_preshared_key" {
+  description = "Tunnel2 preshared key"
+  value       = module.vpn_gateway.tunnel2_preshared_key
+  sensitive   = true
+}
