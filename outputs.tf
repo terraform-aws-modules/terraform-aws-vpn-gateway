@@ -91,22 +91,22 @@ output "vpn_connection_customer_gateway_configuration" {
 
 output "tunnel1_preshared_key" {
   description = "The preshared key of the first VPN tunnel."
-  value = one(compact([
-    try(aws_vpn_connection.default[0].tunnel1_preshared_key, null),
-    try(aws_vpn_connection.preshared[0].tunnel1_preshared_key, null),
-    try(aws_vpn_connection.tunnel[0].tunnel1_preshared_key, null),
-    try(aws_vpn_connection.tunnel_preshared[0].tunnel1_preshared_key, null),
-  ]))
+  value = try(
+    aws_vpn_connection.default[0].tunnel1_preshared_key,
+    aws_vpn_connection.preshared[0].tunnel1_preshared_key,
+    aws_vpn_connection.tunnel[0].tunnel1_preshared_key,
+    aws_vpn_connection.tunnel_preshared[0].tunnel1_preshared_key,
+  "")
   sensitive = true
 }
 
 output "tunnel2_preshared_key" {
   description = "The preshared key of the second VPN tunnel."
-  value = one(compact([
-    try(aws_vpn_connection.default[0].tunnel2_preshared_key, null),
-    try(aws_vpn_connection.preshared[0].tunnel2_preshared_key, null),
-    try(aws_vpn_connection.tunnel[0].tunnel2_preshared_key, null),
-    try(aws_vpn_connection.tunnel_preshared[0].tunnel2_preshared_key, null)
-  ]))
+  value = try(
+    aws_vpn_connection.default[0].tunnel2_preshared_key,
+    aws_vpn_connection.preshared[0].tunnel2_preshared_key,
+    aws_vpn_connection.tunnel[0].tunnel2_preshared_key,
+    aws_vpn_connection.tunnel_preshared[0].tunnel2_preshared_key,
+  "")
   sensitive = true
 }
