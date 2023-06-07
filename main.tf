@@ -122,12 +122,34 @@ resource "aws_vpn_connection" "default" {
   )
 }
 
-resource  "aws_ec2_tag" "default" {
-  count = var.create_vpn_connection && local.tunnel_details_not_specified && var.transit_gateway_id ? 1: 0
+resource  "aws_ec2_tag" "name_tag" {
+  count = var.create_vpn_connection && local.tunnel_details_not_specified && var.transit_gateway_id =~ "^vgw-"  ? 1: 0
   
-  resource_id = aws_vpn_connection.default[0].transit_gateway_attachment_id
+  resource_id = try(
+    aws_vpn_connection.default[0].transit_gateway_attachment_id,
+    aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
+    aws_vpn_connection.preshared[0].transit_gateway_attachment_id,
+    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id,
+    ""
+  )
+
   key = "Name"
   value = local.name_tag
+}
+
+resource  "aws_ec2_tag" "tags" {
+  for_each = { for key,value in var.tags: key => value if var.transit_gateway_id =~ "^tgw-"}
+
+  resource_id = try(
+    aws_vpn_connection.default[0].transit_gateway_attachment_id,
+    aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
+    aws_vpn_connection.preshared[0].transit_gateway_attachment_id,
+    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id,
+    ""
+  )
+
+  key = each.key
+  value = each.value
 }
 
 ### Tunnel Inside CIDR only
@@ -242,7 +264,7 @@ resource "aws_vpn_connection" "tunnel" {
 }
 
 resource  "aws_ec2_tag" "tunnel" {
-  count = var.create_vpn_connection && local.create_tunnel_with_internal_cidr_only && var.transit_gateway_id ? 1: 0
+  count = var.create_vpn_connection && local.create_tunnel_with_internal_cidr_only && var.transit_gateway_id =~ "^tgw-" ? 1: 0
   
   resource_id =     aws_vpn_connection.tunnel[0].transit_gateway_attachment_id
   key = "Name"
@@ -358,7 +380,7 @@ resource "aws_vpn_connection" "preshared" {
 }
 
 resource  "aws_ec2_tag" "preshared" {
-  count = var.create_vpn_connection && local.create_tunnel_with_preshared_key_only && var.transit_gateway_id ? 1: 0
+  count = var.create_vpn_connection && local.create_tunnel_with_preshared_key_only && var.transit_gateway_id =~ "^tgw-" ? 1: 0
   
   resource_id =     aws_vpn_connection.preshared[0].transit_gateway_attachment_id
   key = "Name"
@@ -477,9 +499,9 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 }
 
 resource  "aws_ec2_tag" "tunnel_preshared" {
-  count = var.create_vpn_connection && local.tunnel_details_specified && var.transit_gateway_id ? 1: 0
+  count = var.create_vpn_connection && local.tunnel_details_specified && var.transit_gateway_id =~ "^tgw-" ? 1: 0
   
-  resource_id =     aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id
+  resource_id = aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id
   key = "Name"
   value = local.name_tag
 }
