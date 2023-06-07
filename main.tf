@@ -122,36 +122,6 @@ resource "aws_vpn_connection" "default" {
   )
 }
 
-resource "aws_ec2_tag" "name_tag" {
-  count = var.create_vpn_connection && local.tunnel_details_not_specified && var.transit_gateway_id != null ? 1 : 0
-
-  resource_id = try(
-    aws_vpn_connection.default[0].transit_gateway_attachment_id,
-    aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
-    aws_vpn_connection.preshared[0].transit_gateway_attachment_id,
-    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id,
-    ""
-  )
-
-  key   = "Name"
-  value = local.name_tag
-}
-
-resource "aws_ec2_tag" "tags" {
-  for_each = { for key, value in var.tags : key => value if var.transit_gateway_id != null }
-
-  resource_id = try(
-    aws_vpn_connection.default[0].transit_gateway_attachment_id,
-    aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
-    aws_vpn_connection.preshared[0].transit_gateway_attachment_id,
-    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id,
-    ""
-  )
-
-  key   = each.key
-  value = each.value
-}
-
 ### Tunnel Inside CIDR only
 resource "aws_vpn_connection" "tunnel" {
   count = var.create_vpn_connection && local.create_tunnel_with_internal_cidr_only ? 1 : 0
@@ -502,4 +472,35 @@ resource "aws_vpn_connection_route" "default" {
   vpn_connection_id = local.create_tunnel_with_internal_cidr_only ? aws_vpn_connection.tunnel[0].id : local.create_tunnel_with_preshared_key_only ? aws_vpn_connection.preshared[0].id : local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared[0].id : aws_vpn_connection.default[0].id
 
   destination_cidr_block = element(var.vpn_connection_static_routes_destinations, count.index)
+}
+
+### Fix tagging on Transit Gateway Attachment if it exists
+resource "aws_ec2_tag" "name_tag" {
+  count = var.create_vpn_connection && local.tunnel_details_not_specified && var.transit_gateway_id != null ? 1 : 0
+
+  resource_id = try(
+    aws_vpn_connection.default[0].transit_gateway_attachment_id,
+    aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
+    aws_vpn_connection.preshared[0].transit_gateway_attachment_id,
+    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id,
+    ""
+  )
+
+  key   = "Name"
+  value = local.name_tag
+}
+
+resource "aws_ec2_tag" "tags" {
+  for_each = { for key, value in var.tags : key => value if var.transit_gateway_id != null }
+
+  resource_id = try(
+    aws_vpn_connection.default[0].transit_gateway_attachment_id,
+    aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
+    aws_vpn_connection.preshared[0].transit_gateway_attachment_id,
+    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id,
+    ""
+  )
+
+  key   = each.key
+  value = each.value
 }
