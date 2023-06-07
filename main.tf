@@ -263,14 +263,6 @@ resource "aws_vpn_connection" "tunnel" {
   )
 }
 
-resource  "aws_ec2_tag" "tunnel" {
-  count = var.create_vpn_connection && local.create_tunnel_with_internal_cidr_only && var.transit_gateway_id =~ "^tgw-" ? 1: 0
-  
-  resource_id =     aws_vpn_connection.tunnel[0].transit_gateway_attachment_id
-  key = "Name"
-  value = local.name_tag
-}
-
 ### Preshared Key only
 resource "aws_vpn_connection" "preshared" {
   count = var.create_vpn_connection && local.create_tunnel_with_preshared_key_only ? 1 : 0
@@ -377,14 +369,6 @@ resource "aws_vpn_connection" "preshared" {
     },
     var.tags,
   )
-}
-
-resource  "aws_ec2_tag" "preshared" {
-  count = var.create_vpn_connection && local.create_tunnel_with_preshared_key_only && var.transit_gateway_id =~ "^tgw-" ? 1: 0
-  
-  resource_id =     aws_vpn_connection.preshared[0].transit_gateway_attachment_id
-  key = "Name"
-  value = local.name_tag
 }
 
 ### Tunnel Inside CIDR and Preshared Key
@@ -496,14 +480,6 @@ resource "aws_vpn_connection" "tunnel_preshared" {
     },
     var.tags,
   )
-}
-
-resource  "aws_ec2_tag" "tunnel_preshared" {
-  count = var.create_vpn_connection && local.tunnel_details_specified && var.transit_gateway_id =~ "^tgw-" ? 1: 0
-  
-  resource_id = aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id
-  key = "Name"
-  value = local.name_tag
 }
 
 resource "aws_vpn_gateway_attachment" "default" {
