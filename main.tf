@@ -122,9 +122,9 @@ resource "aws_vpn_connection" "default" {
   )
 }
 
-resource  "aws_ec2_tag" "name_tag" {
-  count = var.create_vpn_connection && local.tunnel_details_not_specified && var.transit_gateway_id =~ "^vgw-"  ? 1: 0
-  
+resource "aws_ec2_tag" "name_tag" {
+  count = var.create_vpn_connection && local.tunnel_details_not_specified && var.transit_gateway_id != null ? 1 : 0
+
   resource_id = try(
     aws_vpn_connection.default[0].transit_gateway_attachment_id,
     aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
@@ -133,12 +133,12 @@ resource  "aws_ec2_tag" "name_tag" {
     ""
   )
 
-  key = "Name"
+  key   = "Name"
   value = local.name_tag
 }
 
-resource  "aws_ec2_tag" "tags" {
-  for_each = { for key,value in var.tags: key => value if var.transit_gateway_id =~ "^tgw-"}
+resource "aws_ec2_tag" "tags" {
+  for_each = { for key, value in var.tags : key => value if var.transit_gateway_id != null }
 
   resource_id = try(
     aws_vpn_connection.default[0].transit_gateway_attachment_id,
@@ -148,7 +148,7 @@ resource  "aws_ec2_tag" "tags" {
     ""
   )
 
-  key = each.key
+  key   = each.key
   value = each.value
 }
 
