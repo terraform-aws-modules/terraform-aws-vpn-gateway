@@ -476,7 +476,7 @@ resource "aws_vpn_connection_route" "default" {
 
 ### Fix tagging on Transit Gateway Attachment if it exists
 resource "aws_ec2_tag" "name_tag" {
-  count = var.create_vpn_connection && local.tunnel_details_not_specified && var.transit_gateway_id != null ? 1 : 0
+  count = var.create_vpn_connection && var.transit_gateway_id != null ? 1 : 0
 
   resource_id = try(
     aws_vpn_connection.default[0].transit_gateway_attachment_id,
