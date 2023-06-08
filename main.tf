@@ -475,30 +475,14 @@ resource "aws_vpn_connection_route" "default" {
 }
 
 ### Fix tagging on Transit Gateway Attachment if it exists
-resource "aws_ec2_tag" "name_tag" {
-  count = var.create_vpn_connection && var.transit_gateway_id != null ? 1 : 0
-
-  resource_id = try(
-    aws_vpn_connection.default[0].transit_gateway_attachment_id,
-    aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
-    aws_vpn_connection.preshared[0].transit_gateway_attachment_id,
-    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id,
-    ""
-  )
-
-  key   = "Name"
-  value = local.name_tag
-}
-
 resource "aws_ec2_tag" "tags" {
-  for_each = { for key, value in var.tags : key => value if var.transit_gateway_id != null }
+  for_each = { for key, value in merge({ "Name" = local.name_tag }, var.tags) : key => value if var.connect_to_transit_gateway == true }
 
   resource_id = try(
     aws_vpn_connection.default[0].transit_gateway_attachment_id,
     aws_vpn_connection.tunnel[0].transit_gateway_attachment_id,
     aws_vpn_connection.preshared[0].transit_gateway_attachment_id,
-    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id,
-    ""
+    aws_vpn_connection.tunnel_preshared[0].transit_gateway_attachment_id
   )
 
   key   = each.key
