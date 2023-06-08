@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.5.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.4.0...v3.5.0) (2023-06-06)
+
+
+### Features
+
+* Output the pre-shared tunnel keys even when they are auto-generated ([#89](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/89)) ([5ab7f2f](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/5ab7f2f6653da7c8ad9d9bd2f86e758a061bee42))
+
 ## [3.4.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.3.0...v3.4.0) (2023-05-18)
 
 

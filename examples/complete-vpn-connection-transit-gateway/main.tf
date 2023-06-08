@@ -42,7 +42,7 @@ module "vpn_gateway_2" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   name = "complete-vpn-gateway-transit-gateway"
 

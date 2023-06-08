@@ -27,7 +27,7 @@ If you want to use the Transit Gateway support you are responsible for creating 
 ```hcl
 module "vpn_gateway" {
   source  = "terraform-aws-modules/vpn-gateway/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   vpc_id                  = module.vpc.vpc_id
   vpn_gateway_id          = module.vpc.vgw_id
@@ -46,7 +46,7 @@ module "vpn_gateway" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   enable_vpn_gateway = true
   amazon_side_asn    = 64620
@@ -71,7 +71,7 @@ module "vpc" {
 ```hcl
 module "vpn_gateway" {
   source  = "terraform-aws-modules/vpn-gateway/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   vpn_gateway_id      = aws_vpn_gateway.vpn_gateway.id
   customer_gateway_id = aws_customer_gateway.main.id
@@ -113,7 +113,7 @@ resource "aws_vpn_gateway" "vpn_gateway" {
 ```hcl
 module "vpn_gateway" {
   source  = "terraform-aws-modules/vpn-gateway/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   create_vpn_gateway_attachment = false
   connect_to_transit_gateway    = true
@@ -131,7 +131,7 @@ module "vpn_gateway" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   enable_vpn_gateway = false
   amazon_side_asn    = 64620
@@ -166,7 +166,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 ```hcl
 module "vpn_gateway" {
   source  = "terraform-aws-modules/vpn-gateway/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   create_vpn_gateway_attachment = false
   connect_to_transit_gateway    = true
@@ -184,7 +184,7 @@ module "vpn_gateway" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   enable_vpn_gateway = false
   amazon_side_asn    = 64620
