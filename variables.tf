@@ -87,10 +87,6 @@ variable "tunnel2_preshared_key" {
   type        = string
   default     = ""
   sensitive   = true
-  validation {
-    condition     = length(var.tunnel2_preshared_key) == 0 || (length(var.tunnel2_preshared_key) >= 8 && length(var.tunnel2_preshared_key) <= 64)
-    error_message = "Must be between 8 and 64 characters"
-  }
 }
 
 # Attachment can be already managed by the terraform-aws-vpc module by using the enable_vpn_gateway variable
