@@ -76,10 +76,6 @@ variable "tunnel1_preshared_key" {
   type        = string
   default     = ""
   sensitive   = true
-  validation {
-    condition     = length(var.tunnel1_preshared_key) == 0 || (length(var.tunnel1_preshared_key) >= 8 && length(var.tunnel1_preshared_key) <= 64)
-    error_message = "Must be between 8 and 64 characters"
-  }
 }
 
 variable "tunnel2_preshared_key" {
