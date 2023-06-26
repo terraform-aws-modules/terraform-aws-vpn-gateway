@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.6.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.5.0...v3.6.0) (2023-06-26)
+
+
+### Features
+
+* Make PSK inputs as sensitive ([#91](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/91)) ([41e4d58](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/41e4d5820cb7c605d6da409e519449d52bb12639))
+
 ## [3.5.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.4.0...v3.5.0) (2023-06-06)
 
 
