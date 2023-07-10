@@ -75,12 +75,14 @@ variable "tunnel1_preshared_key" {
   description = "The preshared key of the first VPN tunnel."
   type        = string
   default     = ""
+  sensitive   = true
 }
 
 variable "tunnel2_preshared_key" {
   description = "The preshared key of the second VPN tunnel."
   type        = string
   default     = ""
+  sensitive   = true
 }
 
 # Attachment can be already managed by the terraform-aws-vpc module by using the enable_vpn_gateway variable
