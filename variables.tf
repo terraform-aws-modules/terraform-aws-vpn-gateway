@@ -62,26 +62,26 @@ variable "vpn_connection_static_routes_destinations" {
 variable "tunnel1_inside_cidr" {
   description = "The CIDR block of the inside IP addresses for the first VPN tunnel."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "tunnel2_inside_cidr" {
   description = "The CIDR block of the inside IP addresses for the second VPN tunnel."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "tunnel1_preshared_key" {
   description = "The preshared key of the first VPN tunnel."
   type        = string
-  default     = ""
+  default     = null
   sensitive   = true
 }
 
 variable "tunnel2_preshared_key" {
   description = "The preshared key of the second VPN tunnel."
   type        = string
-  default     = ""
+  default     = null
   sensitive   = true
 }
 

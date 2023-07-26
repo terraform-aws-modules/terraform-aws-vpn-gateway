@@ -14,6 +14,11 @@ module "vpn_gateway" {
   local_ipv4_network_cidr      = "0.0.0.0/0"
   remote_ipv4_network_cidr     = module.vpc.vpc_cidr_block
 
+  tunnel1_preshared_key = var.tunnel1_preshared_key
+  tunnel2_preshared_key = var.tunnel2_preshared_key
+  tunnel1_inside_cidr   = var.tunnel1_inside_cidr
+  tunnel2_inside_cidr   = var.tunnel2_inside_cidr
+
   tunnel1_log_options = {
     cloudwatch_log_options = {
       log_enabled       = true
