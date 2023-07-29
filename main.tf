@@ -134,6 +134,6 @@ resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
 resource "aws_vpn_connection_route" "default" {
   count = var.create_vpn_connection && var.vpn_connection_static_routes_only && !var.connect_to_transit_gateway ? length(var.vpn_connection_static_routes_destinations) : 0
 
-  vpn_connection_id = aws_vpn_connection.this[0].id
+  vpn_connection_id      = aws_vpn_connection.this[0].id
   destination_cidr_block = element(var.vpn_connection_static_routes_destinations, count.index)
 }
