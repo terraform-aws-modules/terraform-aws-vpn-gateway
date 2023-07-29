@@ -242,8 +242,8 @@ variables were previously set to empty strings and used to decide which conditio
 - tunnel1_preshared_key
 - tunnel2_preshared_key
 
-These are not set to null values by default and will be omited in the resource when set to null. This makes these variables inline with null default for other
-variables in the module. It is unlikley anyone was passing explicit value of an empty string for these. However in the rare case a user was passing these explicitly 
+These are now set to null values by default and will be omitted in the resource when set to null. This makes these variables inline with null default for other
+variables in the module. It is unlikely anyone was passing explicit value of an empty string for these. However, in the rare case a user was passing these explicitly 
 they will need to pass them as `null` now. 
 
 ## Examples
