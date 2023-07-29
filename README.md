@@ -231,6 +231,21 @@ module "tgw" {
 }
 ```
 
+## Upgrading to 4.x Version
+Release 4.0.0 was a refactoring of the source code which utilises the terraform feature of setting a module attribute to null has the same behaviour as 
+explicitly not passing it. This allows the code base to be simplified to a single resource instead of a selection of conditional resources. On the whole 
+most users will see no impact or change as to how they use the module. However, this refactoring does bring a breaking change to the user input. The following
+variables were previously set to empty strings and used to decide which conditional resource to invoke.
+
+- tunnel1_inside_cidr
+- tunnel2_inside_cidr
+- tunnel1_preshared_key
+- tunnel2_preshared_key
+
+These are not set to null values by default and will be omited in the resource when set to null. This makes these variables inline with null default for other
+variables in the module. It is unlikley anyone was passing explicit value of an empty string for these. However in the rare case a user was passing these explicitly 
+they will need to pass them as `null` now. 
+
 ## Examples
 
 - [Complete example](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/tree/master/examples/complete-vpn-gateway) shows how to create all VPN Gateway resources and integration with VPC module.
