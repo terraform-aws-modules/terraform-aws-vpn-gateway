@@ -10,10 +10,19 @@ import (
 	"testing"
 )
 
-var tunnel1PresharedKey = "1234567890abcdefghijklmn"
-var tunnel2PresharedKey = "abcdefghijklmn1234567890"
-var tunnel1InsideCidr = "169.254.33.88/30"
-var tunnel2InsideCidr = "169.254.33.100/30"
+const (
+	tunnel1PresharedKeyName  = "tunnel1_preshared_key"
+	tunnel2PresharedKeyName  = "tunnel2_preshared_key"
+	tunnel1InsideCidrName    = "tunnel1_inside_cidr"
+	tunnel2InsideCidrName    = "tunnel2_inside_cidr"
+	tunnel1PresharedKeyValue = "1234567890abcdefghijklmn"
+	tunnel2PresharedKeyValue = "abcdefghijklmn1234567890"
+	tunnel1InsideCidrValue   = "169.254.33.88/30"
+	tunnel2InsideCidrValue   = "169.254.33.100/30"
+)
+
+type tunnelOptions map[string]string
+type tfTestVars map[string]interface{}
 
 func checkError(err error) {
 	if err != nil {
@@ -21,15 +30,30 @@ func checkError(err error) {
 	}
 }
 
-type tunnelOptions map[string]string
-type tfTestVars map[string]interface{}
+func getTunnelOptions(ec2Client ec2.Client, vpnConnectionId string) tunnelOptions {
+	vpnConnectionsOutput, err := ec2Client.DescribeVpnConnections(
+		context.TODO(), &ec2.DescribeVpnConnectionsInput{
+			VpnConnectionIds: []string{vpnConnectionId},
+		},
+	)
+	checkError(err)
 
-func tunnelOptionsCheck(t *testing.T, tfTestVars map[string]interface{}, awsTunnelOptions tunnelOptions) {
-	for k, v := range awsTunnelOptions {
-		if value, exists := tfTestVars[k]; exists {
-			assert.Equal(t, value, v)
+	vpnConnectionOptions := vpnConnectionsOutput.VpnConnections[0].Options
+
+	return tunnelOptions{
+		tunnel1PresharedKeyName: *vpnConnectionOptions.TunnelOptions[0].PreSharedKey,
+		tunnel2PresharedKeyName: *vpnConnectionOptions.TunnelOptions[1].PreSharedKey,
+		tunnel1InsideCidrName:   *vpnConnectionOptions.TunnelOptions[0].TunnelInsideCidr,
+		tunnel2InsideCidrName:   *vpnConnectionOptions.TunnelOptions[1].TunnelInsideCidr,
+	}
+}
+
+func ValidateTunnelOptions(t *testing.T, tfTestVars map[string]interface{}, awsTunnelOptions tunnelOptions) {
+	for awsKey, awsValue := range awsTunnelOptions {
+		if tfValue, exists := tfTestVars[awsKey]; exists {
+			assert.Equal(t, tfValue, awsValue)
 		} else {
-			assert.NotEmpty(t, v)
+			assert.NotEmpty(t, awsValue)
 		}
 	}
 }
@@ -43,25 +67,26 @@ func TestCompleteVpnGateway(t *testing.T) {
 		},
 		"preshared_keys_only": {
 			tfTestVars: tfTestVars{
-				"tunnel1_preshared_key": tunnel1PresharedKey,
-				"tunnel2_preshared_key": tunnel2PresharedKey,
+				tunnel1PresharedKeyName: tunnel1PresharedKeyValue,
+				tunnel2PresharedKeyName: tunnel2PresharedKeyValue,
 			},
 		},
 		"tunnel_inside_cidr_only": {
 			tfTestVars: tfTestVars{
-				"tunnel1_inside_cidr": tunnel1InsideCidr,
-				"tunnel2_inside_cidr": tunnel2InsideCidr,
+				tunnel1InsideCidrName: tunnel1InsideCidrValue,
+				tunnel2InsideCidrName: tunnel2InsideCidrValue,
 			},
 		},
 		"preshared_keys_and_tunnel_inside_cidr": {
 			tfTestVars: tfTestVars{
-				"tunnel1_preshared_key": tunnel1PresharedKey,
-				"tunnel2_preshared_key": tunnel2PresharedKey,
-				"tunnel1_inside_cidr":   tunnel1InsideCidr,
-				"tunnel2_inside_cidr":   tunnel2InsideCidr,
+				tunnel1PresharedKeyName: tunnel1PresharedKeyValue,
+				tunnel2PresharedKeyName: tunnel2PresharedKeyValue,
+				tunnel1InsideCidrName:   tunnel1InsideCidrValue,
+				tunnel2InsideCidrName:   tunnel2InsideCidrValue,
 			},
 		},
 	}
+
 	for name, test := range tests {
 		log.Println(test)
 		t.Run(name, func(t *testing.T) {
@@ -75,31 +100,16 @@ func TestCompleteVpnGateway(t *testing.T) {
 			defer terraform.Destroy(t, terraformOptions)
 			terraform.InitAndApply(t, terraformOptions)
 
-			tf_vpn_connection_id := terraform.Output(t, terraformOptions, "vpn_connection_id")
+			tfVpnConnectionId := terraform.Output(t, terraformOptions, "vpn_connection_id")
 
 			// Create a new AWS session using the default configuration (including AWS CLI credentials)
 			cfg, err := config.LoadDefaultConfig(context.TODO())
 			checkError(err)
-
-			// create service clients
 			ec2Client := ec2.NewFromConfig(cfg)
 
-			vpnConnectionsOutput, err := ec2Client.DescribeVpnConnections(
-				context.TODO(), &ec2.DescribeVpnConnectionsInput{
-					VpnConnectionIds: []string{tf_vpn_connection_id},
-				},
-			)
-			checkError(err)
-
-			vpnConnectionOptions := vpnConnectionsOutput.VpnConnections[0].Options
-			awsTunnelOptions := tunnelOptions{
-				"tunnel1_preshared_key": *vpnConnectionOptions.TunnelOptions[0].PreSharedKey,
-				"tunnel2_preshared_key": *vpnConnectionOptions.TunnelOptions[1].PreSharedKey,
-				"tunnel1_inside_cidr":   *vpnConnectionOptions.TunnelOptions[0].TunnelInsideCidr,
-				"tunnel2_inside_cidr":   *vpnConnectionOptions.TunnelOptions[1].TunnelInsideCidr,
-			}
-
-			tunnelOptionsCheck(t, test.tfTestVars, awsTunnelOptions)
+			// validate the tunnel options
+			awsTunnelOptions := getTunnelOptions(*ec2Client, tfVpnConnectionId)
+			ValidateTunnelOptions(t, test.tfTestVars, awsTunnelOptions)
 		})
 	}
 }
