@@ -250,7 +250,7 @@ module "tgw" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.17.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.66 |
 
 ## Modules
 
