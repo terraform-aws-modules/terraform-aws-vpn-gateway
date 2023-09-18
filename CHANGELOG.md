@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.7.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.6.0...v3.7.0) (2023-09-18)
+
+
+### Features
+
+* Added Transit Gateway Attachment tagging ([#92](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/92)) ([9f82005](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/9f820051996c46eca7c7b60cfb2b937f6cd4f502))
+
 ## [3.6.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.5.0...v3.6.0) (2023-06-26)
 
 
