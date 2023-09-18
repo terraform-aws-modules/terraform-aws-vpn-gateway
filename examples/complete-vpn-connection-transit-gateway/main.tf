@@ -19,6 +19,11 @@ module "vpn_gateway_1" {
 
   create_vpn_gateway_attachment = false
   connect_to_transit_gateway    = true
+
+  tags = {
+    key1 = "example value 1"
+    key2 = "example value 2"
+  }
 }
 
 module "vpn_gateway_2" {
@@ -38,6 +43,12 @@ module "vpn_gateway_2" {
 
   create_vpn_gateway_attachment = false
   connect_to_transit_gateway    = true
+
+  tags = {
+    vpn2a = "example value 1"
+    vpn2b = "example value 2"
+  }
+
 }
 
 module "vpc" {

@@ -260,6 +260,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_ec2_tag.tags](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_tag) | resource |
 | [aws_vpn_connection.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_connection) | resource |
 | [aws_vpn_connection.preshared](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_connection) | resource |
 | [aws_vpn_connection.tunnel](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_connection) | resource |
