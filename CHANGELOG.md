@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [3.7.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.7.0...v3.7.1) (2023-10-12)
+
+
+### Bug Fixes
+
+* Add `dpd_timeout_seconds` to `tunnel_preshared` ([#95](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/95)) ([21442a7](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/21442a7be49c123bc1bdf1701f92cebfa304219e))
+
 ## [3.7.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.6.0...v3.7.0) (2023-09-18)
 
 
