@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.7.2](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.7.1...v3.7.2) (2024-03-06)
+
+
+### Bug Fixes
+
+* Update CI workflow versions to remove deprecated runtime warnings ([#96](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/96)) ([5556636](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/555663627539853c292d4f209371b963f767661c))
+
 ### [3.7.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.7.0...v3.7.1) (2023-10-12)
 
 
