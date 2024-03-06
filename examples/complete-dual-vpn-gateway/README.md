@@ -2,11 +2,11 @@
 
 Configuration in this directory creates set of VPN Gateway related resources which may be sufficient for staging or production environment (look into [minimal-vpn-gateway](../minimal-vpn-gateway) for more simplified setup).
 
-This example creates VPN Connetions to two separate VPN Endpoints. This is high redundant VPN setup for production environment. 
-vGW and route propagation is configured in the terraform-aws-vpc module. In order to have this possibility additional variable needs to be set 
+This example creates VPN Connetions to two separate VPN Endpoints. This is high redundant VPN setup for production environment.
+vGW and route propagation is configured in the terraform-aws-vpc module. In order to have this possibility additional variable needs to be set
 
 ```
-create_vpn_gateway_attachment = false 
+create_vpn_gateway_attachment = false
 ```
 
 ## Usage
