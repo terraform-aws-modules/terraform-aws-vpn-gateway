@@ -218,7 +218,7 @@ All notable changes to this project will be documented in this file.
 - Select appropriate VPN connection for routes resource ([#15](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/15))
 - Fixing readme to reflect reality. ([#12](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/12))
 
-### 
+###
 
 "tunnel1_preshared_key" can only contain alphanumeric, period and
 underscore characters
