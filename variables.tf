@@ -53,7 +53,7 @@ variable "vpn_connection_static_routes_only" {
   default     = false
 }
 
-variable "vpn_connection_enable_acceleration {
+variable "vpn_connection_enable_acceleration" {
   description = "Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway."
   type        = bool
   default     = false
