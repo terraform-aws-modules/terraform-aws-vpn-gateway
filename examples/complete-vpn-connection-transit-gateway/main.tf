@@ -17,8 +17,9 @@ module "vpn_gateway_1" {
   tunnel1_preshared_key = "1234567890abcdefghijklmn"
   tunnel2_preshared_key = "abcdefghijklmn1234567890"
 
-  create_vpn_gateway_attachment = false
-  connect_to_transit_gateway    = true
+  create_vpn_gateway_attachment      = false
+  connect_to_transit_gateway         = true
+  vpn_connection_enable_acceleration = true
 
   tags = {
     key1 = "example value 1"
@@ -41,8 +42,9 @@ module "vpn_gateway_2" {
   tunnel1_preshared_key = "1234567890abcdefghijklmn"
   tunnel2_preshared_key = "abcdefghijklmn1234567890"
 
-  create_vpn_gateway_attachment = false
-  connect_to_transit_gateway    = true
+  create_vpn_gateway_attachment      = false
+  connect_to_transit_gateway         = true
+  vpn_connection_enable_acceleration = true
 
   tags = {
     vpn2a = "example value 1"
