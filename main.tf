@@ -24,7 +24,8 @@ resource "aws_vpn_connection" "default" {
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
-  static_routes_only = var.vpn_connection_static_routes_only
+  static_routes_only  = var.vpn_connection_static_routes_only
+  enable_acceleration = var.vpn_connection_enable_acceleration
 
   tunnel1_phase1_dh_group_numbers = var.tunnel1_phase1_dh_group_numbers
   tunnel2_phase1_dh_group_numbers = var.tunnel2_phase1_dh_group_numbers
@@ -132,7 +133,8 @@ resource "aws_vpn_connection" "tunnel" {
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
-  static_routes_only = var.vpn_connection_static_routes_only
+  static_routes_only  = var.vpn_connection_static_routes_only
+  enable_acceleration = var.vpn_connection_enable_acceleration
 
   tunnel1_inside_cidr = var.tunnel1_inside_cidr
   tunnel2_inside_cidr = var.tunnel2_inside_cidr
@@ -243,7 +245,8 @@ resource "aws_vpn_connection" "preshared" {
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
-  static_routes_only = var.vpn_connection_static_routes_only
+  static_routes_only  = var.vpn_connection_static_routes_only
+  enable_acceleration = var.vpn_connection_enable_acceleration
 
   tunnel1_preshared_key = var.tunnel1_preshared_key
   tunnel2_preshared_key = var.tunnel2_preshared_key
@@ -351,7 +354,8 @@ resource "aws_vpn_connection" "tunnel_preshared" {
   customer_gateway_id = var.customer_gateway_id
   type                = "ipsec.1"
 
-  static_routes_only = var.vpn_connection_static_routes_only
+  static_routes_only  = var.vpn_connection_static_routes_only
+  enable_acceleration = var.vpn_connection_enable_acceleration
 
   tunnel1_inside_cidr = var.tunnel1_inside_cidr
   tunnel2_inside_cidr = var.tunnel2_inside_cidr

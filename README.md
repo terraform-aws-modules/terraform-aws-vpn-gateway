@@ -243,14 +243,14 @@ module "tgw" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.66 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.42 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.66 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.42 |
 
 ## Modules
 
@@ -325,6 +325,7 @@ No modules.
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the VPC where the VPN Gateway lives. | `string` | `null` | no |
 | <a name="input_vpc_subnet_route_table_count"></a> [vpc\_subnet\_route\_table\_count](#input\_vpc\_subnet\_route\_table\_count) | The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`. | `number` | `0` | no |
 | <a name="input_vpc_subnet_route_table_ids"></a> [vpc\_subnet\_route\_table\_ids](#input\_vpc\_subnet\_route\_table\_ids) | The ids of the VPC subnets for which routes from the VPN Gateway will be propagated. | `list(string)` | `[]` | no |
+| <a name="input_vpn_connection_enable_acceleration"></a> [vpn\_connection\_enable\_acceleration](#input\_vpn\_connection\_enable\_acceleration) | Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway. | `bool` | `null` | no |
 | <a name="input_vpn_connection_static_routes_destinations"></a> [vpn\_connection\_static\_routes\_destinations](#input\_vpn\_connection\_static\_routes\_destinations) | List of CIDRs to be used as destination for static routes (used with `vpn_connection_static_routes_only = true`). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc_subnet_route_table_ids`. | `list(string)` | `[]` | no |
 | <a name="input_vpn_connection_static_routes_only"></a> [vpn\_connection\_static\_routes\_only](#input\_vpn\_connection\_static\_routes\_only) | Set to true for the created VPN connection to use static routes exclusively (only if `create_vpn_connection = true`). Static routes must be used for devices that don't support BGP. | `bool` | `false` | no |
 | <a name="input_vpn_gateway_id"></a> [vpn\_gateway\_id](#input\_vpn\_gateway\_id) | The id of the VPN Gateway. | `string` | `null` | no |

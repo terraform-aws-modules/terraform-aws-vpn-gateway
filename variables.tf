@@ -53,6 +53,12 @@ variable "vpn_connection_static_routes_only" {
   default     = false
 }
 
+variable "vpn_connection_enable_acceleration" {
+  description = "Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway."
+  type        = bool
+  default     = null
+}
+
 variable "vpn_connection_static_routes_destinations" {
   description = "List of CIDRs to be used as destination for static routes (used with `vpn_connection_static_routes_only = true`). Routes to destinations set here will be propagated to the routing tables of the subnets defined in `vpc_subnet_route_table_ids`."
   type        = list(string)
