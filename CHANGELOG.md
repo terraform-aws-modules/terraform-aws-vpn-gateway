@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.7.2...v4.0.0) (2024-12-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* Enable acceleration support, raies MSV or Terraform and AWS provider (#99)
+
+### Features
+
+* Enable acceleration support, raies MSV or Terraform and AWS provider ([#99](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/99)) ([4f7c4d2](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/4f7c4d2459a7a4f15db7b84eb22f547e2d6563f9))
+
+
+### Bug Fixes
+
+* Update CI workflow versions to latest ([#100](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/100)) ([139920a](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/139920ae3e9176aa950523418797719408dec2b4))
+
 ## [3.7.2](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.7.1...v3.7.2) (2024-03-06)
 
 
