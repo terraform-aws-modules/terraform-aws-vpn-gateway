@@ -19,6 +19,9 @@ module "vpn_gateway" {
       log_enabled       = true
       log_group_arn     = aws_cloudwatch_log_group.tunnel1_logs.arn
       log_output_format = "text"
+      bgp_log_enabled       = true
+      bgp_log_group_arn     = aws_cloudwatch_log_group.tunnel1_logs.arn
+      bgp_log_output_format = "json"
     }
   }
   tunnel2_log_options = {
@@ -26,6 +29,9 @@ module "vpn_gateway" {
       log_enabled       = true
       log_group_arn     = aws_cloudwatch_log_group.tunnel2_logs.arn
       log_output_format = "text"
+      bgp_log_enabled       = true
+      bgp_log_group_arn     = aws_cloudwatch_log_group.tunnel2_logs.arn
+      bgp_log_output_format = "json"
     }
   }
 }

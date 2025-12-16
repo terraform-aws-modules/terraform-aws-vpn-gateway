@@ -86,6 +86,9 @@ resource "aws_vpn_connection" "default" {
           log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
           log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
           log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+          bgp_log_enabled       = lookup(cloudwatch_log_options.value, "bgp_log_enabled", null)
+          bgp_log_group_arn     = lookup(cloudwatch_log_options.value, "bgp_log_group_arn", null)
+          bgp_log_output_format = lookup(cloudwatch_log_options.value, "bgp_log_output_format", null)
         }
       }
     }
@@ -99,6 +102,9 @@ resource "aws_vpn_connection" "default" {
         for_each = tunnel2_log_options.value
 
         content {
+          bgp_log_enabled       = lookup(cloudwatch_log_options.value, "bgp_log_enabled", null)
+          bgp_log_group_arn     = lookup(cloudwatch_log_options.value, "bgp_log_group_arn", null)
+          bgp_log_output_format = lookup(cloudwatch_log_options.value, "bgp_log_output_format", null)
           log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
           log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
           log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
@@ -198,6 +204,9 @@ resource "aws_vpn_connection" "tunnel" {
           log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
           log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
           log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+          bgp_log_enabled       = lookup(cloudwatch_log_options.value, "bgp_log_enabled", null)
+          bgp_log_group_arn     = lookup(cloudwatch_log_options.value, "bgp_log_group_arn", null)
+          bgp_log_output_format = lookup(cloudwatch_log_options.value, "bgp_log_output_format", null)
         }
       }
     }
@@ -214,6 +223,9 @@ resource "aws_vpn_connection" "tunnel" {
           log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
           log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
           log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+          bgp_log_enabled       = lookup(cloudwatch_log_options.value, "bgp_log_enabled", null)
+          bgp_log_group_arn     = lookup(cloudwatch_log_options.value, "bgp_log_group_arn", null)
+          bgp_log_output_format = lookup(cloudwatch_log_options.value, "bgp_log_output_format", null)
         }
       }
     }
@@ -307,6 +319,9 @@ resource "aws_vpn_connection" "preshared" {
           log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
           log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
           log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+          bgp_log_enabled       = lookup(cloudwatch_log_options.value, "bgp_log_enabled", null)
+          bgp_log_group_arn     = lookup(cloudwatch_log_options.value, "bgp_log_group_arn", null)
+          bgp_log_output_format = lookup(cloudwatch_log_options.value, "bgp_log_output_format", null)
         }
       }
     }
@@ -323,6 +338,9 @@ resource "aws_vpn_connection" "preshared" {
           log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
           log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
           log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+          bgp_log_enabled       = lookup(cloudwatch_log_options.value, "bgp_log_enabled", null)
+          bgp_log_group_arn     = lookup(cloudwatch_log_options.value, "bgp_log_group_arn", null)
+          bgp_log_output_format = lookup(cloudwatch_log_options.value, "bgp_log_output_format", null)
         }
       }
     }
@@ -422,6 +440,9 @@ resource "aws_vpn_connection" "tunnel_preshared" {
           log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
           log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
           log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+          bgp_log_enabled       = lookup(cloudwatch_log_options.value, "bgp_log_enabled", null)
+          bgp_log_group_arn     = lookup(cloudwatch_log_options.value, "bgp_log_group_arn", null)
+          bgp_log_output_format = lookup(cloudwatch_log_options.value, "bgp_log_output_format", null)
         }
       }
     }
@@ -438,6 +459,9 @@ resource "aws_vpn_connection" "tunnel_preshared" {
           log_enabled       = lookup(cloudwatch_log_options.value, "log_enabled", null)
           log_group_arn     = lookup(cloudwatch_log_options.value, "log_group_arn", null)
           log_output_format = lookup(cloudwatch_log_options.value, "log_output_format", null)
+          bgp_log_enabled       = lookup(cloudwatch_log_options.value, "bgp_log_enabled", null)
+          bgp_log_group_arn     = lookup(cloudwatch_log_options.value, "bgp_log_group_arn", null)
+          bgp_log_output_format = lookup(cloudwatch_log_options.value, "bgp_log_output_format", null)
         }
       }
     }
