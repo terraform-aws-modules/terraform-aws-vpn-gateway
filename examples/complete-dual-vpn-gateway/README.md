@@ -25,20 +25,20 @@ Run `terraform destroy` when you don't need these resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.42 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.42 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 | <a name="module_vpn_gateway"></a> [vpn\_gateway](#module\_vpn\_gateway) | ../../ | n/a |
 | <a name="module_vpn_gateway2"></a> [vpn\_gateway2](#module\_vpn\_gateway2) | ../../ | n/a |
@@ -46,7 +46,7 @@ Run `terraform destroy` when you don't need these resources.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_customer_gateway.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/customer_gateway) | resource |
 | [aws_customer_gateway.secondary](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/customer_gateway) | resource |
 
@@ -57,7 +57,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_vpn_connection_tunnel1_preshared_key"></a> [vpn\_connection\_tunnel1\_preshared\_key](#output\_vpn\_connection\_tunnel1\_preshared\_key) | Tunnel1 preshared key |
 | <a name="output_vpn_connection_tunnel2_preshared_key"></a> [vpn\_connection\_tunnel2\_preshared\_key](#output\_vpn\_connection\_tunnel2\_preshared\_key) | Tunnel2 preshared key |
 | <a name="output_vpn_gateway2_vpn_connection_id"></a> [vpn\_gateway2\_vpn\_connection\_id](#output\_vpn\_gateway2\_vpn\_connection\_id) | VPN id |

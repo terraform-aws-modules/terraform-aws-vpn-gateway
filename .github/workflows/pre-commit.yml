@@ -7,8 +7,8 @@ on:
       - master
 
 env:
-  TERRAFORM_DOCS_VERSION: v0.20.0
-  TFLINT_VERSION: v0.59.1
+  TERRAFORM_DOCS_VERSION: v0.24.0
+  TFLINT_VERSION: v0.64.0
 
 jobs:
   collectInputs:
@@ -18,7 +18,7 @@ jobs:
       directories: ${{ steps.dirs.outputs.directories }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Get root directories
         id: dirs
@@ -33,7 +33,7 @@ jobs:
         directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
       - name: Install rmz
-        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        uses: jaxxstorm/action-install-gh-release@v3.0.0
         with:
           repo: SUPERCILEX/fuc
           asset-name: x86_64-unknown-linux-gnu-rmz
@@ -50,13 +50,12 @@ jobs:
           BEFORE=$(getAvailableSpace)
 
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
-          sudo rmz -f /usr/share/dotnet &
-          sudo rmz -f /usr/local/.ghcup &
           rmz -f /opt/hostedtoolcache/CodeQL &
           rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
           rmz -f /opt/hostedtoolcache/PyPy &
           rmz -f /opt/hostedtoolcache/Ruby &
           rmz -f /opt/hostedtoolcache/go &
+
           wait
 
           AFTER=$(getAvailableSpace)
@@ -64,11 +63,11 @@ jobs:
           echo "=> Saved $(formatByteCount $SAVED)"
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Terraform min/max versions
         id: minMax
-        uses: clowdhaus/terraform-min-max@v2.1.0
+        uses: clowdhaus/terraform-min-max@v3.0.1
         with:
           directory: ${{ matrix.directory }}
 
@@ -96,7 +95,7 @@ jobs:
     needs: collectInputs
     steps:
       - name: Install rmz
-        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        uses: jaxxstorm/action-install-gh-release@v3.0.0
         with:
           repo: SUPERCILEX/fuc
           asset-name: x86_64-unknown-linux-gnu-rmz
@@ -113,13 +112,36 @@ jobs:
           BEFORE=$(getAvailableSpace)
 
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
-          sudo rmz -f /usr/share/dotnet &
-          sudo rmz -f /usr/local/.ghcup &
           rmz -f /opt/hostedtoolcache/CodeQL &
           rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
           rmz -f /opt/hostedtoolcache/PyPy &
           rmz -f /opt/hostedtoolcache/Ruby &
           rmz -f /opt/hostedtoolcache/go &
+          sudo rmz -f /usr/local/lib/android &
+
+          if [[ ${{ github.repository }} == terraform-aws-modules/terraform-aws-security-group ]]; then
+            sudo rmz -f /usr/share/dotnet &
+            sudo rmz -f /usr/local/.ghcup &
+            # Disk cleanup is best-effort; tolerate transient apt mirror failures
+            set +e
+            sudo apt-get -qq update -y
+            sudo apt-get -qq remove -y --fix-missing 'azure-.*'
+            sudo apt-get -qq remove -y --fix-missing 'cpp-.*'
+            sudo apt-get -qq remove -y --fix-missing 'dotnet-runtime-.*'
+            sudo apt-get -qq remove -y --fix-missing 'google-.*'
+            sudo apt-get -qq remove -y --fix-missing 'libclang-.*'
+            sudo apt-get -qq remove -y --fix-missing 'libllvm.*'
+            sudo apt-get -qq remove -y --fix-missing 'llvm-.*'
+            sudo apt-get -qq remove -y --fix-missing 'mysql-.*'
+            sudo apt-get -qq remove -y --fix-missing 'postgresql-.*'
+            sudo apt-get -qq remove -y --fix-missing 'php.*'
+            sudo apt-get -qq remove -y --fix-missing 'temurin-.*'
+            sudo apt-get -qq remove -y --fix-missing kubectl firefox mono-devel
+            sudo apt-get -qq autoremove -y
+            sudo apt-get -qq clean
+            set -e
+          fi
+
           wait
 
           AFTER=$(getAvailableSpace)
@@ -127,14 +149,19 @@ jobs:
           echo "=> Saved $(formatByteCount $SAVED)"
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
 
       - name: Terraform min/max versions
         id: minMax
-        uses: clowdhaus/terraform-min-max@v2.1.0
+        uses: clowdhaus/terraform-min-max@v3.0.1
+
+      - name: Hide template dir
+        # Special to this repo, we don't want to check this dir
+        if: ${{ github.repository ==  'terraform-aws-modules/terraform-aws-security-group' }}
+        run: rm -rf modules/_templates
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.maxVersion }}
         uses: clowdhaus/terraform-composite-actions/pre-commit@v1.14.0

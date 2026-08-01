@@ -242,14 +242,14 @@ module "tgw" {
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.42 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.42 |
 
 ## Modules
@@ -259,7 +259,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_ec2_tag.tags](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_tag) | resource |
 | [aws_vpn_connection.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_connection) | resource |
 | [aws_vpn_connection.preshared](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_connection) | resource |
@@ -272,7 +272,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_connect_to_transit_gateway"></a> [connect\_to\_transit\_gateway](#input\_connect\_to\_transit\_gateway) | Set to false to disable attachment of the VPN connection route to the VPN connection (TGW uses another resource for that) | `bool` | `false` | no |
 | <a name="input_create_vpn_connection"></a> [create\_vpn\_connection](#input\_create\_vpn\_connection) | Set to false to prevent the creation of a VPN Connection. | `bool` | `true` | no |
 | <a name="input_create_vpn_gateway_attachment"></a> [create\_vpn\_gateway\_attachment](#input\_create\_vpn\_gateway\_attachment) | Set to false to prevent attachment of the VGW to the VPC | `bool` | `true` | no |
@@ -333,7 +333,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_tunnel1_preshared_key"></a> [tunnel1\_preshared\_key](#output\_tunnel1\_preshared\_key) | The preshared key of the first VPN tunnel. |
 | <a name="output_tunnel2_preshared_key"></a> [tunnel2\_preshared\_key](#output\_tunnel2\_preshared\_key) | The preshared key of the second VPN tunnel. |
 | <a name="output_vpn_connection_customer_gateway_configuration"></a> [vpn\_connection\_customer\_gateway\_configuration](#output\_vpn\_connection\_customer\_gateway\_configuration) | The configuration information for the VPN connection's customer gateway (in the native XML format) if `create_vpn_connection = true`, or empty otherwise |
