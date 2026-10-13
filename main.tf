@@ -474,11 +474,11 @@ resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
 }
 
 resource "aws_vpn_connection_route" "default" {
-  count = var.create_vpn_connection && var.vpn_connection_static_routes_only && !var.connect_to_transit_gateway ? length(var.vpn_connection_static_routes_destinations) : 0
+  for_each = var.create_vpn_connection && var.vpn_connection_static_routes_only && !var.connect_to_transit_gateway ? toset(var.vpn_connection_static_routes_destinations) : []
 
   vpn_connection_id = local.create_tunnel_with_internal_cidr_only ? aws_vpn_connection.tunnel[0].id : local.create_tunnel_with_preshared_key_only ? aws_vpn_connection.preshared[0].id : local.tunnel_details_specified ? aws_vpn_connection.tunnel_preshared[0].id : aws_vpn_connection.default[0].id
 
-  destination_cidr_block = element(var.vpn_connection_static_routes_destinations, count.index)
+  destination_cidr_block = each.value
 }
 
 ### Fix tagging on Transit Gateway Attachment if it exists
