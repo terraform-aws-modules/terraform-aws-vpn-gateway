@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.1](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v4.0.0...v4.0.1) (2026-11-17)
+
+### Bug Fixes
+
+* Add `dpd_timeout_seconds` to `preshared` VPN connection ([#108](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/108)) ([c191149](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/c191149909fde7d9c33027d67677b81368af20dd))
+* Update CI workflow versions to latest ([#102](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/102)) ([6ec4533](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/6ec4533967d5dbdf5f98e91f65eda7f172ad1291))
+* Update GitHub Actions and pre-commit hook versions ([#106](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/issues/106)) ([4244034](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/commit/424403434002074072426d659949ed23771fd7a0))
+
 ## [4.0.0](https://github.com/terraform-aws-modules/terraform-aws-vpn-gateway/compare/v3.7.2...v4.0.0) (2024-12-20)
 
 
